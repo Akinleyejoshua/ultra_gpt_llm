@@ -28,6 +28,7 @@ class GPTConfig:
     # 2. Training Hyperparameters
     # ---------------------------------------------------------
     batch_size: int = 64          # Micro-batch size per optimization step
+    epochs: Optional[int] = None  # Number of complete passes over the dataset (optional)
     learning_rate: float = 6e-4   # Peak learning rate
     min_lr: float = 6e-5          # Minimum learning rate for cosine decay schedule
     warmup_iters: int = 200       # Iterations of linear warmup

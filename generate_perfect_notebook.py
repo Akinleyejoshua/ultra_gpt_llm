@@ -176,17 +176,25 @@ Here we construct the neural network using raw `torch.nn.Module`:
     code(read_source("model/gpt.py") + """
 
 # Instantiate GPT with gpt-nano preset for our character vocabulary
+# You can control training duration using epochs or max_iters:
+EPOCHS = 3
+steps_per_epoch = len(train_loader)
+total_steps = EPOCHS * steps_per_epoch
+
 nano_cfg = GPTConfig.from_preset(
     "gpt-nano",
     vocab_size=char_tok.vocab_size,
     block_size=64,
     batch_size=8,
-    max_iters=100,
-    eval_interval=20,
+    epochs=EPOCHS,
+    max_iters=total_steps,
+    lr_decay_iters=total_steps,
+    eval_interval=max(1, total_steps // 5),
     eval_iters=5,
     learning_rate=1e-3,
     mixed_precision="fp16" if torch.cuda.is_available() else "no",
 )
+print(f"Training schedule: {EPOCHS} epoch(s) x {steps_per_epoch:,} steps/epoch = {total_steps:,} total steps")
 
 model = GPT(nano_cfg)
 total_params, trainable_params = model.get_num_params()

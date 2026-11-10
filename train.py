@@ -43,6 +43,7 @@ def parse_args():
     parser.add_argument("--search", nargs="+", default=None, help="Specific search queries/topics to scrape before training")
     parser.add_argument("--preset", type=str, default="gpt-nano", help="Model preset: gpt-nano, gpt-micro, gpt-mini, gpt2-small")
     parser.add_argument("--dataset", type=str, default="data/dataset.txt", help="Path to text corpus")
+    parser.add_argument("--epochs", type=int, default=None, help="Number of complete training passes over dataset (overrides max_iters)")
     parser.add_argument("--max_iters", type=int, default=None, help="Override maximum training iterations")
     parser.add_argument("--batch_size", type=int, default=None, help="Override micro-batch size")
     parser.add_argument("--learning_rate", type=float, default=None, help="Override learning rate")
@@ -109,6 +110,13 @@ def main():
         batch_size=config.batch_size,
         split_ratio=0.9,
     )
+
+    if args.epochs is not None:
+        steps_per_epoch = len(train_loader)
+        config.epochs = args.epochs
+        config.max_iters = args.epochs * steps_per_epoch
+        config.lr_decay_iters = config.max_iters
+        print(f"Epoch schedule: {args.epochs} epoch(s) x {steps_per_epoch:,} steps/epoch = {config.max_iters:,} total steps")
 
     # 4. Instantiate Model
     model = GPT(config)
