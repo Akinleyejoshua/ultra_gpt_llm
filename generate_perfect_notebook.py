@@ -4,13 +4,29 @@ Guarantees 100% code parity between .py modules and the Jupyter Notebook.
 """
 
 import json
+import re
 from pathlib import Path
+
+def clean_notebook_imports(source: str) -> str:
+    """
+    Remove relative imports (from .xxx import yyy) and redundant local module imports
+    (from config import ..., from data.xxx import ..., etc.) that fail in a Jupyter
+    notebook because notebook cells share a single unified global namespace.
+    """
+    # Remove relative imports like: from .cleaner import TextCleaner
+    source = re.sub(r'from \.\w+ import [^\n]+\n', '', source)
+    source = re.sub(r'from \. import [^\n]+\n', '', source)
+    
+    # Remove local project imports like: from config import GPTConfig, from data.cleaner import ...
+    source = re.sub(r'from (?:config|data|model|trainer|inference|server)(?:\.\w+)? import [^\n]+\n', '', source)
+    return source
 
 def read_source(rel_path: str) -> str:
     path = Path(rel_path)
     if not path.exists():
         raise FileNotFoundError(f"Missing file: {rel_path}")
-    return path.read_text(encoding="utf-8")
+    raw = path.read_text(encoding="utf-8")
+    return clean_notebook_imports(raw)
 
 def build_nb():
     cells = []
@@ -63,6 +79,10 @@ import json
 import logging
 from pathlib import Path
 from typing import Any, Dict, Generator, List, Literal, Optional, Sequence, Set, Tuple, Union
+
+# Ensure current project directory is in python search path
+if os.path.abspath(".") not in sys.path:
+    sys.path.insert(0, os.path.abspath("."))
 
 import torch
 import torch.nn as nn
