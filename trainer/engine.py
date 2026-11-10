@@ -15,6 +15,7 @@ import matplotlib.pyplot as plt
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
+from tqdm.auto import tqdm
 
 from config import GPTConfig
 from .checkpoint import CheckpointManager
@@ -129,9 +130,21 @@ class Trainer:
 
         print(f"\n--- Launching UltraGPT Training on {self.device.upper()} ---")
         print(f"Max Iters: {self.config.max_iters} | Batch Size: {self.config.batch_size} | Context: {self.config.block_size}")
-        print(f"Mixed Precision: {self.config.mixed_precision} | AMP Enabled: {self.use_amp}")
+        print(f"Mixed Precision: {self.config.mixed_precision} | AMP Enabled: {self.use_amp}\n")
 
-        for step in range(start_step, self.config.max_iters):
+        pbar = tqdm(
+            range(start_step, self.config.max_iters),
+            desc="Training UltraGPT",
+            unit="step",
+            dynamic_ncols=True,
+        )
+
+        ema_loss = None
+        last_val_loss = None
+
+        for step in pbar:
+            step_start = time.time()
+
             # Dynamic LR step
             lr = self.scheduler.step(step)
 
@@ -166,6 +179,22 @@ class Trainer:
             self.scaler.step(self.optimizer)
             self.scaler.update()
 
+            # Calculate real-time EMA loss and instantaneous step throughput
+            ema_loss = loss_val if ema_loss is None else (0.95 * ema_loss + 0.05 * loss_val)
+            step_dt = max(time.time() - step_start, 1e-5)
+            step_tok_s = tokens_per_batch / step_dt
+
+            # Update live real-time progress bar on every single step
+            pbar.set_postfix(
+                {
+                    "step_loss": f"{loss_val:.4f}",
+                    "ema_loss": f"{ema_loss:.4f}",
+                    "val_loss": f"{last_val_loss:.4f}" if last_val_loss is not None else "n/a",
+                    "lr": f"{lr:.2e}",
+                    "tok/s": f"{step_tok_s:,.0f}",
+                }
+            )
+
             # Periodic Evaluation & Telemetry
             if (step + 1) % self.config.eval_interval == 0 or step == self.config.max_iters - 1:
                 t1 = time.time()
@@ -175,6 +204,7 @@ class Trainer:
                 t0 = time.time()
 
                 train_eval_loss, val_loss = self.estimate_loss()
+                last_val_loss = val_loss
 
                 self.history["steps"].append(step + 1)
                 self.history["train_loss"].append(train_eval_loss)
@@ -184,12 +214,12 @@ class Trainer:
                 self.history["tokens_per_sec"].append(tokens_per_sec)
 
                 elapsed_str = time.strftime("%H:%M:%S", time.gmtime(time.time() - start_time))
-                print(
-                    f"Step {step + 1:5d}/{self.config.max_iters} | "
-                    f"Train Loss: {train_eval_loss:.4f} | "
-                    f"Val Loss: {val_loss:.4f} | "
+                pbar.write(
+                    f"[Step {step + 1:5d}/{self.config.max_iters}] | "
+                    f"Train: {train_eval_loss:.4f} | "
+                    f"Val: {val_loss:.4f} | "
                     f"LR: {lr:.2e} | "
-                    f"Speed: {tokens_per_sec:7.0f} tok/s | "
+                    f"Avg Speed: {tokens_per_sec:7,.0f} tok/s | "
                     f"Elapsed: {elapsed_str}"
                 )
 
