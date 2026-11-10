@@ -173,7 +173,9 @@ class CharTokenizer(BaseTokenizer):
 
     def save(self, filepath: str | Path) -> None:
         """Persist tokenizer vocabulary to JSON."""
-        with open(filepath, "w", encoding="utf-8") as f:
+        path = Path(filepath)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with open(path, "w", encoding="utf-8") as f:
             json.dump({"stoi": self.stoi, "specials": self.specials}, f, indent=2)
 
     @classmethod
