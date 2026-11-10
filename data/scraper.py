@@ -1,7 +1,8 @@
 """
 Lightweight Web Scraper for Dataset Ingestion.
-Crawls textual content from Wikipedia, web articles, and raw text URLs,
-runs through TextCleaner, and saves/appends to dataset storage.
+Crawls textual content from Wikipedia (exact titles or search keywords),
+general web articles, and raw text URLs, runs through TextCleaner,
+and saves/appends to dataset storage.
 """
 
 from __future__ import annotations
@@ -21,8 +22,11 @@ logger = logging.getLogger(__name__)
 
 class WebScraper:
     """
-    HTTP Crawler & Text Ingestion Utility.
-    Pulls clean paragraphs from Wikipedia pages or general URLs.
+    HTTP Crawler & Text Ingestion Utility:
+    - Search Wikipedia articles by any keyword, phrase, or topic.
+    - Scrape general web URLs.
+    - Automatic DOM noise filtering and text sanitization.
+    - Append to dataset.txt with <|endoftext|> boundaries.
     """
 
     DEFAULT_USER_AGENT = (
@@ -37,6 +41,33 @@ class WebScraper:
         self.timeout = timeout
         self.session = requests.Session()
         self.session.headers.update({"User-Agent": self.DEFAULT_USER_AGENT})
+
+    def search_wikipedia(self, query: str) -> Optional[str]:
+        """
+        Search Wikipedia using OpenSearch API for a keyword/phrase.
+        Returns the top matching article URL, or None if no match found.
+        """
+        api_url = "https://en.wikipedia.org/w/api.php"
+        params = {
+            "action": "opensearch",
+            "search": query,
+            "limit": 1,
+            "namespace": 0,
+            "format": "json",
+        }
+        try:
+            resp = self.session.get(api_url, params=params, timeout=self.timeout)
+            if resp.status_code == 200:
+                data = resp.json()
+                # data format: [query, [titles], [descriptions], [urls]]
+                if len(data) >= 4 and len(data[3]) > 0:
+                    matched_url = data[3][0]
+                    matched_title = data[1][0]
+                    print(f"  -> Search '{query}' matched Wikipedia article: '{matched_title}' ({matched_url})")
+                    return matched_url
+        except Exception as e:
+            logger.warning(f"Wikipedia search query failed for '{query}': {e}")
+        return None
 
     def scrape_url(self, url: str) -> str:
         """Fetch raw HTML, extract body text, and clean it."""
@@ -62,14 +93,23 @@ class WebScraper:
             logger.warning(f"Failed to scrape {url}: {e}")
             return ""
 
-    def scrape_wikipedia(self, title_or_url: str) -> str:
-        """Convenience method for scraping an English Wikipedia article."""
-        if title_or_url.startswith("http"):
-            url = title_or_url
-        else:
-            encoded_title = urllib.parse.quote(title_or_url.replace(" ", "_"))
-            url = f"https://en.wikipedia.org/wiki/{encoded_title}"
-        return self.scrape_url(url)
+    def scrape_wikipedia(self, title_or_query: str) -> str:
+        """
+        Scrape Wikipedia by title, query phrase, or direct URL.
+        If not a URL, it queries Wikipedia search to find the most relevant article.
+        """
+        if title_or_query.startswith("http://") or title_or_query.startswith("https://"):
+            return self.scrape_url(title_or_query)
+
+        # First try search API for best match
+        matched_url = self.search_wikipedia(title_or_query)
+        if matched_url:
+            return self.scrape_url(matched_url)
+
+        # Fallback: direct title encoding
+        encoded_title = urllib.parse.quote(title_or_query.replace(" ", "_"))
+        direct_url = f"https://en.wikipedia.org/wiki/{encoded_title}"
+        return self.scrape_url(direct_url)
 
     def append_to_dataset(self, text: str) -> int:
         """Append cleaned text to dataset file. Returns number of characters written."""
@@ -81,13 +121,18 @@ class WebScraper:
 
     def scrape_batch(self, sources: List[str]) -> int:
         """
-        Scrape a list of Wikipedia topics or URLs and append all to dataset file.
+        Scrape a list of search queries, Wikipedia topics, or direct URLs,
+        and append all cleaned text to the dataset file.
         Returns total characters appended.
         """
         total_chars = 0
         for src in sources:
-            text = self.scrape_wikipedia(src) if not src.startswith("http") else self.scrape_url(src)
+            src_clean = src.strip()
+            if not src_clean:
+                continue
+            print(f"Ingesting: '{src_clean}'...")
+            text = self.scrape_wikipedia(src_clean)
             chars = self.append_to_dataset(text)
             total_chars += chars
-            logger.info(f"Ingested '{src}': {chars} characters.")
+            print(f"  [+] Wrote {chars:,} characters from '{src_clean}'")
         return total_chars

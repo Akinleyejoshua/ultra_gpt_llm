@@ -280,12 +280,25 @@ jupyter notebook notebook.ipynb
 
 ## Quickstart CLI Guide
 
-### 1. Training from Scratch
+### 1. Scraping Custom Datasets
+You can scrape any Wikipedia topics, search queries, or web URLs into `data/dataset.txt`:
+```powershell
+# A. Scrape specific keywords/topics:
+python scrape.py --search "Quantum computing" "Neural networks" "Astrophysics"
+
+# B. Interactive mode (prompts you in the terminal):
+python scrape.py --interactive
+
+# C. Scrape direct URLs:
+python scrape.py --urls "https://en.wikipedia.org/wiki/Deep_learning"
+```
+
+### 2. Training from Scratch
 Run pre-training using any preset:
 ```powershell
-python train.py --preset gpt-nano --max_iters 500 --batch_size 16 --dataset data/dataset.txt
+# Automatically scrapes search topics and trains:
+python train.py --preset gpt-nano --search "Artificial intelligence" "Deep learning" --max_iters 500 --batch_size 16
 ```
-*Note: If `data/dataset.txt` does not exist, `train.py` automatically scrapes a sample educational corpus from Wikipedia via `WebScraper`.*
 
 ### 2. Interactive Terminal Chat
 Launch an interactive streaming chat session with the trained model:

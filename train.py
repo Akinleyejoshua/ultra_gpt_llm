@@ -40,6 +40,7 @@ def prepare_sample_dataset(dataset_path: Path) -> None:
 
 def parse_args():
     parser = argparse.ArgumentParser(description="UltraGPT Training CLI")
+    parser.add_argument("--search", nargs="+", default=None, help="Specific search queries/topics to scrape before training")
     parser.add_argument("--preset", type=str, default="gpt-nano", help="Model preset: gpt-nano, gpt-micro, gpt-mini, gpt2-small")
     parser.add_argument("--dataset", type=str, default="data/dataset.txt", help="Path to text corpus")
     parser.add_argument("--max_iters", type=int, default=None, help="Override maximum training iterations")
@@ -73,7 +74,11 @@ def main():
 
     # 1. Prepare data
     data_path = Path(args.dataset)
-    if not data_path.exists() or data_path.stat().st_size == 0:
+    if args.search:
+        print(f"Scraping requested topics into {data_path}: {args.search}")
+        scraper = WebScraper(output_path=data_path)
+        scraper.scrape_batch(args.search)
+    elif not data_path.exists() or data_path.stat().st_size == 0:
         prepare_sample_dataset(data_path)
 
     with open(data_path, "r", encoding="utf-8") as f:
