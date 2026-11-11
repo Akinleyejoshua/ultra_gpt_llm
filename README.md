@@ -49,7 +49,8 @@ ultra_gpt/
 ├── train.py                  # Standalone CLI training engine
 ├── generate.py               # Standalone interactive conversational CLI
 ├── run_server.py             # Uvicorn entrypoint for FastAPI serving
-├── notebook.ipynb            # Phase-by-phase executable Jupyter Notebook
+├── notebook.ipynb            # Phase-by-phase executable training notebook
+├── inference.ipynb           # Dedicated inference studio (model loader, chat, sampling, serving)
 ├── data/
 │   ├── __init__.py
 │   ├── scraper.py            # Web crawler for Wikipedia / raw text URLs
