@@ -92,7 +92,13 @@ class GPT(nn.Module):
             logits: (Batch, Seq_Len, Vocab_Size) or (Batch, 1, Vocab_Size) during generation
             loss: scalar cross-entropy loss if targets is provided, otherwise None
         """
-        device = idx.device
+        # Automatically synchronize device with model parameters
+        device = self.transformer.wte.weight.device
+        if idx.device != device:
+            idx = idx.to(device)
+        if targets is not None and targets.device != device:
+            targets = targets.to(device)
+
         b, t = idx.size()
         if t > self.config.block_size:
             idx = idx[:, -self.config.block_size:]

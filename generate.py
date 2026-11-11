@@ -5,6 +5,9 @@ Demonstrates streaming token-by-token generation with temperature, top-k, top-p,
 
 from __future__ import annotations
 
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+
 import argparse
 from pathlib import Path
 import sys

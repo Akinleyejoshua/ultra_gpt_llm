@@ -6,6 +6,9 @@ Usage:
 
 from __future__ import annotations
 
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+
 import argparse
 import uvicorn
 from server.app import app, load_model_and_tokenizer

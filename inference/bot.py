@@ -101,7 +101,8 @@ class ConversationBot:
             context_window = current_tokens[-self.block_size :]
             vocab_size = getattr(self.model.config, "vocab_size", 50257)
             context_window = [min(max(0, tid), vocab_size - 1) for tid in context_window]
-            x = torch.tensor([context_window], dtype=torch.long, device=self.device)
+            model_device = next(self.model.parameters()).device
+            x = torch.tensor([context_window], dtype=torch.long, device=model_device)
 
             logits, _ = self.model(x)  # (1, 1, vocab_size)
             next_logits = logits[0, -1, :]

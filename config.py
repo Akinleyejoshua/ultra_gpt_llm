@@ -5,6 +5,9 @@ Production-grade dataclass supporting presets, user overrides, and serialization
 
 from __future__ import annotations
 
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+
 import json
 from dataclasses import asdict, dataclass, field
 from pathlib import Path

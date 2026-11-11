@@ -72,6 +72,8 @@ This notebook is an exact, self-contained, phase-by-phase mirror of the UltraGPT
     md("""## Phase 1: Environment Setup & Hardware Telemetry
 We inspect the computing environment, checking CUDA GPU device properties, driver compatibility, and memory allocation.""")
     code("""import os
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+
 import sys
 import math
 import time
