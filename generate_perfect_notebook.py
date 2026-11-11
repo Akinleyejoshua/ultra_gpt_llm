@@ -262,16 +262,38 @@ We implement:
     code(read_source("inference/bot.py") + """
 
 # Initialize interactive conversational bot with trained model
+# If a saved checkpoint exists, restore the exact trained weights & vocab
+ckpt_path = Path("checkpoints/latest_checkpoint.pt")
+vocab_path = Path("checkpoints/char_vocab.json")
+
+if ckpt_path.exists():
+    print(f"Loading trained weights from {ckpt_path}...")
+    ckpt = torch.load(ckpt_path, map_location=device)
+    active_cfg = GPTConfig(**ckpt["config"])
+    active_model = GPT(active_cfg)
+    active_model.load_state_dict(ckpt["model_state_dict"])
+    active_model.to(device)
+    active_model.eval()
+    if vocab_path.exists():
+        active_tok = CharTokenizer.load(vocab_path)
+    else:
+        active_tok = char_tok
+    print(f"Successfully restored trained checkpoint: Step {ckpt.get('step', 0):,}, Loss {ckpt.get('loss', 0):.4f}, Vocab {active_cfg.vocab_size}")
+else:
+    active_model = model
+    active_tok = char_tok
+    active_cfg = nano_cfg
+
 bot = ConversationBot(
-    model=model,
-    tokenizer=char_tok,
+    model=active_model,
+    tokenizer=active_tok,
     system_prompt="You are UltraGPT, an expert AI assistant.",
-    device=nano_cfg.device,
+    device=active_cfg.device,
 )
 
-print("Prompt: 'What is deep learning?'")
+print("\\nPrompt: 'What is deep learning?'")
 print("UltraGPT > ", end="", flush=True)
-for piece in bot.stream_generate("What is deep learning?", max_tokens=50, temperature=0.7):
+for piece in bot.stream_generate("What is deep learning?", max_tokens=60, temperature=0.7):
     print(piece, end="", flush=True)
 print()""")
 

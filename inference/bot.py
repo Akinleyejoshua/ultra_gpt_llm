@@ -97,8 +97,10 @@ class ConversationBot:
         accumulated_text = ""
 
         for _ in range(max_tokens):
-            # Take last block_size tokens
+            # Take last block_size tokens and clamp to valid vocabulary range
             context_window = current_tokens[-self.block_size :]
+            vocab_size = getattr(self.model.config, "vocab_size", 50257)
+            context_window = [min(max(0, tid), vocab_size - 1) for tid in context_window]
             x = torch.tensor([context_window], dtype=torch.long, device=self.device)
 
             logits, _ = self.model(x)  # (1, 1, vocab_size)

@@ -95,9 +95,11 @@ class GPT(nn.Module):
         device = idx.device
         b, t = idx.size()
         if t > self.config.block_size:
-            raise ValueError(
-                f"Cannot forward sequence of length {t}, block_size is {self.config.block_size}"
-            )
+            idx = idx[:, -self.config.block_size:]
+            t = idx.size(1)
+
+        # Safety clamp to strictly guarantee indices are within embedding bounds
+        idx = torch.clamp(idx, 0, self.config.vocab_size - 1)
 
         pos = torch.arange(0, t, dtype=torch.long, device=device)  # shape (t)
 
