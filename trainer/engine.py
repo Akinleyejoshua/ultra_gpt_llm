@@ -114,13 +114,32 @@ class Trainer:
         self.model.train()
         return losses["train"], losses["val"]
 
-    def train(self, resume_from_checkpoint: bool = False) -> Dict[str, List[float]]:
-        """Main training loop with telemetry logging, checkpointing, and safeguards."""
+    def train(self, resume_from_checkpoint: Optional[bool] = None) -> Dict[str, List[float]]:
+        """
+        Main training loop with telemetry logging, checkpointing, and safeguards.
+        - If resume_from_checkpoint is True or None (auto), and latest_checkpoint.pt exists,
+          it automatically resumes training from the latest weights, step, and optimizer state!
+        - If resume_from_checkpoint is False, starts afresh from step 0.
+        """
         start_step = 0
-        if resume_from_checkpoint:
-            start_step, _, _ = self.checkpoint_mgr.resume(
+        should_resume = (
+            resume_from_checkpoint is True
+            or (resume_from_checkpoint is None and self.checkpoint_mgr.latest_path.exists())
+        )
+
+        if should_resume and self.checkpoint_mgr.latest_path.exists():
+            print(f"\n[Auto-Resume] Found existing checkpoint at: {self.checkpoint_mgr.latest_path}")
+            start_step, last_loss, _ = self.checkpoint_mgr.resume(
                 self.model, self.optimizer, self.scaler, device=self.device
             )
+            print(f"  -> Successfully restored weights at Step {start_step:,} (Loss: {last_loss:.4f})")
+            if self.config.max_iters <= start_step:
+                added = 1000
+                self.config.max_iters = start_step + added
+                self.config.lr_decay_iters = self.config.max_iters
+                print(f"  -> Target step {start_step:,} already achieved. Extending training to {self.config.max_iters:,} steps (+{added:,}).")
+        elif resume_from_checkpoint is True:
+            raise FileNotFoundError(f"Cannot resume: No checkpoint found at {self.checkpoint_mgr.latest_path}")
 
         self.model.train()
         data_iter = iter(self.train_loader)

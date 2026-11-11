@@ -51,7 +51,8 @@ def parse_args():
     parser.add_argument("--mixed_precision", type=str, default=None, choices=["fp16", "bf16", "no"], help="AMP precision mode")
     parser.add_argument("--device", type=str, default=None, help="Target device (cuda, mps, cpu, auto)")
     parser.add_argument("--bpe", action="store_true", help="Use GPT-2 Byte Pair Encoding tokenizer instead of character tokenizer")
-    parser.add_argument("--resume", action="store_true", help="Resume from latest checkpoint")
+    parser.add_argument("--resume", action="store_true", help="Explicitly resume from latest checkpoint")
+    parser.add_argument("--fresh", action="store_true", help="Force train from scratch, ignoring existing checkpoints")
     return parser.parse_args()
 
 
@@ -131,7 +132,9 @@ def main():
         val_loader=val_loader,
     )
 
-    history = trainer.train(resume_from_checkpoint=args.resume)
+    # Automatically resume from latest checkpoint unless --fresh is passed
+    resume_flag = False if args.fresh else (True if args.resume else None)
+    history = trainer.train(resume_from_checkpoint=resume_flag)
     trainer.plot_metrics(save_path="training_metrics.png")
     print("Done! Metrics and latest checkpoints successfully generated.")
 

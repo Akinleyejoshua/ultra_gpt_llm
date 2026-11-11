@@ -233,9 +233,9 @@ We define:
     code(read_source("trainer/engine.py"))
 
     # Phase 8
-    md("""## Phase 8: Model Training Execution & Telemetry Demonstration
-Now we train our UltraGPT model on the scraped Wikipedia dataset, tracking real-time loss, learning rate, and processing throughput (tokens/second).""")
-    code("""# Initialize Trainer and execute training loop
+    md("""## Phase 8: Model Training Execution & Resuming Mechanism
+We train our UltraGPT model with live real-time telemetry. If `checkpoints/latest_checkpoint.pt` exists, **it automatically resumes from the saved step and trained weights** instead of starting from scratch!""")
+    code("""# Initialize Trainer
 trainer = Trainer(
     model=model,
     config=nano_cfg,
@@ -243,7 +243,17 @@ trainer = Trainer(
     val_loader=val_loader,
 )
 
-training_history = trainer.train()""")
+# Check for existing checkpoint
+ckpt_file = Path("checkpoints/latest_checkpoint.pt")
+resume_mode = ckpt_file.exists()
+
+if resume_mode:
+    print(f"[*] Found checkpoint at {ckpt_file}. RESUMING training from saved weights...")
+else:
+    print("[*] No checkpoint found. Starting training from scratch...")
+
+# trainer.train() automatically restores model weights, optimizer buffers, and step count
+training_history = trainer.train(resume_from_checkpoint=resume_mode)""")
 
     # Phase 9
     md("""## Phase 9: Telemetry Visualizations
