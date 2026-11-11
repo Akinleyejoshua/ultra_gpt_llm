@@ -48,7 +48,19 @@ class Trainer:
         self.val_loader = val_loader
 
         self.device = config.device
+        if self.device == "cuda" and not torch.cuda.is_available():
+            raise RuntimeError("CUDA was requested, but torch.cuda.is_available() is False!")
         self.model.to(self.device)
+
+        # Explicit GPU hardware placement verification
+        param_device = next(self.model.parameters()).device
+        if "cuda" in str(param_device):
+            gpu_name = torch.cuda.get_device_name(param_device)
+            vram_mb = torch.cuda.memory_allocated(param_device) / (1024**2)
+            print(f"[GPU Confirmed] Model weights residing on: {gpu_name} ({param_device})")
+            print(f"[GPU Confirmed] Active GPU VRAM Allocation: {vram_mb:.2f} MB")
+        else:
+            print(f"[Hardware Device] Model placed on: {param_device.type.upper()}")
 
         # Optimizer setup with decoupled weight decay
         self.optimizer = configure_optimizers(
