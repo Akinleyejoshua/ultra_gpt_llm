@@ -49,6 +49,8 @@ class BPETokenizer(BaseTokenizer):
         "<|pad|>": 50257,
         "<|im_start|>": 50258,
         "<|im_end|>": 50259,
+        "<think>": 50260,
+        "</think>": 50261,
     }
 
     def __init__(self) -> None:
@@ -61,8 +63,8 @@ class BPETokenizer(BaseTokenizer):
         self._special_tokens = self.SPECIAL_TOKENS.copy()
         self._reverse_special_tokens = {v: k for k, v in self._special_tokens.items()}
         # Base gpt2 vocab has 50257 tokens (0..50256 where 50256 is <|endoftext|>)
-        # With added pad, im_start, im_end, vocab_size becomes 50260
-        self._vocab_size = 50260
+        # With added pad, im_start, im_end, think, think_end, vocab_size becomes 50262
+        self._vocab_size = 50262
 
     @property
     def vocab_size(self) -> int:
@@ -103,10 +105,10 @@ class BPETokenizer(BaseTokenizer):
 class CharTokenizer(BaseTokenizer):
     """
     Self-contained Character-level Tokenizer with special token handling.
-    Ideal for testing, zero-dependency deployment, and fast CPU training.
+    Supports chat boundaries (<|im_start|>, <|im_end|>) and thinking tokens (<think>, </think>).
     """
 
-    DEFAULT_SPECIALS = ["<|endoftext|>", "<|pad|>", "<|im_start|>", "<|im_end|>"]
+    DEFAULT_SPECIALS = ["<|endoftext|>", "<|pad|>", "<|im_start|>", "<|im_end|>", "<think>", "</think>"]
 
     def __init__(self, chars: Optional[List[str]] = None):
         self.specials = self.DEFAULT_SPECIALS.copy()

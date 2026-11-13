@@ -54,8 +54,9 @@ ultra_gpt/
 ├── data/
 │   ├── __init__.py
 │   ├── scraper.py            # Web crawler for Wikipedia / raw text URLs
-│   ├── cleaner.py            # NFKC Unicode normalization, regex artifact removal, ChatML
-│   ├── tokenizer.py          # BPE (tiktoken) & standalone character-level tokenizers
+│   ├── dialogue_scraper.py   # Reddit Q&A crawler, transcripts, pleasantries & thinking synthesizers
+│   ├── cleaner.py            # NFKC Unicode normalization, regex artifact removal, ChatML & <think> tags
+│   ├── tokenizer.py          # BPE (tiktoken) & standalone character-level tokenizers with <think> specials
 │   └── dataset.py            # Causal LM shifting (x=t[:-1], y=t[1:]), dynamic pinning
 ├── model/
 │   ├── __init__.py
@@ -281,17 +282,26 @@ jupyter notebook notebook.ipynb
 
 ## Quickstart CLI Guide
 
-### 1. Scraping Custom Datasets
-You can scrape any Wikipedia topics, search queries, or web URLs into `data/dataset.txt`:
+### 1. Scraping Custom Datasets & Dialogue Ingestion
+You can scrape articles, Reddit discussions, everyday conversational pleasantries, and Chain-of-Thought reasoning traces into `data/dataset.txt`:
 ```powershell
-# A. Scrape specific keywords/topics:
+# A. Scrape Wikipedia topics:
 python scrape.py --search "Quantum computing" "Neural networks" "Astrophysics"
 
-# B. Interactive mode (prompts you in the terminal):
-python scrape.py --interactive
+# B. Ingest everyday conversational greetings & pleasantries:
+python scrape.py --greetings 50
 
-# C. Scrape direct URLs:
-python scrape.py --urls "https://en.wikipedia.org/wiki/Deep_learning"
+# C. Crawl authentic multi-turn dialogue from educational subreddits:
+python scrape.py --subreddits AskScience ExplainLikeImFive philosophy
+
+# D. Synthesize Chain-of-Thought reasoning dialogues (<think>...</think>):
+python scrape.py --thinking 30
+
+# E. Parse and convert external interview/dialogue transcripts:
+python scrape.py --transcript my_interview.txt
+
+# F. Interactive mode (prompts you in the terminal):
+python scrape.py --interactive
 ```
 
 ### 2. Training from Scratch

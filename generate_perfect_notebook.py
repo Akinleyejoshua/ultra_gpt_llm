@@ -120,25 +120,72 @@ for preset_name in ["gpt-nano", "gpt-micro", "gpt-mini", "gpt2-small"]:
           f"embd={cfg_inst.n_embd:4d}, context={cfg_inst.block_size:4d}, batch={cfg_inst.batch_size:2d}")""")
 
     # Phase 3
-    md("""## Phase 3: Data Ingestion, Web Scraping & Text Cleaning Pipeline
+    md("""## Phase 3: Data Ingestion, Web Scraping, Dialogue Pipeline & Deduplication
 Here we define:
-1. `TextCleaner`: Unicode NFKC normalization, regex citation removal (`[1]`, `[citation needed]`, `[edit]`), HTML tag stripping, and whitespace consolidation.
-2. `DialogueFormatter`: ShareGPT / ChatML format converter (`<|im_start|>role...<|im_end|>`).
-3. `WebScraper`: BeautifulSoup + requests crawler targeting Wikipedia and web articles.
-Then we run the scraper to ingest real articles into `data/dataset.txt`.""")
+1. `TextCleaner`: Unicode NFKC normalization, regex citation removal (`[1]`, `[citation needed]`, `[edit]`), HTML tag stripping, whitespace consolidation, and document deduplication (`deduplicate_file`).
+2. `DialogueFormatter`: ShareGPT / ChatML format converter (`<|im_start|>role...<|im_end|>`) with native `<think>...</think>` Chain-of-Thought tags.
+3. `WebScraper`: BeautifulSoup + requests crawler targeting Wikipedia and educational web articles.
+4. `DialogueParser`, `RedditDialogueScraper`, `ThinkingDialogueSynthesizer`, and `GreetingPleasantrySynthesizer`: Scraping Reddit Q&A threads, transcripts, everyday conversational pleasantries, and step-by-step reasoning dialogues.
+
+> **Anti-Repetition Controls**: Below you can toggle `SKIP_IF_EXISTS = True` to prevent repeated re-scraping and data duplication on subsequent notebook runs.""")
     code(read_source("data/cleaner.py"))
+    code(read_source("data/dialogue_scraper.py"))
     code(read_source("data/scraper.py") + """
 
-# Execute Live Web Scraper: Ingest real articles into data/dataset.txt
-scraper = WebScraper(output_path="data/dataset.txt")
-topics = [
-    "Artificial intelligence",
-    "Transformer (deep learning architecture)",
-    "Large language model",
-]
-print("Scraping educational corpus from Wikipedia...")
-total_chars = scraper.scrape_batch(topics)
-print(f"Total scraped & cleaned characters in dataset.txt: {total_chars:,}")""")
+# =====================================================================
+# DATASET INGESTION CONTROLS (Prevents Data Repetition on Re-runs)
+# =====================================================================
+SKIP_IF_EXISTS = True       # When True, reuses existing dataset to prevent duplicate appending
+REBUILD_DATASET = False     # Set to True ONLY if you want to wipe dataset.txt and scrape afresh
+DEDUPLICATE_DATASET = True  # Automatically strips duplicate documents/conversations
+DATASET_PATH = Path("data/dataset.txt")
+# =====================================================================
+
+dataset_already_exists = DATASET_PATH.exists() and DATASET_PATH.stat().st_size > 0
+
+if dataset_already_exists and SKIP_IF_EXISTS and not REBUILD_DATASET:
+    print("=" * 70)
+    print(f"[DATASET REUSED] '{DATASET_PATH}' already exists ({DATASET_PATH.stat().st_size:,} bytes).")
+    print("Skipping scraping & ingestion to prevent duplicate data repetition!")
+    print("-> To scrape afresh from scratch: set REBUILD_DATASET = True and run this cell.")
+    print("-> To append more data anyway: set SKIP_IF_EXISTS = False and run this cell.")
+    print("=" * 70)
+else:
+    if REBUILD_DATASET and DATASET_PATH.exists():
+        DATASET_PATH.unlink()
+        print(f"Cleared existing '{DATASET_PATH}' for a fresh rebuild.")
+
+    # 1. Scrape educational articles
+    scraper = WebScraper(output_path=DATASET_PATH)
+    topics = [
+        "Artificial intelligence",
+        "Transformer (deep learning architecture)",
+        "Large language model",
+    ]
+    print("1. Scraping educational corpus from Wikipedia...")
+    total_chars = scraper.scrape_batch(topics)
+    print(f"Scraped {total_chars:,} characters from Wikipedia.")
+
+    # 2. Ingest Greetings, Pleasantries & Thinking Dialogues
+    print("2. Ingesting conversational pleasantries & Chain-of-Thought dialogues...")
+    builder = DialogueDatasetBuilder(output_path=DATASET_PATH)
+    greetings = GreetingPleasantrySynthesizer.generate_dialogues(count=15)
+    g_chars = builder.append_conversations(greetings)
+    print(f"Ingested {len(greetings)} greeting/pleasantry dialogues ({g_chars:,} chars).")
+
+    thinking = ThinkingDialogueSynthesizer.generate_thinking_dialogues(count=10)
+    t_chars = builder.append_conversations(thinking)
+    print(f"Ingested {len(thinking)} reasoning (<think>) dialogues ({t_chars:,} chars).")
+
+# Run deduplication pass to guarantee clean, non-repeated corpus
+if DEDUPLICATE_DATASET and DATASET_PATH.exists():
+    orig_docs, unique_docs = TextCleaner.deduplicate_file(DATASET_PATH)
+    if orig_docs > unique_docs:
+        print(f"[Deduplication Pass] Removed {orig_docs - unique_docs} duplicate sections. Unique documents: {unique_docs}")
+    else:
+        print(f"[Dataset Verified] All {unique_docs} documents/conversations in dataset are unique.")
+
+print(f"Final Dataset Size: {DATASET_PATH.stat().st_size:,} bytes")""")
 
     # Phase 4
     md("""## Phase 4: Tokenization Engine (BPE & Character-Level with Specials)

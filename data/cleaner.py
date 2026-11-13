@@ -66,27 +66,77 @@ class TextCleaner:
 
         return text.strip()
 
+    @classmethod
+    def deduplicate_documents(cls, text: str, delimiter: str = "<|endoftext|>") -> tuple[str, int, int]:
+        """
+        Deduplicate document/dialogue chunks separated by delimiter while preserving first-seen order.
+        Returns (deduplicated_text, original_doc_count, unique_doc_count).
+        """
+        chunks = text.split(delimiter)
+        seen = set()
+        unique_chunks: list[str] = []
+        original_count = 0
+
+        for chunk in chunks:
+            chunk_stripped = chunk.strip()
+            if not chunk_stripped:
+                continue
+            original_count += 1
+            # Normalize whitespace for fuzzy duplicate detection
+            hash_key = re.sub(r"\s+", " ", chunk_stripped)
+            if hash_key not in seen:
+                seen.add(hash_key)
+                unique_chunks.append(chunk_stripped)
+
+        delim_spaced = f"\n\n{delimiter}\n\n"
+        deduped_text = delim_spaced.join(unique_chunks)
+        if deduped_text:
+            deduped_text += delim_spaced
+        return deduped_text, original_count, len(unique_chunks)
+
+    @classmethod
+    def deduplicate_file(cls, filepath: str | Path, delimiter: str = "<|endoftext|>") -> tuple[int, int]:
+        """Deduplicate in-place a dataset file separated by delimiter."""
+        from pathlib import Path
+        p = Path(filepath)
+        if not p.exists():
+            return 0, 0
+        raw = p.read_text(encoding="utf-8")
+        deduped, orig_count, uniq_count = cls.deduplicate_documents(raw, delimiter)
+        p.write_text(deduped, encoding="utf-8")
+        return orig_count, uniq_count
+
 
 class DialogueFormatter:
     """
-    Format converter for multi-turn structured dialogues:
-    MLChat / ShareGPT / ChatML style:
+    Format converter for multi-turn structured dialogues and thinking models:
+    MLChat / ShareGPT / ChatML style with native Chain-of-Thought (<think>...</think>) support:
     <|im_start|>system
     {system_message}<|im_end|>
     <|im_start|>user
     {user_message}<|im_end|>
     <|im_start|>assistant
-    {assistant_message}<|im_end|>
+    <think>
+    {internal_reasoning_steps}
+    </think>
+    {final_response}<|im_end|>
     """
 
     IM_START = "<|im_start|>"
     IM_END = "<|im_end|>"
+    THINK_START = "<think>"
+    THINK_END = "</think>"
 
     @classmethod
-    def format_turn(cls, role: str, content: str) -> str:
-        """Format a single dialogue turn."""
+    def format_turn(cls, role: str, content: str, reasoning: Optional[str] = None) -> str:
+        """Format a single dialogue turn with optional thinking chain-of-thought."""
         clean_content = content.strip()
-        return f"{cls.IM_START}{role}\n{clean_content}{cls.IM_END}"
+        if role == "assistant" and reasoning and reasoning.strip():
+            clean_reasoning = reasoning.strip()
+            body = f"{cls.THINK_START}\n{clean_reasoning}\n{cls.THINK_END}\n{clean_content}"
+        else:
+            body = clean_content
+        return f"{cls.IM_START}{role}\n{body}{cls.IM_END}"
 
     @classmethod
     def format_conversation(
@@ -95,19 +145,37 @@ class DialogueFormatter:
         add_generation_prompt: bool = False,
     ) -> str:
         """
-        Convert list of message dicts ({'role': 'user'|'assistant'|'system', 'content': '...'})
+        Convert list of message dicts ({'role': 'user'|'assistant'|'system', 'content': '...', 'reasoning': '...'})
         into a formatted single prompt string.
         """
         formatted = []
         for msg in messages:
             role = msg.get("role", "user")
             content = msg.get("content", "")
-            formatted.append(cls.format_turn(role, content))
+            reasoning = msg.get("reasoning", None)
+            formatted.append(cls.format_turn(role, content, reasoning=reasoning))
 
         result = "\n".join(formatted)
         if add_generation_prompt:
             result += f"\n{cls.IM_START}assistant\n"
         return result
+
+    @classmethod
+    def extract_thinking(cls, text: str) -> Tuple[Optional[str], str]:
+        """
+        Separates internal reasoning (<think>...</think>) from user-facing answer.
+        Returns (reasoning_text, final_answer).
+        """
+        pattern = re.compile(
+            rf"{re.escape(cls.THINK_START)}\s*(.*?)\s*{re.escape(cls.THINK_END)}",
+            re.DOTALL,
+        )
+        match = pattern.search(text)
+        if match:
+            reasoning = match.group(1).strip()
+            answer = pattern.sub("", text).strip()
+            return reasoning, answer
+        return None, text.strip()
 
     @classmethod
     def parse_conversation(cls, text: str) -> List[Dict[str, str]]:
@@ -117,4 +185,14 @@ class DialogueFormatter:
             re.DOTALL,
         )
         matches = pattern.findall(text)
-        return [{"role": role, "content": content.strip()} for role, content in matches]
+        parsed = []
+        for role, raw_content in matches:
+            if role == "assistant":
+                reasoning, answer = cls.extract_thinking(raw_content)
+                item = {"role": role, "content": answer}
+                if reasoning:
+                    item["reasoning"] = reasoning
+                parsed.append(item)
+            else:
+                parsed.append({"role": role, "content": raw_content.strip()})
+        return parsed
