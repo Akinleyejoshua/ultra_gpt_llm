@@ -120,24 +120,48 @@ for preset_name in ["gpt-nano", "gpt-micro", "gpt-mini", "gpt2-small"]:
           f"embd={cfg_inst.n_embd:4d}, context={cfg_inst.block_size:4d}, batch={cfg_inst.batch_size:2d}")""")
 
     # Phase 3
-    md("""## Phase 3: Data Ingestion, Web Scraping, Dialogue Pipeline & Deduplication
-Here we define:
-1. `TextCleaner`: Unicode NFKC normalization, regex citation removal (`[1]`, `[citation needed]`, `[edit]`), HTML tag stripping, whitespace consolidation, and document deduplication (`deduplicate_file`).
+    md("""## Phase 3: Dynamic Data Ingestion, Scraping, DSA & Dialogue Pipeline
+Here we define our end-to-end data preparation architecture:
+1. `TextCleaner`: Unicode NFKC normalization, citation/artifact removal, HTML stripping, and deduplication (`deduplicate_file`).
 2. `DialogueFormatter`: ShareGPT / ChatML format converter (`<|im_start|>role...<|im_end|>`) with native `<think>...</think>` Chain-of-Thought tags.
-3. `WebScraper`: BeautifulSoup + requests crawler targeting Wikipedia and educational web articles.
-4. `DialogueParser`, `RedditDialogueScraper`, `ThinkingDialogueSynthesizer`, and `GreetingPleasantrySynthesizer`: Scraping Reddit Q&A threads, transcripts, everyday conversational pleasantries, and step-by-step reasoning dialogues.
+3. `DialogueParser` & `RedditDialogueScraper`: Crawling multi-turn Q&A from forums and transcripts.
+4. `DSACodingSynthesizer`: Generating canonical Data Structures & Algorithms interview problems with reasoning and Python code.
+5. `GreetingPleasantrySynthesizer` & `ThinkingDialogueSynthesizer`: Conversational greetings, polite check-ins, and step-by-step reasoning.
+6. `WebScraper`: BeautifulSoup + requests crawler for Wikipedia and web articles.
 
-> **Anti-Repetition Controls**: Below you can toggle `SKIP_IF_EXISTS = True` to prevent repeated re-scraping and data duplication on subsequent notebook runs.""")
+### How to Use the Dynamic Scraper in this Notebook:
+You can customize **any topics, DSA problems, subreddits, or URLs** in the configuration cell below, or use the interactive `scrape_custom_topic()` function!""")
     code(read_source("data/cleaner.py"))
     code(read_source("data/dialogue_scraper.py"))
-    code(read_source("data/scraper.py") + """
+    code(read_source("data/scraper.py"))
 
+    code("""# =====================================================================
+# DYNAMIC INGESTION CONTROLS (Customize What to Scrape & Ingest!)
 # =====================================================================
-# DATASET INGESTION CONTROLS (Prevents Data Repetition on Re-runs)
-# =====================================================================
-SKIP_IF_EXISTS = True       # When True, reuses existing dataset to prevent duplicate appending
-REBUILD_DATASET = False     # Set to True ONLY if you want to wipe dataset.txt and scrape afresh
-DEDUPLICATE_DATASET = True  # Automatically strips duplicate documents/conversations
+# 1. Custom Topics / Concepts to Scrape (DSA, AI, Computer Science, etc.)
+TOPICS_TO_SCRAPE = [
+    "Binary search tree",
+    "Dynamic programming",
+    "Dijkstra's algorithm",
+    "Transformer (deep learning architecture)",
+    "Large language model",
+]
+
+# 2. Direct Web URLs to Scrape (optional)
+URLS_TO_SCRAPE = []
+
+# 3. Discussion Subreddits to Scrape (e.g. ['leetcode', 'AskScience'])
+SUBREDDITS_TO_SCRAPE = ["leetcode"]
+
+# 4. Synthetic Dialogues & Problem Counts
+NUM_DSA_PROBLEMS = 15        # LeetCode-style DSA coding problems with <think> reasoning
+NUM_GREETINGS = 15           # Everyday conversational pleasantries and check-ins
+NUM_THINKING_DIALOGUES = 10  # Deep architectural / mathematical reasoning dialogues
+
+# 5. Pipeline Execution Controls
+SKIP_IF_EXISTS = False       # Set to False to run ingestion with your chosen topics above
+REBUILD_DATASET = True       # Set to True to wipe dataset.txt and rebuild afresh from your topics
+DEDUPLICATE_DATASET = True   # Automatically remove duplicate entries
 DATASET_PATH = Path("data/dataset.txt")
 # =====================================================================
 
@@ -146,46 +170,113 @@ dataset_already_exists = DATASET_PATH.exists() and DATASET_PATH.stat().st_size >
 if dataset_already_exists and SKIP_IF_EXISTS and not REBUILD_DATASET:
     print("=" * 70)
     print(f"[DATASET REUSED] '{DATASET_PATH}' already exists ({DATASET_PATH.stat().st_size:,} bytes).")
-    print("Skipping scraping & ingestion to prevent duplicate data repetition!")
-    print("-> To scrape afresh from scratch: set REBUILD_DATASET = True and run this cell.")
-    print("-> To append more data anyway: set SKIP_IF_EXISTS = False and run this cell.")
+    print("Skipping scraping to prevent duplicate data repetition!")
+    print("-> To scrape afresh with new topics: set REBUILD_DATASET = True and run this cell.")
     print("=" * 70)
 else:
     if REBUILD_DATASET and DATASET_PATH.exists():
         DATASET_PATH.unlink()
         print(f"Cleared existing '{DATASET_PATH}' for a fresh rebuild.")
 
-    # 1. Scrape educational articles
     scraper = WebScraper(output_path=DATASET_PATH)
-    topics = [
-        "Artificial intelligence",
-        "Transformer (deep learning architecture)",
-        "Large language model",
-    ]
-    print("1. Scraping educational corpus from Wikipedia...")
-    total_chars = scraper.scrape_batch(topics)
-    print(f"Scraped {total_chars:,} characters from Wikipedia.")
-
-    # 2. Ingest Greetings, Pleasantries & Thinking Dialogues
-    print("2. Ingesting conversational pleasantries & Chain-of-Thought dialogues...")
     builder = DialogueDatasetBuilder(output_path=DATASET_PATH)
-    greetings = GreetingPleasantrySynthesizer.generate_dialogues(count=15)
-    g_chars = builder.append_conversations(greetings)
-    print(f"Ingested {len(greetings)} greeting/pleasantry dialogues ({g_chars:,} chars).")
 
-    thinking = ThinkingDialogueSynthesizer.generate_thinking_dialogues(count=10)
-    t_chars = builder.append_conversations(thinking)
-    print(f"Ingested {len(thinking)} reasoning (<think>) dialogues ({t_chars:,} chars).")
+    # 1. Scrape Custom Topics (Wikipedia / Web Articles)
+    if TOPICS_TO_SCRAPE:
+        print(f"1. Scraping {len(TOPICS_TO_SCRAPE)} educational topic(s)...")
+        scraped_chars = scraper.scrape_batch(TOPICS_TO_SCRAPE)
+        print(f"   [+] Scraped {scraped_chars:,} characters from topics.")
+
+    # 2. Scrape Direct URLs
+    if URLS_TO_SCRAPE:
+        print(f"2. Scraping {len(URLS_TO_SCRAPE)} direct URL(s)...")
+        for u in URLS_TO_SCRAPE:
+            txt = scraper.scrape_url(u)
+            c = scraper.append_to_dataset(txt)
+            print(f"   [+] Ingested {c:,} characters from {u}")
+
+    # 3. Scrape Subreddit Discussions
+    if SUBREDDITS_TO_SCRAPE:
+        reddit_scraper = RedditDialogueScraper()
+        for sub in SUBREDDITS_TO_SCRAPE:
+            print(f"3. Crawling community dialogues from r/{sub}...")
+            convs = reddit_scraper.scrape_subreddit_dialogues(sub, limit=10)
+            if convs:
+                c = builder.append_conversations(convs)
+                print(f"   [+] Ingested {len(convs)} dialogues from r/{sub} ({c:,} chars)")
+
+    # 4. Ingest DSA Algorithmic Problems with Reasoning & Code
+    if NUM_DSA_PROBLEMS > 0:
+        print(f"4. Synthesizing {NUM_DSA_PROBLEMS} DSA coding problems (<think> + Python code)...")
+        dsa_convs = DSACodingSynthesizer.generate_dsa_dialogues(count=NUM_DSA_PROBLEMS)
+        dsa_chars = builder.append_conversations(dsa_convs)
+        print(f"   [+] Ingested {len(dsa_convs)} DSA problems ({dsa_chars:,} chars).")
+
+    # 5. Ingest Conversational Pleasantries & Thinking Dialogues
+    if NUM_GREETINGS > 0:
+        print(f"5. Ingesting {NUM_GREETINGS} conversational pleasantries...")
+        greetings = GreetingPleasantrySynthesizer.generate_dialogues(count=NUM_GREETINGS)
+        g_chars = builder.append_conversations(greetings)
+        print(f"   [+] Ingested {len(greetings)} greetings ({g_chars:,} chars).")
+
+    if NUM_THINKING_DIALOGUES > 0:
+        print(f"6. Ingesting {NUM_THINKING_DIALOGUES} Chain-of-Thought reasoning dialogues...")
+        thinking = ThinkingDialogueSynthesizer.generate_thinking_dialogues(count=NUM_THINKING_DIALOGUES)
+        t_chars = builder.append_conversations(thinking)
+        print(f"   [+] Ingested {len(thinking)} reasoning dialogues ({t_chars:,} chars).")
 
 # Run deduplication pass to guarantee clean, non-repeated corpus
 if DEDUPLICATE_DATASET and DATASET_PATH.exists():
     orig_docs, unique_docs = TextCleaner.deduplicate_file(DATASET_PATH)
     if orig_docs > unique_docs:
-        print(f"[Deduplication Pass] Removed {orig_docs - unique_docs} duplicate sections. Unique documents: {unique_docs}")
+        print(f"[Deduplication Pass] Removed {orig_docs - unique_docs} duplicate sections. Unique sections: {unique_docs}")
     else:
         print(f"[Dataset Verified] All {unique_docs} documents/conversations in dataset are unique.")
 
 print(f"Final Dataset Size: {DATASET_PATH.stat().st_size:,} bytes")""")
+
+    md("""### Interactive Scraper Widget: Ingest Any Custom Topic on Demand
+You can type any topic or URL into the box below and click **Scrape & Ingest** to instantly append it to your training corpus!""")
+    code("""import ipywidgets as widgets
+from IPython.display import display
+
+topic_input = widgets.Text(
+    value="Quicksort algorithm",
+    placeholder="Enter any search query, Wikipedia topic, or URL...",
+    description="Topic / URL:",
+    layout=widgets.Layout(width="60%")
+)
+scrape_button = widgets.Button(
+    description="Scrape & Ingest",
+    button_style="success",
+    icon="download",
+    layout=widgets.Layout(width="18%")
+)
+scrape_status = widgets.Output()
+
+def on_scrape_button_clicked(b):
+    query = topic_input.value.strip()
+    if not query:
+        return
+    with scrape_status:
+        print(f"Scraping '{query}'...")
+        sc = WebScraper(output_path="data/dataset.txt")
+        if query.startswith("http://") or query.startswith("https://"):
+            text = sc.scrape_url(query)
+        else:
+            text = sc.scrape_wikipedia(query)
+        chars = sc.append_to_dataset(text)
+        if chars > 0:
+            print(f"[SUCCESS] Ingested {chars:,} characters from '{query}' into data/dataset.txt!")
+            # Run dedup
+            TextCleaner.deduplicate_file("data/dataset.txt")
+            print(f"Updated dataset size: {Path('data/dataset.txt').stat().st_size:,} bytes.")
+        else:
+            print(f"[NOTICE] No content retrieved for '{query}'.")
+
+scrape_button.on_click(on_scrape_button_clicked)
+display(widgets.HBox([topic_input, scrape_button]))
+display(scrape_status)""")
 
     # Phase 4
     md("""## Phase 4: Tokenization Engine (BPE & Character-Level with Specials)
@@ -352,7 +443,7 @@ bot = ConversationBot(
 
 print("\\nPrompt: 'What is deep learning?'")
 print("UltraGPT > ", end="", flush=True)
-for piece in bot.stream_generate("What is deep learning?", max_tokens=60, temperature=0.7):
+for piece in bot.stream_generate("What is deep learning?", max_tokens=300, temperature=0.7):
     print(piece, end="", flush=True)
 print()""")
 

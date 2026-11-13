@@ -297,10 +297,13 @@ python scrape.py --subreddits AskScience ExplainLikeImFive philosophy
 # D. Synthesize Chain-of-Thought reasoning dialogues (<think>...</think>):
 python scrape.py --thinking 30
 
-# E. Parse and convert external interview/dialogue transcripts:
+# E. Ingest Data Structures & Algorithms (DSA) interview problems with CoT reasoning & code:
+python scrape.py --dsa 25
+
+# F. Parse and convert external interview/dialogue transcripts:
 python scrape.py --transcript my_interview.txt
 
-# F. Interactive mode (prompts you in the terminal):
+# G. Interactive mode (prompts you in the terminal):
 python scrape.py --interactive
 ```
 

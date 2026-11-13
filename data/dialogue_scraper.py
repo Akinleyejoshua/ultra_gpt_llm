@@ -357,6 +357,66 @@ class ThinkingDialogueSynthesizer:
         return dialogues
 
 
+class DSACodingSynthesizer:
+    """
+    Synthesizes Data Structures & Algorithms (DSA) coding problems, solutions,
+    and step-by-step algorithmic reasoning equipped with <think>...</think> tags.
+    Teaches the model to solve technical interview questions, analyze time/space
+    complexity, and implement optimal Python code.
+    """
+
+    DSA_TEMPLATES = [
+        {
+            "user": "How do you solve the Two Sum problem in Python? Given nums = [2, 7, 11, 15] and target = 9, return indices of the two numbers that add up to target.",
+            "think": "We need to find two distinct indices i and j such that nums[i] + nums[j] == target. A brute force approach checks all pairs with two nested loops, taking O(N^2) time. To optimize, we can use a Hash Map (dictionary) to store elements seen so far mapping value -> index. For each number num at index i, the required complement is target - num. If complement is in the hash map, we immediately return [hash_map[complement], i]. This single pass runs in O(N) time and O(N) auxiliary space.",
+            "answer": "We can solve Two Sum optimally in O(N) time using a Hash Map:\n\n```python\ndef two_sum(nums: list[int], target: int) -> list[int]:\n    seen = {}\n    for i, num in enumerate(nums):\n        complement = target - num\n        if complement in seen:\n            return [seen[complement], i]\n        seen[num] = i\n    return []\n```\n\n- Time Complexity: O(N) since each lookup in the hash map is O(1) on average.\n- Space Complexity: O(N) to store up to N elements in the dictionary.",
+        },
+        {
+            "user": "Explain how to reverse a singly linked list in Python iteratively.",
+            "think": "In a singly linked list, each node points to next: curr.next. To reverse in-place iteratively, we maintain three pointers: prev (initialized to None), curr (starts at head), and next_node (temporary store for curr.next). At each step: next_node = curr.next, curr.next = prev, prev = curr, curr = next_node. We repeat until curr is None, at which point prev becomes the new head of the reversed list. Time complexity is O(N) since we visit each node once. Space complexity is O(1) since we only use pointers.",
+            "answer": "Here is the optimal iterative solution in Python:\n\n```python\nclass ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\n\ndef reverse_list(head: ListNode | None) -> ListNode | None:\n    prev = None\n    curr = head\n    while curr:\n        next_node = curr.next\n        curr.next = prev\n        prev = curr\n        curr = next_node\n    return prev\n```\n\n- Time Complexity: O(N) where N is the number of nodes in the list.\n- Space Complexity: O(1) since pointers are updated in-place.",
+        },
+        {
+            "user": "How do you validate if a string of brackets is valid using a Stack? (e.g. '()[]{}')",
+            "think": "A bracket string is valid if open brackets are closed by the same type of brackets in the correct order. We use a Stack (LIFO). We map closing brackets to corresponding opening brackets: {')': '(', '}': '{', ']': '['}. When scanning the string: if char is a closing bracket, we check if stack is non-empty and stack.pop() matches the expected open bracket. If it does not match, return False. If char is an opening bracket, push it onto the stack. At the end, return True if the stack is completely empty.",
+            "answer": "We can validate bracket sequences using a Stack in O(N) time:\n\n```python\ndef is_valid_parentheses(s: str) -> bool:\n    stack = []\n    mapping = {')': '(', '}': '{', ']': '['}\n    for char in s:\n        if char in mapping:\n            top_element = stack.pop() if stack else '#'\n            if mapping[char] != top_element:\n                return False\n        else:\n            stack.append(char)\n    return len(stack) == 0\n```\n\n- Time Complexity: O(N) since we traverse the string of length N once.\n- Space Complexity: O(N) in the worst case when all brackets are opening brackets.",
+        },
+        {
+            "user": "Explain Binary Search and write its implementation in Python.",
+            "think": "Binary search is an efficient divide-and-conquer algorithm for finding an element in a sorted array. It maintains two pointers: low = 0 and high = len(nums) - 1. In each step, it computes mid = (low + high) // 2. If nums[mid] == target, return mid. If nums[mid] < target, target must be in the right half, so low = mid + 1. If nums[mid] > target, target must be in the left half, so high = mid - 1. Each iteration halves the search space, giving O(log N) time complexity.",
+            "answer": "Binary Search operates on sorted arrays in logarithmic time:\n\n```python\ndef binary_search(nums: list[int], target: int) -> int:\n    low, high = 0, len(nums) - 1\n    while low <= high:\n        mid = (low + high) // 2\n        if nums[mid] == target:\n            return mid\n        elif nums[mid] < target:\n            low = mid + 1\n        else:\n            high = mid - 1\n    return -1  # Target not found\n```\n\n- Time Complexity: O(log N) as the search space is divided by 2 at each step.\n- Space Complexity: O(1) iterative space.",
+        },
+        {
+            "user": "How do you find the maximum subarray sum using Kadane's Algorithm?",
+            "think": "The maximum subarray problem asks for the contiguous subarray with the largest sum. Kadane's algorithm uses dynamic programming in O(N) time. At each index i, we decide whether to extend the existing subarray (current_sum + nums[i]) or start a new subarray at nums[i]: current_sum = max(nums[i], current_sum + nums[i]). We track max_sum = max(max_sum, current_sum). This guarantees finding the global maximum in a single linear pass.",
+            "answer": "Kadane's Algorithm finds the maximum subarray sum in O(N) time:\n\n```python\ndef max_sub_array(nums: list[int]) -> int:\n    max_sum = current_sum = nums[0]\n    for num in nums[1:]:\n        current_sum = max(num, current_sum + num)\n        max_sum = max(max_sum, current_sum)\n    return max_sum\n```\n\n- Time Complexity: O(N) single pass through the array.\n- Space Complexity: O(1) auxiliary variables.",
+        },
+        {
+            "user": "How do you solve the Coin Change problem using Dynamic Programming? Given coins = [1, 2, 5] and amount = 11, return the fewest coins needed.",
+            "think": "This is the classic unbounded knapsack problem. Let dp[i] be the minimum coins needed to make amount i. Base case: dp[0] = 0, and all other dp[i] = infinity. For each amount from 1 to target, and for each coin in coins: if amount - coin >= 0, dp[amount] = min(dp[amount], 1 + dp[amount - coin]). If dp[amount] is still infinity at the end, return -1 because the amount cannot be made. Time complexity is O(amount * len(coins)). Space complexity is O(amount).",
+            "answer": "We use bottom-up 1D Dynamic Programming to find the fewest coins:\n\n```python\ndef coin_change(coins: list[int], amount: int) -> int:\n    dp = [float('inf')] * (amount + 1)\n    dp[0] = 0\n    for a in range(1, amount + 1):\n        for c in coins:\n            if a - c >= 0:\n                dp[a] = min(dp[a], 1 + dp[a - c])\n    return dp[amount] if dp[amount] != float('inf') else -1\n```\n\n- Time Complexity: O(A * C) where A is amount and C is the number of coin denominations.\n- Space Complexity: O(A) for the DP table.",
+        },
+        {
+            "user": "How do you find the longest substring without repeating characters in Python?",
+            "think": "We use the Sliding Window technique with two pointers (left and right) and a dictionary (last_seen) storing the last index of each character. As right expands from 0 to N-1: if s[right] was seen and its index >= left, we shift left = last_seen[s[right]] + 1. Then we update last_seen[s[right]] = right and max_len = max(max_len, right - left + 1). Both pointers move at most N times, yielding O(N) time.",
+            "answer": "Here is the optimal Sliding Window solution in Python:\n\n```python\ndef length_of_longest_substring(s: str) -> int:\n    last_seen = {}\n    left = 0\n    max_len = 0\n    for right, char in enumerate(s):\n        if char in last_seen and last_seen[char] >= left:\n            left = last_seen[char] + 1\n        last_seen[char] = right\n        max_len = max(max_len, right - left + 1)\n    return max_len\n```\n\n- Time Complexity: O(N) linear time.\n- Space Complexity: O(min(N, M)) where M is the size of the alphabet.",
+        },
+    ]
+
+    @classmethod
+    def generate_dsa_dialogues(cls, count: int = 15) -> List[List[Dict[str, str]]]:
+        """Generate structured DSA interview dialogues with CoT reasoning and code."""
+        dialogues = []
+        bank_len = len(cls.DSA_TEMPLATES)
+        for i in range(count):
+            item = cls.DSA_TEMPLATES[i % bank_len]
+            dialogues.append([
+                {"role": "user", "content": item["user"]},
+                {"role": "assistant", "content": item["answer"], "reasoning": item["think"]},
+            ])
+        return dialogues
+
+
 class DialogueDatasetBuilder:
     """
     Compiles multi-source dialogues into the primary training dataset:

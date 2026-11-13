@@ -23,6 +23,7 @@ from data.dialogue_scraper import (
     RedditDialogueScraper,
     ThinkingDialogueSynthesizer,
     GreetingPleasantrySynthesizer,
+    DSACodingSynthesizer,
     DialogueDatasetBuilder,
 )
 
@@ -55,6 +56,12 @@ def parse_args():
         type=int,
         default=None,
         help="Synthesize N conversational dialogues covering everyday greetings, polite check-ins, and pleasantries",
+    )
+    parser.add_argument(
+        "--dsa",
+        type=int,
+        default=None,
+        help="Synthesize N Data Structures & Algorithms (DSA) interview problems with CoT reasoning and Python solutions",
     )
     parser.add_argument(
         "--transcript",
@@ -136,7 +143,15 @@ def main():
         total_dialogue_chars += c
         print(f"  [+] Ingested {len(greeting_convs)} greeting & pleasantry dialogues ({c:,} characters)")
 
-    # 4. Ingest and parse transcript file
+    # 4. Synthesize Data Structures & Algorithms (DSA) Coding Dialogues
+    if args.dsa:
+        print(f"Generating {args.dsa} DSA algorithmic coding dialogues with reasoning & Python code...")
+        dsa_convs = DSACodingSynthesizer.generate_dsa_dialogues(count=args.dsa)
+        c = dialogue_builder.append_conversations(dsa_convs)
+        total_dialogue_chars += c
+        print(f"  [+] Ingested {len(dsa_convs)} DSA coding dialogues ({c:,} characters)")
+
+    # 5. Ingest and parse transcript file
     if args.transcript:
         t_path = Path(args.transcript)
         if t_path.exists():

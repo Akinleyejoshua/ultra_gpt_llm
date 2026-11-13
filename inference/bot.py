@@ -42,13 +42,16 @@ class ConversationBot:
         """Clear conversational history, retaining system prompt."""
         self.messages = [{"role": "system", "content": self.system_prompt}]
 
-    def _truncate_history(self, new_user_msg: str, max_new_tokens: int) -> str:
+    def _truncate_history(self, new_user_msg: str, max_new_tokens: int = 512) -> str:
         """
-        Dynamically trims conversation history so prompt tokens + max_new_tokens <= block_size.
-        Always preserves system prompt (messages[0]).
+        Dynamically trims conversation history so prompt tokens leave ample headroom for generation.
+        Always preserves system prompt (messages[0]) and the latest user message.
         """
         candidate_messages = list(self.messages) + [{"role": "user", "content": new_user_msg}]
-        max_prompt_len = self.block_size - max_new_tokens - 8  # headroom for formatting
+        # Reserve room in context window for generation:
+        # At least 25% of block_size (or 32 tokens) is preserved for new output tokens
+        reserved_tokens = max(32, min(max_new_tokens, self.block_size // 3))
+        max_prompt_len = max(32, self.block_size - reserved_tokens)
 
         while len(candidate_messages) > 2:
             prompt_str = DialogueFormatter.format_conversation(candidate_messages, add_generation_prompt=True)
@@ -65,17 +68,20 @@ class ConversationBot:
     def stream_generate(
         self,
         user_message: str,
-        max_tokens: int = 256,
+        max_tokens: int = 512,
         temperature: float = 0.8,
         top_k: Optional[int] = 50,
         top_p: Optional[float] = 0.9,
         repetition_penalty: float = 1.1,
         stop_tokens: Optional[List[str]] = None,
+        complete_sentence: bool = True,
     ) -> Generator[str, None, str]:
         """
-        Stream generation token by token:
-        Yields newly emitted text fragments as they are generated.
-        Returns the full assistant response at end.
+        Stream generation token by token with full conversational completion:
+        - Terminates naturally when the model emits End-of-Turn (<|im_end|>) or EOS.
+        - Supports short responses (stops early on EOS) or long responses (generates up to max_tokens).
+        - Includes adaptive sentence-boundary completion to prevent cutting off mid-sentence.
+        - Yields newly emitted text fragments in real time.
         """
         self.model.eval()
 
@@ -85,7 +91,7 @@ class ConversationBot:
         generated_token_ids: List[int] = []
 
         # Default stop tokens
-        stops: Set[str] = {DialogueFormatter.IM_END, "<|endoftext|>"}
+        stops: Set[str] = {DialogueFormatter.IM_END, "<|endoftext|>", "<|im_start|>"}
         if stop_tokens:
             stops.update(stop_tokens)
 
@@ -95,8 +101,18 @@ class ConversationBot:
             stop_ids.add(self.tokenizer.im_end_token_id)
 
         accumulated_text = ""
+        # Adaptive budget allows finishing the current thought if cut off mid-sentence
+        adaptive_limit = 40 if complete_sentence else 0
+        total_token_budget = max_tokens + adaptive_limit
+        sentence_terminators = {".", "!", "?", "\n", ";", "```"}
 
-        for _ in range(max_tokens):
+        for step in range(total_token_budget):
+            # If past max_tokens, stop as soon as a complete sentence or clause has ended
+            if step >= max_tokens:
+                stripped = accumulated_text.rstrip()
+                if any(stripped.endswith(t) for t in sentence_terminators):
+                    break
+
             # Take last block_size tokens and clamp to valid vocabulary range
             context_window = current_tokens[-self.block_size :]
             vocab_size = getattr(self.model.config, "vocab_size", 50257)
@@ -104,7 +120,7 @@ class ConversationBot:
             model_device = next(self.model.parameters()).device
             x = torch.tensor([context_window], dtype=torch.long, device=model_device)
 
-            logits, _ = self.model(x)  # (1, 1, vocab_size)
+            logits, _ = self.model(x)
             next_logits = logits[0, -1, :]
 
             next_token = sample_next_token(
@@ -138,7 +154,9 @@ class ConversationBot:
             if stop_triggered:
                 break
 
-            yield piece
+            # Prevent leaking partial stop tags in stream
+            if not any(st.startswith(piece) and len(piece) > 2 for st in stops):
+                yield piece
 
         clean_response = accumulated_text.strip()
         # Record turn in persistent history
@@ -150,12 +168,13 @@ class ConversationBot:
     def generate(
         self,
         user_message: str,
-        max_tokens: int = 256,
+        max_tokens: int = 512,
         temperature: float = 0.8,
         top_k: Optional[int] = 50,
         top_p: Optional[float] = 0.9,
         repetition_penalty: float = 1.1,
         stop_tokens: Optional[List[str]] = None,
+        complete_sentence: bool = True,
     ) -> str:
         """Synchronously generate complete response for user message."""
         gen = self.stream_generate(
@@ -166,6 +185,7 @@ class ConversationBot:
             top_p=top_p,
             repetition_penalty=repetition_penalty,
             stop_tokens=stop_tokens,
+            complete_sentence=complete_sentence,
         )
         full_text = ""
         for piece in gen:

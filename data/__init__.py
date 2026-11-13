@@ -9,6 +9,7 @@ from .dialogue_scraper import (
     RedditDialogueScraper,
     ThinkingDialogueSynthesizer,
     GreetingPleasantrySynthesizer,
+    DSACodingSynthesizer,
     DialogueDatasetBuilder,
 )
 from .tokenizer import BPETokenizer, CharTokenizer
@@ -26,6 +27,7 @@ __all__ = [
     "RedditDialogueScraper",
     "ThinkingDialogueSynthesizer",
     "GreetingPleasantrySynthesizer",
+    "DSACodingSynthesizer",
     "DialogueDatasetBuilder",
     "BPETokenizer",
     "CharTokenizer",

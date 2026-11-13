@@ -28,7 +28,7 @@ def parse_args():
     parser.add_argument("--top_k", type=int, default=50, help="Top-K filtering limit")
     parser.add_argument("--top_p", type=float, default=0.9, help="Top-P nucleus mass threshold")
     parser.add_argument("--repetition_penalty", type=float, default=1.1, help="Repetition penalty")
-    parser.add_argument("--max_tokens", type=int, default=200, help="Max tokens to generate per turn")
+    parser.add_argument("--max_tokens", type=int, default=512, help="Max tokens to generate per turn (stops naturally on EOS)")
     parser.add_argument("--bpe", action="store_true", help="Use BPE Tokenizer")
     return parser.parse_args()
 

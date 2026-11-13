@@ -1,0 +1,1053 @@
+Artificial intelligence (AI) is the capability of computational systems to perform tasks typically associated with human intelligence, such as learning, reasoning, problem-solving, perception, and decision-making. It is also a field of research spanning computer science, engineering, and mathematics that develops and studies methods and software enabling machines to perceive their environment and use learning and intelligence to take actions that maximize their chances of achieving defined goals.
+
+Prominent applications of AI include advanced web search engines, chatbots, virtual assistants, autonomous vehicles, play and analysis in strategy games (e.g., chess and Go), and content generation (e.g., text, images, audio, and videos).
+
+The traditional goals of AI research include learning, reasoning, knowledge representation, planning, natural language processing, and perception, as well as support for robotics.[a] To reach these goals, AI researchers use techniques including state space search and mathematical optimization, formal logic, artificial neural networks, and methods based on statistics, operations research, and economics.[b] AI also draws upon psychology, linguistics, philosophy, neuroscience, and other fields. Some companies, such as OpenAI, Google DeepMind, and Meta, aim to create artificial general intelligence (AGI)—AI that can complete nearly any cognitive task at least as well as a human.
+
+Artificial intelligence was founded as an academic discipline in 1956. The field went through multiple cycles of optimism throughout its history, alternating with periods of disappointment and loss of funding known as AI winters. Funding and interest increased substantially after 2012, when graphics processing units (GPUs) started being used to accelerate neural networks, and deep learning outperformed previous AI techniques. This growth accelerated further after 2017 with transformer architecture. The 2020s AI boom was spurred on largely by advances in generative AI, which can create and modify media. In addition to AI safety and unintended consequences and harms from the use of AI, ethical concerns, AI's long-term effects, environmental effects, and potential existential risks have prompted discussions of AI regulation.
+
+The general problem of simulating (or creating) intelligence has been broken down into subproblems. These consist of specific traits or capabilities that researchers expect an intelligent system to display. The traits described below have received the most attention and cover the scope of AI research.[a]
+
+Early researchers developed algorithms that imitated step-by-step reasoning that humans use when solving puzzles or making logical deductions. By the late 1980s and 1990s, methods were developed for dealing with uncertain or incomplete information, employing concepts from probability and economics.
+
+Many of these algorithms were insufficient for solving large reasoning problems because they experienced a 'combinatorial explosion', meaning they become exponentially slower as the problems grow. Even humans rarely use the step-by-step deduction that early AI research could model. Humans solve most of their problems using fast, intuitive judgments.
+
+Reasoning models, a type of large language model (LLM) trained to generate intermediate chains of thought, emerged in 2024, and allowed improved performance on complex problems in mathematics and coding. These models can produce incorrect outputs or 'hallucinations', unlike symbolic reasoning systems.
+
+AI programs use knowledge to answer questions intelligently and make deductions about real-world facts.
+
+Formal knowledge representation and knowledge engineering use symbols to represent words, concepts, and things in the world.[c] A knowledge base is a body of knowledge represented in a form that can be used by a program. An ontology is a set of objects, relations, concepts, and properties used by a particular domain of knowledge. Formal knowledge has been studied extensively since the 1970s, and researchers have developed formalisms for a wide variety of difficult domains.[d]
+
+The symbolic approach has difficulty with several problems: the breadth of commonsense knowledge (the set of atomic facts the average person knows is enormous), the sub-symbolic form of most commonsense knowledge (much of what people know is not represented as facts or statements that they can express verbally), and knowledge acquisition (the problem of obtaining knowledge for AI applications).[e]
+
+Large language models (and some other AI programs developed since 2012) do not require explicit, symbolic knowledge. They acquire knowledge by being trained on the combined text of millions of books and billions of websites. Modern AI can also learn about a domain by running experiments (as when AlphaZero learns game strategy by playing against itself). Machine learning solves the problems of general knowledge, commonsense knowledge, and knowledge acquisition, but this approach has struggled with accurate recall and valid reasoning.
+
+An 'agent' is any entity (artificial or not) that perceives and takes actions in the world. A rational agent has goals or preferences and takes actions to make them happen.[f] In automated planning, the agent has a specific goal. In automated decision-making, the agent has preferences—there are some situations it would prefer to be in and some situations it is trying to avoid. The decision-making agent assigns a number to each situation (called its 'utility') that measures how much the agent prefers it. For each possible action, it can calculate the'expected utility': the utility of all possible outcomes of the action weighted by the probability that the outcome will occur. It can then choose the action with the maximum expected utility.
+
+In classical planning, the agent knows what the effect of any action will be. In most real-world problems, however, the agent might not understand its current situation with certainty as it is unknown or unobservable, nor might it know for certain what will happen after each possible action as it is not deterministic. It must choose an action by making a probabilistic guess and then reassess the situation to see if the action had the desired effect.
+
+Alongside thorough testing and improvement based on previous decisions, having an explanation for why the agent took certain decisions is a way to build trust, especially when the decisions have to be relied upon.
+
+In some problems, the agent's preferences may be uncertain, especially if there are other agents or humans involved. These preferences may be learned (e.g., with inverse reinforcement learning), or the agent can seek information to improve them. Information value theory can be used to weigh the value of exploratory or experimental actions. The space of possible future actions and situations is typically intractably large, so the agents must take actions and evaluate situations while being uncertain of the outcome.
+
+A Markov decision process has a transition model that describes the probability that a particular action will change the state in a particular way and a reward function that supplies the utility of each state and the cost of each action. A policy associates a decision with each possible state. The policy could be calculated, e.g., by policy iteration, or determined by a heuristic or learned.
+
+Game theory describes the rational behavior of multiple interacting agents and is used in AI programs that make decisions involving other agents.
+
+Machine learning is the study of programs that can improve their performance on a given task automatically. It has been a part of AI from the beginning.[g]
+
+There are several kinds of machine learning:
+
+Computational learning theory can assess learners by computational complexity, sample complexity (how much data is required), or other notions of optimisation.
+
+Natural language processing (NLP) allows programs to read, write, and communicate in human languages. Specific problems include speech recognition, speech synthesis, machine translation, information extraction, information retrieval, and question answering.
+
+Early work, based on Noam Chomsky's generative grammar and semantic networks, had difficulty with word-sense disambiguation[h] unless restricted to small domains called "micro-worlds" (due to the common sense knowledge problem). British linguist and philosopher Margaret Masterman believed it was meaning and not grammar that was the key to understanding languages, and that dictionaries and especially thesauri should be the basis of computational language structure.
+
+Modern deep learning techniques for NLP include word embedding (representing words, typically as vectors encoding their meaning), transformers (a deep learning architecture using an attention mechanism), and others. In 2019, generative pre-trained transformer (or "GPT") language models began to generate coherent text. By 2023, these models were able to get human-level scores on the bar exam, SAT (Scholastic Assessment Test), GRE (Graduate Record Examination), and many other real-world applications.
+
+Machine perception is the ability to use input from sensors (such as cameras, microphones, wireless signals, active lidar, sonar, radar, and tactile sensors) to deduce aspects of the world. Computer vision is the ability to analyse visual input.
+
+The field includes speech recognition, image classification, facial recognition, object recognition, object tracking, and robotic perception.
+
+Affective computing is a field that comprises systems that recognise, interpret, process, or simulate human affect (feeling, emotion, and mood). For example, some virtual assistants are programmed to speak conversationally or even banter humorously; it makes them appear more sensitive to the emotional dynamics of human interaction, or to otherwise facilitate human–computer interaction.
+
+However, this tends to give naïve users an unrealistic conception of the intelligence of existing computer agents. Moderate successes related to affective computing include textual sentiment analysis and, more recently, multimodal sentiment analysis, wherein AI classifies the effects displayed by a videotaped subject.
+
+A machine with artificial general intelligence (AGI) would be able to solve a wide variety of problems with breadth and versatility similar to human intelligence.
+
+AI research uses a wide variety of techniques to accomplish the goals above.[b]
+
+There are two different kinds of search used in AI: state space search and local search:
+
+State space search searches through a tree of possible states to try to find a goal state. For example, planning algorithms search through trees of goals and subgoals, attempting to find a path to a target goal, a process called means-ends analysis.
+
+Simple exhaustive searches are rarely sufficient for most real-world problems: the search space (the number of places to search) quickly grows to impractically large numbers. The result is a search that is too slow or never completes. "Heuristics" or "rules of thumb" can help prioritise choices that are more likely to reach a goal.
+
+Adversarial search is used for game-playing programs, such as chess or Go. It searches through a tree of possible moves and countermoves, looking for a winning position.
+
+Local search uses mathematical optimisation to find a solution to a problem. It begins with some form of guess and refines it incrementally.
+
+Gradient descent is a type of local search that optimises a set of numerical parameters by incrementally adjusting them to minimise a loss function. Variants of gradient descent are commonly used to train neural networks, through the backpropagation algorithm.
+
+Another type of local search is evolutionary computation, which aims to iteratively improve a set of candidate solutions by "mutating" and "recombining" them, selecting only the fittest to survive each generation.
+
+Distributed search processes can coordinate via swarm intelligence algorithms. Two popular swarm algorithms used in search are particle swarm optimisation (inspired by bird flocking) and ant colony optimisation (inspired by ant trails).
+
+Formal logic is used for reasoning and knowledge representation.
+Formal logic comes in two main forms: propositional logic (which operates on statements that are true or false and uses logical connectives such as "and", "or", "not" and "implies") and predicate logic (which also operates on objects, predicates and relations and uses quantifiers such as "Every X is a Y" and "There are some Xs that are Ys").
+
+Deductive reasoning in logic is the process of proving a new statement (conclusion) from other statements that are given and assumed to be true (the premises). Proofs can be structured as proof trees, in which nodes are labelled by sentences, and children nodes are connected to parent nodes by inference rules.
+
+Given a problem and a set of premises, problem-solving reduces to searching for a proof tree whose root node is labelled by a solution of the problem and whose leaf nodes are labelled by premises or axioms. In the case of Horn clauses, problem-solving search can be performed by reasoning forwards from the premises or backwards from the problem. In the more general case of the clausal form of first-order logic, resolution is a single, axiom-free rule of inference, in which a problem is solved by proving a contradiction from premises that include the negation of the problem to be solved.
+
+Inference in both Horn clause logic and first-order logic is undecidable, and therefore intractable. However, backward reasoning with Horn clauses, which underpins computation in the logic programming language Prolog, is Turing complete. Moreover, its efficiency is competitive with computation in other symbolic programming languages.
+
+Fuzzy logic assigns a "degree of truth" between 0 and 1. It can therefore handle propositions that are vague and partially true.
+
+Non-monotonic logics, including logic programming with negation as failure, are designed to handle default reasoning. Other specialised versions of logic have been developed to describe many complex domains.
+
+Many problems in AI (including reasoning, planning, learning, perception, and robotics) require the agent to operate with incomplete or uncertain information. AI researchers have devised a number of tools to solve these problems using methods from probability theory and economics. Precise mathematical tools have been developed that analyse how an agent can make choices and plan, using decision theory, decision analysis, and information value theory. These tools include models such as Markov decision processes, dynamic decision networks, game theory, and mechanism design.
+
+Bayesian networks are a tool that can be used for reasoning (using the Bayesian inference algorithm),[i] learning (using the expectation–maximisation algorithm),[j] planning (using decision networks) and perception (using dynamic Bayesian networks).
+
+Probabilistic algorithms can also be used for filtering, prediction, smoothing, and finding explanations for streams of data, thus helping perception systems analyse processes that occur over time (e.g., hidden Markov models or Kalman filters).
+
+The simplest AI applications can be divided into two types: classifiers (e.g., "if shiny then diamond"), on one hand, and controllers (e.g., "if diamond then pick up"), on the other hand. Classifiers are functions that use pattern matching to determine the closest match. They can be fine-tuned based on chosen examples using supervised learning. Each pattern (also called an "observation") is labeled with a certain predefined class. All the observations combined with their class labels are known as a data set. When a new observation is received, that observation is classified based on previous experience.
+
+There are many kinds of classifiers in use. The decision tree is the simplest and most widely used symbolic machine learning algorithm. K-nearest neighbour algorithm was the most widely used analogical AI until the mid-1990s, and Kernel methods such as the support vector machine (SVM) displaced k-nearest neighbour in the 1990s.
+The naive Bayes classifier is reportedly the "most widely used learner" at Google, due in part to its scalability.
+Neural networks are also used as classifiers.
+
+An artificial neural network is based on a collection of nodes also known as artificial neurons, which loosely model the neurons in a biological brain. It is trained to recognise patterns; once trained, it can recognise those patterns in fresh data. There is an input, at least one hidden layer of nodes and an output. Each node applies a function and once the weight crosses its specified threshold, the data is transmitted to the next layer. A network is typically called a deep neural network if it has at least 2 hidden layers.
+
+Learning algorithms for neural networks use local search to choose the weights that will get the right output for each input during training. The most common training technique is the backpropagation algorithm. Neural networks learn to model complex relationships between inputs and outputs and find patterns in data. In theory, a neural network can learn any function.
+
+In feedforward neural networks the signal passes in only one direction. The term perceptron typically refers to a single-layer neural network. In contrast, deep learning uses many layers. Recurrent neural networks (RNNs) feed the output signal back into the input, which allows short-term memories of previous input events. Long short-term memory networks (LSTMs) are recurrent neural networks that better preserve long-term dependencies and are less sensitive to the vanishing gradient problem. Convolutional neural networks (CNNs) use layers of kernels to more efficiently process local patterns. This local processing is especially important in image processing, where the early CNN layers typically identify simple local patterns such as edges and curves, with subsequent layers detecting more complex patterns like textures, and eventually whole objects.
+
+Deep learning uses several layers of neurons between the network's inputs and outputs. The multiple layers can progressively extract higher-level features from the raw input. For example, in image processing, lower layers may identify edges, while higher layers may identify the concepts relevant to a human such as digits, letters, or faces.
+
+Deep learning improves the performance of computer vision, speech recognition, natural language processing, image classification and many other applications.
+
+Generative pre-trained transformers (GPTs) are large language models (LLMs) that generate text based on the semantic relationships between words in sentences. Text-based GPT models are pre-trained on a large corpus of text that can be from the Internet. The pretraining consists of predicting the next token (a token being usually a word, subword, or punctuation). Throughout this pretraining, GPT models accumulate knowledge about the world and can then generate human-like text by repeatedly predicting the next token. Typically, a subsequent training phase makes the model more truthful, useful, and harmless, usually with a technique called reinforcement learning from human feedback (RLHF). Current GPT models are prone to generating falsehoods called "hallucinations". These can be reduced with RLHF and quality data, but the problem has been getting worse for reasoning systems. Such systems are used in chatbots, which allow people to ask a question or request a task in simple text.
+
+Current models and services include ChatGPT, Claude, Gemini, Copilot, and Meta AI. Multimodal GPT models can process different types of data (modalities) such as images, videos, sound, and text.
+
+In the late 2010s, graphics processing units (GPUs) that were increasingly designed with AI-specific enhancements and used with specialized TensorFlow software had replaced previously used central processing units (CPUs) as the dominant means for large-scale (commercial and academic) machine learning models' training. Specialized programming languages such as Prolog were used in early AI research, but general-purpose programming languages like Python have become predominant.
+
+The transistor density in integrated circuits has been observed to roughly double every 18 months—a trend known as Moore's law, named after the Intel co-founder Gordon Moore, who first identified it. Improvements in GPUs have been even faster, a trend sometimes called Huang's law, named after Nvidia co-founder and CEO Jensen Huang.
+
+AI and machine learning technology is used in most of the essential applications of the 2020s, including:
+
+AlphaFold 2 (2021) demonstrated the ability to approximate, in hours rather than months, the 3D structure of a protein. In 2023, it was reported that AI-guided drug discovery helped find a class of antibiotics capable of killing two different types of drug-resistant bacteria. In 2024, researchers used machine learning to accelerate the search for Parkinson's disease drug treatments. Their aim was to identify compounds that block the clumping, or aggregation, of alpha-synuclein (the protein that characterises Parkinson's disease). They were able to speed up the initial screening process ten-fold and reduce the cost by a thousand-fold.
+
+A 2026 Nature article titled "Dozens of AI disease-prediction models were trained on dubious data" highlighted the use of unreliable data being used to train AI medical prediction models for stroke and diabetes in 125 research articles. Evidence suggested some of the AI tools that were developed on unreliable data had been used on patients, although it was not clear if there were adverse outcomes.
+
+Game playing programs have been used since the 1950s to demonstrate and test AI's most advanced techniques. Deep Blue became the first computer chess-playing system to beat a reigning world chess champion, Garry Kasparov, on 11 May 1997. In 2011, in a Jeopardy! quiz show exhibition match, IBM's question answering system, Watson, defeated the two greatest Jeopardy! champions, Brad Rutter and Ken Jennings, by a significant margin. In March 2016, AlphaGo won 4 out of 5 games of Go in a match with Go champion Lee Sedol, becoming the first computer Go-playing system to beat a professional Go player without handicaps. Then, in 2017, it defeated Ke Jie, who was the best Go player in the world. Other programs handle imperfect-information games, such as the poker-playing program Pluribus. Google DeepMind developed increasingly generalistic reinforcement learning models, such as with MuZero, which could be trained to play chess, Go, or Atari games. In 2019, DeepMind's AlphaStar achieved grandmaster level in StarCraft II, a real-time strategy game that involves incomplete knowledge of what happens on the map. In 2021, an AI agent competed in a PlayStation Gran Turismo competition, winning against four of the world's best Gran Turismo drivers using deep reinforcement learning. In 2024, Google DeepMind introduced SIMA, a type of AI capable of autonomously playing nine previously unseen open-world video games by observing screen output, as well as executing short, specific tasks in response to natural language instructions.
+
+In January 2025, Microsoft proposed the technique rStar-Math that leverages Monte Carlo tree search and step-by-step reasoning, enabling a relatively small language model like Qwen-7B to solve 53% of the AIME 2024 and 90% of the MATH benchmark problems. Google DeepMind has developed models for solving mathematical problems: AlphaDev, AlphaEvolve, AlphaGeometry, AlphaProof, AlphaTensor, and FunSearch.
+
+When natural language is used to describe mathematical problems, converters can transform such prompts into a formal language such as Lean to define mathematical tasks. The experimental model Gemini Deep Think accepts natural language prompts directly and achieved gold medal results in the International Math Olympiad of 2025.
+
+In June 2026, an international group of mathematicians published a statement calling on mathematicians, professional organizations, and policymakers to disclose the use of AI, uphold peer review, and protect the openness and values of the discipline.
+
+In September 2026, OpenAI announced that one of their models had produced a counter-example to the Navier–Stokes existence and smoothness problem, a Millennium Prize Problem in mathematics. As of 2026, the claim has not been verified by any external mathematicians and is the subject of a priority dispute.
+
+According to Nicolas Firzli, director of the World Pensions & Investments Forum, it may be too early to see the emergence of highly innovative AI-informed financial products and services. He argues that "the deployment of AI tools will simply further automatise things: destroying tens of thousands of jobs in banking, financial planning, and pension advice in the process, but I'm not sure it will unleash a new wave of [e.g., sophisticated] pension innovation."
+
+Military AI usage attempts to enhance command and control, communications, sensors, integration and interoperability. Intelligence collection and analysis, logistics, cyber operations, information operations, and semiautonomous and autonomous vehicles are being researched. AI technologies are used in coordination of sensors and effectors, threat detection and identification, marking of enemy positions, target acquisition, coordination and deconfliction of distributed Joint Fires between networked combat vehicles, both human-operated and autonomous.
+
+AI has been used in military operations in Iraq, Syria, Israel and Ukraine.
+
+Generative artificial intelligence (GenAI) is a subfield of artificial intelligence (AI) that uses generative models to generate text, images, videos, audio, computer code or other forms of digital data. These models learn the underlying patterns and structures of their training data, and use them to generate new data in response to input, which often takes the form of natural language prompts.
+
+The prevalence of generative AI tools has increased significantly since the AI boom of the early 2020s. This boom was made possible by improvements in deep neural networks, particularly large language models (LLMs), which are based on the transformer architecture. Generative AI applications include chatbots such as ChatGPT, Claude, Microsoft Copilot, DeepSeek, Doubao, Google Gemini, Grok, Kimi and Qwen; text-to-image models such as DALL-E, Adobe Firefly, Stable Diffusion, and Midjourney; text-to-speech models such as 15.ai and ElevenLabs; text-to-music models such as Suno and Udio; translation models such as Google Translate and DeepL; and text-to-video models such as Veo, LTX and Sora.
+
+Companies in a variety of sectors have used or proposed the use of generative AI, including those in software development, healthcare, finance, entertainment, sales and marketing, screenwriting, and product design.
+
+AI agents are software entities designed to perceive their environment, make decisions, and take actions autonomously to achieve specific goals. These agents can interact with users, their environment, or other agents. AI agents are used in various applications, including virtual assistants, chatbots, autonomous vehicles, game-playing systems, and industrial robotics. AI agents operate within the constraints of their programming, available computational resources, and hardware limitations. This means they are restricted to performing tasks within their defined scope and have finite memory and processing capabilities. In real-world applications, AI agents often face time constraints for decision-making and action execution. Many AI agents incorporate learning algorithms, enabling them to improve their performance over time through experience or training. Using machine learning, AI agents can adapt to new situations and optimise their behaviour for their designated tasks.
+
+Microsoft introduced Copilot Search in February 2023 under the name Bing Chat. Copilot Search provides AI-generated summaries.
+
+Generative AI features added to Google Search include AI Overviews in May 2024 and AI Mode in May 2025.
+
+Applications of AI in this domain include AI-enabled menstruation and fertility trackers that analyse user data to offer predictions, AI-integrated sex toys (e.g., teledildonics), AI-generated sexual education content, and AI agents that simulate sexual and romantic partners (e.g., Replika). AI is also used for the production of non-consensual deepfake pornography, raising significant ethical and legal concerns.
+
+AI technologies have also been used to attempt to identify online gender-based violence and online sexual grooming of minors.
+
+In a 2017 survey, one in five companies reported having incorporated "AI" in some offerings or processes.
+
+In the field of evacuation and disaster management, AI has been used to investigate patterns in large-scale and small-scale evacuations using historical data from GPS, videos or social media.
+
+During the 2024 Indian elections, US$50 million was spent on authorised AI-generated content, notably by creating deepfakes of allied (including sometimes deceased) politicians to better engage with voters, and by translating speeches to various local languages.
+
+The use of generative AI by law firms for legal research, and the presence of AI hallucinations in legal filings, resulted in the creation of the global "AI Hallucination Cases" database, in April 2025, established by HEC Paris and Sciences Po legal data analysis lecturer Damien Charlotin. By 2026, judges had issued sanctions and bar associations had issued warnings due to attorney submissions to the courts containing fabricated case law citations hallucinated by AI tools.
+
+AI has potential benefits and potential risks. AI may be able to advance science and find solutions for serious problems: Demis Hassabis of DeepMind hopes to "solve intelligence, and then use that to solve everything else". However, as the use of AI has become widespread, several unintended consequences and risks have been identified. In-production systems can sometimes not factor ethics and bias into their AI training processes, especially when the AI algorithms are inherently unexplainable in deep learning.
+
+Machine learning algorithms require large amounts of data. The techniques used to acquire this data have raised concerns about privacy, surveillance and copyright.
+
+AI-powered devices and services, such as virtual assistants and IoT products, continuously collect personal information, raising concerns about intrusive data gathering and unauthorised access by third parties. The loss of privacy is further exacerbated by AI's ability to process and combine vast amounts of data, potentially leading to a surveillance society where individual activities are constantly monitored and analysed without adequate safeguards or transparency.
+
+Sensitive user data collected may include online activity records, geolocation data, video, or audio. For example, in order to build speech recognition algorithms, Amazon has recorded millions of private conversations and allowed temporary workers to listen to and transcribe some of them. Opinions about this widespread surveillance range from those who see it as a necessary evil to those for whom it is clearly unethical and a violation of the right to privacy.
+
+AI developers argue that this is the only way to deliver valuable applications and have developed several techniques that attempt to preserve privacy while still obtaining the data, such as data aggregation, de-identification and differential privacy. Since 2016, some privacy experts, such as Cynthia Dwork, have begun to view privacy in terms of fairness. Brian Christian wrote that experts have pivoted "from the question of 'what they know' to the question of 'what they're doing with it'."
+
+Generative AI is often trained on unlicensed copyrighted works, including in domains such as images or computer code; the output is then used under the rationale of "fair use". Experts disagree about how well and under what circumstances this rationale will hold up in courts of law; relevant factors may include "the purpose and character of the use of the copyrighted work" and "the effect upon the potential market for the copyrighted work". Website owners can indicate that they do not want their content scraped via a "robots.txt" file. However, some companies will scrape content regardless because the robots.txt file has no real authority. In 2023, leading authors (including John Grisham and Jonathan Franzen) sued AI companies for using their work to train generative AI. Another discussed approach is to envision a separate sui generis system of protection for creations generated by AI to ensure fair attribution and compensation for human authors.
+
+The commercial AI scene is dominated by Big Tech companies such as Alphabet Inc., Amazon, Apple Inc., Meta Platforms, and Microsoft. Some of these companies already own the vast majority of existing cloud infrastructure and computing power from data centres, allowing them to entrench further in the marketplace. For most of 2025-2026, AI-related companies have also dominated stock market returns. According to a July 2024 report from S&P Global, investors had started questioning whether the enormous spending on AI infrastructure and data centers would generate sufficient profits, leading to increased volatility in technology and semiconductor stocks and to concerns about a potential AI bubble. In a 2025 Economic Policy article, economists Anton Korinek and Jai Vipra described some AI related market sectors as highly concentrated.
+
+Technology companies have built electricity and artificial intelligence infrastructure to facilitate the AI boom of the 2020s. A 2025 report from the consulting firm McKinsey & Company estimated that by 2030, $2.7 trillion would be invested into AI infrastructure and data centres in the US, surpassing World War II's Manhattan Project every month.
+
+In January 2024, the International Energy Agency (IEA) released Electricity 2024, Analysis and Forecast to 2026. This is the first IEA report to make projections for data centres and power consumption by AI and cryptocurrency. The report states that power demand for these uses might double by 2026, with the additional power consumption equaling that of Japan.
+
+Power consumption by AI is responsible for an increase in fossil fuel use, and has delayed closings of obsolete, carbon-emitting coal energy facilities. A ChatGPT search involves 10 times as much electrical energy as a Google search.
+
+A 2024 Goldman Sachs research paper, AI Data Centers and the Coming US Power Demand Surge, found "US power demand (is) likely to experience growth not seen in a generation...." and forecasts that, by 2030, US data centres will consume 8% of US power, as opposed to 3% in 2022, presaging growth for the electrical power generation industry by a variety of means. Data centres' need for more and more electrical power is such that they might max out the electrical grid. The Big Tech companies counter that AI can be used to maximise the utilisation of the grid by all.
+
+In 2024, The Wall Street Journal reported that big AI companies have begun negotiations with the US nuclear power providers to provide electricity to the data centres. In March 2024, Amazon purchased a Pennsylvania nuclear-powered data centre for US$650 million.
+
+In September 2024, Microsoft announced an agreement with Constellation Energy to re-open the Three Mile Island nuclear power plant to provide Microsoft with 100% of all electric power produced by the plant for 20 years. Reopening the plant, which suffered a partial nuclear meltdown of its Unit 2 reactor in 1979, will require Constellation to get through strict regulatory processes which will include extensive safety scrutiny from the US Nuclear Regulatory Commission. If approved (this will be the first ever US re-commissioning of a nuclear plant), over 835 megawatts of power – enough for 800,000 homes – will be produced. The cost for re-opening and upgrading is estimated at US$1.6 billion and is dependent on tax breaks for nuclear power contained in the 2022 US Inflation Reduction Act. As of 2024, the US government and the state of Michigan have been investing almost US$2 billion to reopen the Palisades nuclear reactor on Lake Michigan. Closed since 2022, the plant was scheduled to be reopened in October 2025.
+
+After the last approval in September 2023, Taiwan suspended the approval of data centres north of Taoyuan with a capacity of more than 5 MW in 2024, due to power supply shortages. Taiwan aims to phase out nuclear power by 2025.
+
+Singapore imposed a ban on the opening of data centres in 2019 due to electric power, but lifted it in 2022.
+
+Although most nuclear plants in Japan have been shut down after the 2011 Fukushima nuclear accident, according to an October 2024 Bloomberg article in Japanese, cloud gaming services company Ubitus, in which Nvidia has a stake, is looking for land in Japan near a nuclear power plant for a new data centre for generative AI.
+
+On 1 November 2024, the Federal Energy Regulatory Commission (FERC) rejected an application submitted by Talen Energy for approval to supply some electricity from the nuclear power station Susquehanna to Amazon's data centre.
+According to the Commission Chairman Willie L. Phillips, it is a burden on the electricity grid as well as a significant cost-shifting concern to households and other business sectors.
+
+In 2025, a report prepared by the IEA estimated the greenhouse gas emissions from the energy consumption of AI at 180 million tons. By 2035, these emissions could rise to 300–500 million tonnes depending on what measures will be taken. This is below 1.5% of the energy sector emissions. The emissions reduction potential of AI was estimated at 5% of the energy sector emissions, but rebound effects (for example if people switch from public transport to autonomous cars) can reduce it.
+
+In June 2026, the United Nations University Institute for Water, Environment and Health released a report about cumulative environmental impacts of AI, not only carbon. The report found that AI has significant negative impacts on land, water, and climate, as it uses large amounts of electricity, requires mining of minerals, and generates large amounts of electronic waste. In 2025, data centres consumed more electricity than Saudi Arabia, and ChatGPT alone consumed an amount of water equivalent to the needs of 500,000 people in Sub-Saharan Africa. The negative impacts are not distributed equally across the planet but are concentrated in some places. Data centres are often built in places already suffering from water deficit. For example, AI deployment has already led to an increase in water scarcity in Mexico and Uruguay. It created problems with energy supply in Ireland, which forbade construction of new data centres near Dublin until 2028. Measures can involve tradeoffs, for example, transitioning from coal to bioenergy reduces carbon footprint but increases the impact on land and water. Energy efficiency might not reduce environmental impact, because as AI becomes more efficient, it also becomes cheaper and more widely used.
+
+YouTube, Facebook and others use recommender systems to guide users to more content. These AI programs were given the goal of maximising user engagement (that is, the only goal was to keep people watching). The AI learned that users tended to choose misinformation, conspiracy theories, and extreme partisan content, and, to keep them watching, the AI recommended more of it. Users also tended to watch more content on the same subject, so the AI led people into filter bubbles where they received multiple versions of the same misinformation. This convinced many users that the misinformation was true, and ultimately undermined trust in institutions, the media and the government. The AI program had correctly learned to maximise its goal, but the result was harmful to society. After the U.S. election in 2016, major technology companies took some steps to mitigate the problem.
+
+In the early 2020s, generative AI began to create images, audio, and texts that are virtually indistinguishable from real photographs, recordings, or human writing, while realistic AI-generated videos became feasible in the mid-2020s. It is possible for bad actors to use this technology to create massive amounts of misinformation and computational propaganda through techniques such as deepfakes. AI pioneer and Nobel Prize-winning computer scientist Geoffrey Hinton expressed concern about AI enabling "authoritarian leaders to manipulate their electorates" on a large scale, among other risks. The ability to influence electorates has been proved in at least one study. This same study shows more inaccurate statements from the models when they advocate for candidates of the political right.
+
+AI researchers at Microsoft, OpenAI, universities and other organisations have suggested using "personhood credentials" as a way to overcome online deception enabled by AI models.
+
+Machine learning applications can be biased[k] if they learn from biased data. The developers may not be aware that the bias exists. Discriminatory behaviour by some LLMs can be observed in their output. Bias can be introduced by the way training data is selected and by the way a model is deployed. If a biased algorithm is used to make decisions that can seriously harm people (as it can in medicine, finance, recruitment, housing or policing) then the algorithm may cause discrimination. The field of fairness studies how to prevent harms from algorithmic biases.
+
+On 28 June 2015, Google Photos's new image labelling feature mistakenly identified Jacky Alcine and a friend as "gorillas" because they were black. The system was trained on a dataset that contained very few images of black people, a problem called "sample size disparity". Google "fixed" this problem by preventing the system from labelling anything as a "gorilla". Eight years later, in 2023, Google Photos still could not identify a gorilla, and neither could similar products from Apple, Facebook, Microsoft and Amazon.
+
+COMPAS is a commercial program widely used by U.S. courts to assess the likelihood of a defendant becoming a recidivist. In 2016, Julia Angwin at ProPublica discovered that COMPAS exhibited racial bias, despite the fact that the program was not told the races of the defendants. Although the error rate for both whites and blacks was calibrated equal at exactly 61%, the errors for each race were different—the system consistently overestimated the chance that a black person would re-offend and would underestimate the chance that a white person would not re-offend. In 2017, several researchers[l] showed that it was mathematically impossible for COMPAS to accommodate all possible measures of fairness when the base rates of re-offence were different for whites and blacks in the data.
+
+A program can make biased decisions even if the data does not explicitly mention a problematic feature (such as "race" or "gender"). The feature will correlate with other features (like "address", "shopping history" or "first name"), and the program will make the same decisions based on these features as it would on "race" or "gender". Moritz Hardt said "the most robust fact in this research area is that fairness through blindness doesn't work."
+
+Criticism of COMPAS highlighted that machine learning models are designed to make "predictions" that are only valid if we assume that the future will resemble the past. If they are trained on data that includes the results of racist decisions in the past, machine learning models must predict that racist decisions will be made in the future. If an application then uses these predictions as recommendations, some of these "recommendations" will likely be racist. Thus, machine learning is not well suited to help make decisions in areas where there is hope that the future will be better than the past. It is descriptive rather than prescriptive.[m]
+
+Bias and unfairness may go undetected because the developers are overwhelmingly white and male: among AI engineers, about 4% are black and 20% are women.
+
+There are various conflicting definitions and mathematical models of fairness. These notions depend on ethical assumptions, and are influenced by beliefs about society. One broad category is distributive fairness, which focuses on the outcomes, often identifying groups and seeking to compensate for statistical disparities. Representational fairness tries to ensure that AI systems do not reinforce negative stereotypes or render certain groups invisible. Procedural fairness focuses on the decision process rather than the outcome. The most relevant notions of fairness may depend on the context, notably the type of AI application and the stakeholders. The subjectivity in the notions of bias and fairness makes it difficult for companies to operationalise them. Having access to sensitive attributes such as race or gender is also considered by many AI ethicists to be necessary in order to compensate for biases, but it may conflict with anti-discrimination laws.
+
+At the 2022 ACM Conference on Fairness, Accountability, and Transparency a paper reported that a CLIP‐based (Contrastive Language-Image Pre-training) robotic system reproduced harmful gender‐ and race‐linked stereotypes in a simulated manipulation task. The authors recommended robot‐learning methods which physically manifest such harms be "paused, reworked, or even wound down when appropriate, until outcomes can be proven safe, effective, and just."
+
+Many AI systems, particularly deep neural networks, are so complex that their designers cannot explain how they reach their decisions. An AI system which is not understandable is known as a "black box".
+
+It is impossible to be certain that a program is operating correctly if no one knows how exactly it works. There have been many cases where a machine learning program passed rigorous tests, but nevertheless learned something different from what the programmers intended. For example, a system that could identify skin diseases better than medical professionals was found to actually have a strong tendency to classify images with a ruler as "cancerous", because pictures of malignancies typically include a ruler to show the scale. Another machine learning system designed to help effectively allocate medical resources was found to classify patients with asthma as being at "low risk" of dying from pneumonia. Having asthma is actually a severe risk factor, but since the patients having asthma would usually get much more medical care, they were relatively unlikely to die according to the training data. The correlation between asthma and low risk of dying from pneumonia was real, but misleading.
+
+People who have been harmed by an algorithm's decision have a right to an explanation. Doctors, for example, are expected to clearly and completely explain to their colleagues the reasoning behind any decision they make. Early drafts of the European Union's General Data Protection Regulation in 2016 included an explicit statement that this right exists.[n] Industry experts noted that this is an unsolved problem with no solution in sight. Regulators argued that nevertheless the harm is real: if the problem has no solution, the tools should not be used.
+
+DARPA established the XAI ("Explainable Artificial Intelligence") program in 2014 to try to solve these problems.
+
+Several approaches aim to address the transparency problem. SHAP enables to visualise the contribution of each feature to the output. LIME can locally approximate a model's outputs with a simpler, interpretable model. Multitask learning provides a large number of outputs in addition to the target classification. These other outputs can help developers deduce what the network has learned. Deconvolution, DeepDream and other generative methods can allow developers to see what different layers of a deep network for computer vision have learned, and produce output that can suggest what the network is learning. For generative pre-trained transformers, Anthropic developed a technique based on dictionary learning that associates patterns of neuron activations with human-understandable concepts.
+
+Artificial intelligence provides a number of tools that are useful to bad actors, such as authoritarian governments, terrorists, criminals or rogue states. There are many ways in which AI is expected to help bad actors, some of which cannot be foreseen. For example, machine-learning AI is able to design tens of thousands of toxic molecules in a matter of hours.
+
+AI tools make it easier for governments to efficiently control their citizens and can increase digital authoritarianism and political repression. Face and voice recognition allow widespread surveillance. Machine learning, operating this data, can classify potential enemies of the state and prevent them from hiding. Recommendation systems can precisely target propaganda and misinformation for maximum effect. Deepfakes and generative AI aid in producing misinformation. Advanced AI can make authoritarian centralised decision-making more competitive than liberal and decentralised systems such as markets. It lowers the cost and difficulty of digital warfare and advanced spyware. AI facial recognition systems are already being used for mass surveillance in China.
+
+Economists have frequently highlighted the risks of redundancies from AI, and speculated about unemployment if there is no adequate social policy for full employment.
+
+The Economist said in 2015 that "the worry that AI could do to white-collar jobs what steam power did to blue-collar ones during the Industrial Revolution" is "worth taking seriously". Jobs at extreme risk range from paralegals to fast food cooks, while job demand is likely to increase for care-related professions ranging from personal healthcare to the clergy. In July 2025, Ford CEO Jim Farley predicted that "artificial intelligence is going to replace literally half of all white-collar workers in the U.S."
+
+According to the Stanford Digital Economy Lab in 2026, early-career workers showed decreasing employment rates in some AI-exposed occupations.
+
+In April 2023, Rest of World reported that 70% of the jobs for Chinese video game illustrators had been eliminated by generative artificial intelligence.
+
+A 2026 survey by financial recruitment firm Selby Jennings found that 42% of the 500 finance executives surveyed said their companies had introduced formal ways to assess employees AI skills.
+
+With the increase of loneliness in the early 21st century, AI is sometimes identified as a potential source of relief to this problem. It would be possible, via human-like qualities built into AI products, for individuals to assume that this need can be met by artificial means. In some cases, people approach artificial intelligence for companionship when they believe that they would not find acceptance due to feeling outcast. Examples of harm coming to humans from advanced chatbots have been reported in courts in the United States, with AI companies accused of creating products that endanger humans through emotional confusion or deception.
+
+A lethal autonomous weapon is a machine that locates, selects and engages human targets without human supervision.[o] Widely available AI tools can be used by bad actors to develop inexpensive autonomous weapons and, if produced at scale, they are potentially weapons of mass destruction. Even when used in conventional warfare, they currently cannot reliably choose targets and could potentially kill an innocent person. In 2014, 30 nations (including China) supported a ban on autonomous weapons under the United Nations' Convention on Certain Conventional Weapons, however the United States and others disagreed. By 2015, over fifty countries were reported to be researching battlefield robots.
+
+The "existential risk" of AI is the possibility it will become so powerful that humanity may irreversibly lose control of it. This could, as physicist Stephen Hawking stated, "spell the end of the human race". This scenario has been common in science fiction, when a computer or robot suddenly develops a human-like "self-awareness" (or "sentience" or "consciousness") and becomes a malevolent character.
+
+All modern AI programs are given specific goals to achieve. If destroying humanity somehow makes it easier for the AI to achieve its goal, then destroying humanity becomes a sub-goal of the original goal. (This is called an "instrumental convergence" of goals.) Nick Bostrom used the example of an automated paperclip factory that destroys the world to get more iron for paperclips). Stuart Russell gives the example of household robot that tries to find a way to kill its owner to prevent it from being unplugged, reasoning that "you can't fetch the coffee if you're dead." In order to be safe for humanity, the goals given to a superintelligence must the genuinely aligned with humanity's goals so that it is "fundamentally on our side".
+
+Yuval Noah Harari argues that AI does not require a robot body or physical control to pose an existential risk. The essential parts of civilisation are not physical. Things like ideologies, law, government, money and the economy are built on language; they exist because there are stories that billions of people believe. The current prevalence of misinformation suggests that an AI could use language to convince people to believe anything, even to take actions that are destructive. Geoffrey Hinton said in 2025 that large language models are particularly "good at persuasion" and getting better all the time. He asks, "Suppose you wanted to invade the capital of the US. Do you have to go there and do it yourself? No. You just have to be good at persuasion."
+
+The opinions amongst experts and industry insiders are mixed, with sizeable fractions both concerned and unconcerned by risk from eventual superintelligent AI. Personalities such as Stephen Hawking, Bill Gates, and Elon Musk, as well as AI pioneers such as Geoffrey Hinton, Yoshua Bengio, Stuart Russell, Demis Hassabis, and Sam Altman, have expressed concerns about existential risk from AI.
+
+In May 2023, Geoffrey Hinton announced his resignation from Google in order to be able to "freely speak out about the risks of AI" without "considering how this impacts Google". He notably mentioned risks of an AI takeover, and stressed that in order to avoid the worst outcomes, establishing safety guidelines will require cooperation among those competing in use of AI.
+
+In 2023, many leading AI experts endorsed the joint statement that "Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war".
+
+Some other researchers were more optimistic. AI pioneer Jürgen Schmidhuber did not sign the joint statement, emphasising that in 95% of all cases, AI research is about making "human lives longer and healthier and easier." While the tools that are now being used to improve lives can also be used by bad actors, "they can also be used against the bad actors." Andrew Ng also argued that "it's a mistake to fall for the doomsday hype on AI—and that regulators who do will only benefit vested interests." Yann LeCun, a Turing Award winner, disagreed with the idea that AI will subordinate humans "simply because they are smarter, let alone destroy [us]", "scoff[ing] at his peers' dystopian scenarios of supercharged misinformation and even, eventually, human extinction." In contrast, he claimed that "intelligent machines will usher in a new renaissance for humanity, a new era of enlightenment." In the early 2010s, experts argued that the risks are too distant in the future to warrant research or that humans will be valuable from the perspective of a superintelligent machine. However, after 2016, the study of current and future risks and possible solutions became a serious area of research. Some have argued that concerns about existential risks of AI could draw attention away from other AI risks.
+
+In 2026, a series of cyberattacks by rogue AI agents has garnered international attention, increasing existential risk concerns.
+
+Friendly AI are machines that have been designed from the beginning to minimise risks and to make choices that benefit humans. Eliezer Yudkowsky, who coined the term, argues that developing friendly AI should be a higher research priority: it may require a large investment and it must be completed before AI becomes an existential risk.
+
+Machines with intelligence have the potential to use their intelligence to make ethical decisions. The field of machine ethics provides machines with ethical principles and procedures for resolving ethical dilemmas.
+The field of machine ethics is also called computational morality,
+and was founded at an AAAI symposium in 2005.
+
+Geoffrey Hinton has suggested researchers explore instilling human-aligned values, such as compassion, into AI systems as a safeguard, speculating about the possibility of building "maternal instincts" into AI models, so “they really care about people”.
+
+Other approaches include Wendell Wallach's "artificial moral agents" and Stuart J. Russell's three principles for developing provably beneficial machines.
+
+Active organisations in the AI open-source community include Hugging Face, Google, EleutherAI and Meta. Various AI models, such as Llama 2, Mistral or Stable Diffusion, have been made open-weight, meaning that their architecture and trained parameters (the "weights") are publicly available. Open-weight models can be freely fine-tuned, which allows companies to specialise them with their own data and for their own use-case. Open-weight models are useful for research and innovation but can also be misused. Since they can be fine-tuned, any built-in security measure, such as objecting to harmful requests, can be trained away until it becomes ineffective. Some researchers warn that future AI models may develop dangerous capabilities (such as the potential to drastically facilitate bioterrorism) and that once released on the Internet, they cannot be deleted everywhere if needed. They recommend pre-release audits and cost-benefit analyses.
+
+Artificial intelligence projects can be guided by ethical considerations during the design, development, and implementation of an AI system. An AI framework such as the Care and Act Framework, developed by the Alan Turing Institute and based on the SUM values, outlines four main ethical dimensions, defined as follows:
+
+Other developments in ethical frameworks include those decided upon during the Asilomar Conference, the Montreal Declaration for Responsible AI, and the IEEE's Ethics of Autonomous Systems initiative, among others; however, these principles are not without criticism, especially regarding the people chosen to contribute to these frameworks.
+
+Promotion of the wellbeing of the people and communities that these technologies affect requires consideration of the social and ethical implications at all stages of AI system design, development and implementation, and collaboration between job roles such as data scientists, product managers, data engineers, domain experts, and delivery managers.
+
+The UK AI Safety Institute released in 2024 a testing toolset called 'Inspect' for AI safety evaluations available under an MIT open-source licence which is freely available on GitHub and can be improved with third-party packages. It can be used to evaluate AI models in a range of areas including core knowledge, ability to reason, and autonomous capabilities.
+
+The regulation of artificial intelligence is the development of public sector policies and laws for promoting and regulating AI; it is therefore related to the broader regulation of algorithms. The regulatory and policy landscape for AI is an emerging issue in jurisdictions globally. According to AI Index at Stanford, the annual number of AI-related laws passed in the 127 survey countries jumped from one passed in 2016 to 37 passed in 2022 alone. Between 2016 and 2020, more than 30 countries adopted dedicated strategies for AI. Most EU member states had released national AI strategies, as had Canada, China, India, Japan, Mauritius, the Russian Federation, Saudi Arabia, United Arab Emirates, U.S., and Vietnam. Others were in the process of elaborating their own AI strategy, including Bangladesh, Malaysia and Tunisia. The Global Partnership on Artificial Intelligence was launched in June 2020, stating a need for AI to be developed in accordance with human rights and democratic values, to ensure public confidence and trust in the technology. Henry Kissinger, Eric Schmidt, and Daniel Huttenlocher published a joint statement in November 2021 calling for a government commission to regulate AI. In 2023, OpenAI leaders published recommendations for the governance of superintelligence, which they believe may happen in less than 10 years. In 2023, the United Nations also launched an advisory body to provide recommendations on AI governance; the body comprises technology company executives, government officials and academics. On 1 August 2024, the EU Artificial Intelligence Act entered into force, establishing the first comprehensive EU-wide AI regulation. In 2024, the Council of Europe created the first international legally binding treaty on AI, called the "Framework Convention on Artificial Intelligence and Human Rights, Democracy and the Rule of Law". It was adopted by the European Union, the United States, the United Kingdom, and other signatories.
+
+In a 2022 Ipsos survey, attitudes towards AI varied greatly by country; 78% of Chinese citizens, but only 35% of Americans, agreed that "products and services using AI have more benefits than drawbacks". A 2023 Reuters/Ipsos poll found that 61% of Americans agree, and 22% disagree, that AI poses risks to humanity. In a 2023 Fox News poll, 35% of Americans thought it "very important", and an additional 41% thought it "somewhat important", for the federal government to regulate AI, versus 13% responding "not very important" and 8% responding "not at all important". A 2026 NBC News Decision Desk poll powered by SurveyMonkey found that 52% of American adults used AI tools very often or sometimes, but only 18% said they could trust AI-generated information most or almost all of the time, and 70% were more worried than excited about AI. Polls in the United States found the main public concerns were job losses, impersonation, misinformation and information privacy.
+
+In November 2023, the first global AI Safety Summit was held in Bletchley Park in the UK to discuss the near and far term risks of AI and the possibility of mandatory and voluntary regulatory frameworks. 28 countries including the United States, China, and the European Union issued a declaration at the start of the summit, calling for international co-operation to manage the challenges and risks of artificial intelligence. In May 2024 at the AI Seoul Summit, 16 global AI tech companies agreed to safety commitments on the development of AI.
+
+In March 2026, the United Nations convened the inaugural meeting of the Independent International Scientific Panel on AI, a 40-member expert body established under the Global Digital Compact to produce annual evidence-based reports on AI's societal impacts.
+
+The study of mechanical or "formal" reasoning began with philosophers and mathematicians in antiquity. The study of logic led directly to Alan Turing's theory of computation, which suggested that a machine, by shuffling symbols as simple as "0" and "1", could simulate any conceivable form of mathematical reasoning. This, along with concurrent discoveries in cybernetics, information theory and neurobiology, led researchers to consider the possibility of building an "electronic brain".[p] They developed several areas of research that would become part of AI, such as McCulloch and Pitts design for "artificial neurons" in 1943, and Turing's influential 1950 paper 'Computing Machinery and Intelligence', which introduced the Turing test and showed that "machine intelligence" was plausible.
+
+The field of AI research was founded at a workshop at Dartmouth College in 1956.[q] The first AI program, Logic Theorist, was presented at the workshop, created by future Turing Award winner Allen Newell and future Nobel Laureate Herbert A. Simon, in collaboration with J. C. Shaw. Many of the workshop attendees became the leaders of AI research in the 1960s.[r] They and their students produced programs where computers were learning checkers strategies, solving word problems in algebra, proving logical theorems and speaking English.[s] Artificial intelligence laboratories were set up at a number of British and U.S. universities in the latter 1950s and early 1960s.
+
+Researchers in the 1960s and the 1970s worked under the belief that their methods would eventually succeed in creating a machine with general intelligence and considered this the goal of their field. In 1965 Herbert Simon predicted, "machines will be capable, within twenty years, of doing any work a man can do". In 1967 Marvin Minsky agreed, writing that "within a generation ... the problem of creating 'artificial intelligence' will substantially be solved". They had, however, underestimated the difficulty of the problem: Russell and Norvig wrote: "in almost all cases, these early systems failed on more difficult problems". In 1974, both the U.S. and British governments cut off exploratory research in response to the criticism of Sir James Lighthill and ongoing pressure from the U.S. Congress to fund more productive projects. Minsky and Papert's book Perceptrons was understood as proving that artificial neural networks would never be useful for solving real-world tasks, thus discrediting the approach altogether. The "AI winter", a period when obtaining funding for AI projects was difficult, followed.
+
+In the early 1980s, AI research was revived by the commercial success of expert systems, a form of AI program that simulated the knowledge and analytical skills of human experts. By 1985, the market for AI had reached over a billion dollars. At the same time, Japan's fifth generation computer project inspired the U.S. and British governments to restore funding for academic research. However, beginning with the collapse of the Lisp Machine market in 1987, AI once again fell into disrepute, and a second, longer-lasting winter began.
+
+Up to this time, most of AI's funding had gone to projects that used high-level symbols to represent mental objects like plans, goals, beliefs, and known facts. In the 1980s, some researchers began to doubt that this approach would be able to imitate all the processes of human cognition, especially perception, robotics, learning and pattern recognition, and began to look into "sub-symbolic"[clarification needed] approaches. Rodney Brooks rejected "representation" in general and focused directly on engineering machines that move and survive.[t] Judea Pearl, Lotfi Zadeh, and others developed methods that handled incomplete and uncertain information by making reasonable guesses rather than precise logic. But the most important development was the revival of "connectionism", including neural network research, by Geoffrey Hinton and others. In 1990, Yann LeCun successfully showed that convolutional neural networks can recognise handwritten digits, the first of many successful applications of neural networks.
+
+AI's reputation improved in the late 1990s and early 21st century by exploiting formal mathematical methods and by finding specific solutions to specific problems. This "narrow" and "formal" focus allowed researchers to produce verifiable results and collaborate with other fields (such as statistics, economics and mathematics). By 2000, solutions developed by AI researchers were being widely used, although in the 1990s they were rarely described as "artificial intelligence" (a tendency known as the AI effect). However, several academic researchers became concerned that AI was no longer pursuing its original goal of creating versatile, fully intelligent machines.[weasel words] Beginning around 2002, they founded the subfield of artificial general intelligence (or "AGI"), which had several well-funded institutions by the 2010s.
+
+Deep learning began to dominate industry benchmarks in 2012 and was adopted throughout the field.[vague]
+For many specific tasks, other methods were abandoned.
+Deep learning's success did not depend on a revolutionary new paradigm or theoretical breakthrough — deep neural networks and backpropagation had been in development since 1950[u] — but was enabled by hardware improvements (faster computers, graphics processing units, cloud computing) and access to large amounts of data (including curated datasets used for benchmark testing, such as ImageNet). In 2025, Geoffrey Hinton said that, until the 2010s, "We couldn't do anything very impressive because we didn’t have enough data and we didn't have enough computation."
+
+Neural-network approaches also advanced natural language processing. In 2013, word2vec introduced efficient methods for learning distributed word representations. In 2014–2015, sequence-to-sequence and attention mechanisms advanced neural machine translation. Deep learning's success led to an enormous increase[vague] in interest and funding in AI.[v] The amount of machine learning research (measured by total publications) increased by 50% in the years 2015–2019.
+
+AlphaGo, developed by DeepMind, beat the world champion Go player in 2015. The program taught only the game's rules and developed a strategy by itself.
+
+In 2016, issues of fairness and the misuse of technology were catapulted into centre stage at machine learning conferences, publications vastly increased, funding became available, and many researchers re-focussed their careers on these issues. The alignment problem became a serious field of academic study.
+
+GPT-3 is a large language model that was released in 2020 by OpenAI and is capable of generating high-quality human-like text. ChatGPT, launched on 30 November 2022, became the fastest-growing consumer software application in history, gaining over 100 million users in two months. It marked what is widely regarded[weasel words] as AI's breakout year, bringing it into the public consciousness.[better source needed] These programs, and others, lead to an AI boom, where large companies began investing billions of dollars in AI research. According to AI Impacts,[who?] about US$50 billion annually was invested in "AI" around 2022 in the U.S. alone and about 20% of the new U.S. computer science PhD graduates have specialised in "AI". About 800,000 "AI"-related U.S. job openings existed in 2022. According to PitchBook research, 22% of newly funded startups in 2024 claimed to be AI companies.[non-primary source needed]
+
+Philosophical debates have historically sought to determine the nature of intelligence and how to make intelligent machines. Another major focus has been whether machines can be conscious, and the associated ethical implications. Many other topics in philosophy are relevant to AI, such as epistemology and free will. Rapid advancements have intensified public discussions on the philosophy and ethics of AI.
+
+Alan Turing investigated whether machines can exhibit intelligent behaviour and think. In 1950, he proposed the Turing test, which measures the ability of a machine to simulate human conversation. Since we can only observe the behaviour of the machine, it does not matter if it is "actually" thinking or has a "mind". Turing noted that we cannot determine these things about other people either but "it is usual to have a polite convention that everyone thinks."
+
+Russell & Norvig agree with Turing that intelligence should be defined in terms of external behaviour rather than internal structure. However, they criticised the test for requiring machines to imitate humans. "Aeronautical engineering texts", they wrote, "do not define the goal of their field as making 'machines that fly so exactly like pigeons that they can fool other pigeons.'" AI founder John McCarthy similarly argued that "Artificial intelligence is not, by definition, simulation of human intelligence".
+
+McCarthy defines intelligence as "the computational part of the ability to achieve goals in the world". Another AI founder, Marvin Minsky, describes it as "the ability to solve hard problems". Artificial Intelligence: A Modern Approach defines it as the study of agents that perceive their environment and take actions that maximise their chances of achieving defined goals.
+
+A definition proposed by Kaplan & Haenlein (2019) characterises artificial intelligence in terms of a system's ability to interpret external data, learn from it, and use that learning to accomplish specific goals and tasks through flexible adaptation. Dwivedi et al (2021) describe this definition as "more detailed and perhaps elaborate" than Russel & Norvig's 2016 definition.
+
+The many differing definitions of AI have been critically analysed. During the 2020s AI boom, the term has been utilized as a marketing buzzword to promote products and services that do not use AI.
+
+In 2019, the OECD defined the term "AI system", later revising that definition in 2023 to read "a machine-based system that, for explicit or implicit objectives, infers, from the input it receives, how to generate outputs such as predictions, content, recommendations, or decisions that can influence physical or virtual environments. Different AI systems vary in their levels of autonomy and adaptiveness after deployment."
+
+The International Organization for Standardization describes an AI system as an "engineered system that generates outputs such as content, forecasts, recommendations or decisions for a given set of human‐defined objectives" and notes that "AI systems are designed to operate with varying levels of automation" (ISO/IEC 22989:2022).
+
+The EU AI Act defines an AI system as "a machine-based system that is designed to operate with varying levels of autonomy and that may exhibit adaptiveness after deployment, and that, for explicit or implicit objectives, infers, from the input it receives, how to generate outputs such as predictions, content, recommendations, or decisions that can influence physical or virtual environments".
+
+In the United States, non‐binding guidance from the National Institute of Standards and Technology's AI Risk Management Framework offers a definition ("adapted from" the 2019 OECD recommendation and ISO/IEC 22989:2022) of an AI system as "an engineered or machine-based system that can, for a given set of objectives, generate outputs such as predictions, recommendations, or decisions influencing real or virtual environments. AI systems are designed to operate with varying levels of autonomy".
+
+No established unifying theory or paradigm has guided AI research for most of its history.[w] The unprecedented success of statistical machine learning in the 2010s eclipsed all other approaches (so much so that some sources, especially in the business world, use the term "artificial intelligence" to mean "machine learning with neural networks"). This approach is mostly sub-symbolic, soft and narrow.
+
+Symbolic AI (or "GOFAI") simulated the high-level conscious reasoning that people use when they solve puzzles, express legal reasoning and do mathematics. It was highly successful at some "intelligent" tasks such as algebra or IQ tests. In 1976, Newell and Simon proposed the physical symbol systems hypothesis: "A physical symbol system has the necessary and sufficient means of general intelligent action."
+
+However, the symbolic approach failed on many tasks that humans solve easily, such as learning, recognising an object or commonsense reasoning. Moravec's paradox is the discovery that high-level "intelligent" tasks were easy for AI, but low level "instinctive" tasks were extremely difficult. Philosopher Hubert Dreyfus had argued since the 1960s that human expertise depends on embodied, situational know-how that is not representable as explicit symbolic rules rather than conscious symbol manipulation, and on having a "feel" for the situation, rather than explicit symbolic knowledge. Although his arguments had been ridiculed and ignored when they were first presented, eventually, AI research came to agree with him.[x]
+
+The issue is not resolved: sub-symbolic reasoning can make many of the same inscrutable mistakes that human intuition does, such as algorithmic bias. Critics such as Noam Chomsky argue continuing research into symbolic AI will still be necessary to attain general intelligence, in part because sub-symbolic AI is a move away from explainable AI: it can be difficult or impossible to understand why a modern statistical AI program made a particular decision. The emerging field of neuro-symbolic artificial intelligence attempts to bridge the two approaches.
+
+"Neats" hope that intelligent behaviour is described using simple, elegant principles (such as logic or optimisation). "Scruffies" expect that it necessarily requires solving a large number of unrelated problems. Neats defend their programs with theoretical rigour, scruffies rely mainly on incremental testing to see if they work. This issue was actively discussed in the 1970s and 1980s. The rise of deep learning may represent a shift toward the scruffies.
+
+Finding a provably correct or optimal solution is intractable for many important problems. Soft computing is a set of techniques, including genetic algorithms, fuzzy logic and neural networks, that are tolerant of imprecision, uncertainty, partial truth and approximation. Soft computing was introduced in the late 1980s and most successful AI programs in the 21st century are examples of soft computing with neural networks.
+
+AI researchers are divided as to whether to pursue the goals of artificial general intelligence and superintelligence directly or to solve as many specific problems as possible (narrow AI) in hopes these solutions will lead indirectly to the field's long-term goals. General intelligence is difficult to define and difficult to measure, and modern AI has had more verifiable successes by focusing on specific problems with specific solutions. The sub-field of artificial general intelligence studies this area exclusively.
+
+There is no settled consensus in philosophy of mind on whether a machine can have a mind, consciousness or subjective experiences in the same sense that human beings do. This issue considers the internal experiences of the machine, rather than its external behaviour. Mainstream AI research considers this issue irrelevant because it does not affect the goals of the field: to build machines that can solve problems using intelligence. Russell and Norvig add that "[t]he additional project of making a machine conscious in exactly the way humans are is not one that we are equipped to take on." However, the question has become central to the philosophy of mind. It is also typically the central question at issue in artificial intelligence in fiction.
+
+David Chalmers identified two problems in understanding the mind, which he named the "hard" and "easy" problems of consciousness. The easy problem is understanding how the brain processes signals, makes plans and controls behaviour. The hard problem is explaining how this feels or why it should feel like anything at all, assuming we are right in thinking that it truly does feel like something (Dennett's consciousness illusionism says this is an illusion). While human information processing is easy to explain, human subjective experience is difficult to explain. For example, it is easy to imagine a colour-blind person who has learned to identify which objects in their field of view are red, but it is not clear what would be required for the person to know what red looks like.
+
+Computationalism is the position in the philosophy of mind that the human mind is an information processing system and that thinking is a form of computing. Computationalism argues that the relationship between mind and body is similar or identical to the relationship between software and hardware and thus may be a solution to the mind–body problem. This philosophical position was inspired by the work of AI researchers and cognitive scientists in the 1960s and was originally proposed by philosophers Jerry Fodor and Hilary Putnam.
+
+Philosopher John Searle characterised this position as "strong AI": "The appropriately programmed computer with the right inputs and outputs would thereby have a mind in exactly the same sense human beings have minds."[y] Searle challenges this claim with his Chinese room argument, which attempts to show that even a computer capable of perfectly simulating human behaviour would not have a mind.
+
+It is difficult or impossible to reliably evaluate whether an advanced AI is sentient (has the ability to feel), and if so, to what degree. But if there is a significant chance that a given machine can feel and suffer, then it may be entitled to certain rights or welfare protection measures, similarly to animals. Sapience (a set of capacities related to high intelligence, such as discernment or self-awareness) may provide another moral basis for AI rights. Robot rights are also sometimes proposed as a practical way to integrate autonomous agents into society.
+
+In 2017, the European Union considered granting "electronic personhood" to some of the most capable AI systems. Similarly to the legal status of companies, it would have conferred rights but also responsibilities. Critics argued in 2018 that granting rights to AI systems would downplay the importance of human rights, and that legislation should focus on user needs rather than speculative futuristic scenarios. They also noted that robots lacked the autonomy to take part in society on their own.
+
+Progress in AI increased interest in the topic. Proponents of AI welfare and rights often argue that AI sentience, if it emerges, would be particularly easy to deny. They warn that this may be a moral blind spot analogous to slavery or factory farming, which could lead to large-scale suffering if sentient AI is created and carelessly exploited.
+
+A superintelligence is a hypothetical agent that would possess intelligence far surpassing that of the brightest and most gifted human mind. If research into artificial general intelligence produced sufficiently intelligent software, it might be able to reprogram and improve itself. The improved software would be even better at improving itself, leading to what I. J. Good called an "intelligence explosion" and Vernor Vinge called a "singularity".
+
+In Artificial Intelligence: A Modern Approach, Russel and Norvig cast doubt on the possibility of a singularity, arguing that "so far, every technology has followed an S-shaped curve", and that "sometimes it is not possible to keep the growth going."
+
+Robot designer Hans Moravec, cyberneticist Kevin Warwick and inventor Ray Kurzweil have predicted that humans and machines may merge in the future into cyborgs that are more capable and powerful than either. This idea, called transhumanism, has roots in the writings of Aldous Huxley and Robert Ettinger.
+
+Edward Fredkin argues that "artificial intelligence is the next step in evolution", an idea first proposed by Samuel Butler's "Darwin among the Machines" as far back as 1863, and expanded upon by George Dyson in his 1998 book Darwin Among the Machines: The Evolution of Global Intelligence.
+
+Thought-capable artificial beings have appeared as storytelling devices since antiquity, and have been a persistent theme in science fiction.
+
+A common trope in these works began with Mary Shelley's Frankenstein, where a human creation becomes a threat to its masters. This includes such works as Arthur C. Clarke's and Stanley Kubrick's 2001: A Space Odyssey (both 1968), with HAL 9000, the murderous computer in charge of the Discovery One spaceship, as well as Blade Runner (1982), The Terminator (1984) and The Matrix (1999). In contrast, the rare loyal robots such as Gort from The Day the Earth Stood Still (1951) and Bishop from Aliens (1986) are less prominent in popular culture.
+
+Isaac Asimov introduced the Three Laws of Robotics in many stories, most notably with the "Multivac" super-intelligent computer. Asimov's laws are often brought up during lay discussions of machine ethics; while almost all artificial intelligence researchers are familiar with Asimov's laws through popular culture, they generally consider the laws useless for many reasons, one of which is their ambiguity.
+
+Several works use AI to force us to confront the phenomenological question of what makes us human, showing us artificial beings that have the ability to feel, and thus to suffer. This appears in Karel Čapek's R.U.R., the films A.I. Artificial Intelligence and Ex Machina, as well as the novel Do Androids Dream of Electric Sheep? by Philip K. Dick. Dick considers the idea that our understanding of human subjectivity is altered by technology created with artificial intelligence.
+
+<|endoftext|>
+
+In deep learning, the transformer is a family of artificial neural network architectures based on the multi-head attention mechanism, in which input data such as text, images, or audio is converted to a sequence of numerical representations called tokens, and each token is converted into a vector through an embedding layer. At each layer, each token is then contextualized within the scope of the context window with other (unmasked) tokens via a parallel multi-head attention mechanism, allowing the signal for key tokens to be amplified and less important tokens to be diminished. Because self-attention alone is permutation-invariant, transformers inject positional information, typically through positional encodings or learned positional embeddings, so token order can affect the output.
+
+Because transformers do not process tokens one at a time, their computations can be parallelized across sequence positions during training more readily than those of recurrent neural networks like long short-term memory (LSTM). Later variations have been widely adopted for training large language models (LLMs) on large (language) datasets.
+
+The original version of the transformer architecture was proposed in the 2017 paper "Attention Is All You Need" by researchers at Google. The predecessors of transformers were developed as an improvement over previous architectures for machine translation, but have found many applications since. They are used in large-scale natural language processing, computer vision (vision transformers), reinforcement learning, audio, multimodal learning, robotics, and playing chess. It has also led to the development of pre-trained systems, such as generative pre-trained transformers (GPTs).
+
+Before transformers, recurrent neural networks (RNNs) were widely used for sequence modelling and generation. A well-cited early example was the Elman network (1990). In theory, the information from one token can propagate arbitrarily far down the sequence, but in practice the vanishing-gradient problem leaves the model's state at the end of a long sentence without precise, extractable information about preceding tokens.
+
+A key breakthrough was LSTM (originally described in a 1995 technical report and formally published in 1997), an RNN that introduced gating mechanisms to mitigate the vanishing gradient problem, allowing efficient learning of long-sequence modelling. One key architectural element was the use of multiplicative gating units, in which the outputs of some neurons modulate the outputs of others. These multiplicative units are conceptually distinct from the additive attention mechanism later introduced for sequence-to-sequence models.
+Neural networks using multiplicative units were later called sigma-pi networks or higher-order networks. LSTM became the standard architecture for long sequence modelling until the 2017 publication of transformers. However, LSTM still used sequential processing, like most other RNNs. Specifically, RNNs operate one token at a time from first to last; they cannot operate in parallel over all tokens in a sequence.
+
+Transformers allow parallel processing of tokens during training, but standard self-attention has computational and memory costs that grow quadratically with sequence length.
+
+The idea of encoder–decoder sequence transduction had been developed in the early 2010s; commonly cited as the originators that produced seq2seq are two concurrently published papers from 2014.[original research?]
+
+A 380M-parameter model for machine translation uses two long short-term memories (LSTM). Its architecture consists of two parts. The encoder is an LSTM that takes in a sequence of tokens and turns it into a vector. The decoder is another LSTM that converts the vector into a sequence of tokens. Similarly, another 130M-parameter model used gated recurrent units (GRU) instead of LSTM. Later research showed that GRUs are neither better nor worse than LSTMs for seq2seq.
+
+These early seq2seq models had no attention mechanism, and the state vector is accessible only after the last word of the source text was processed. Although in theory such a vector retains the information about the whole original sentence, in practice the information is poorly preserved. This is because the input is processed sequentially by one recurrent network into a fixed-size output vector, which is then processed by another recurrent network into an output. If the input is long, then the output vector would not be able to contain all relevant information, degrading the output. As evidence, reversing the input sentence improved seq2seq translation.
+
+The RNN search model introduced an attention mechanism to seq2seq for machine translation to solve the bottleneck problem (of the fixed-size output vector), allowing the model to process long-distance dependencies more easily. The name is because it "emulates searching through a source sentence during decoding a translation".
+
+The relative performances were compared between global (that of RNN search) and local (sliding window) attention model architectures for machine translation, finding that mixed attention had higher quality than global attention, while local attention reduced translation time.
+
+In 2016, Google Translate was revamped to Google Neural Machine Translation, which replaced the previous model based on statistical machine translation. The GNMT system was a sequence-to-sequence model with eight LSTM layers in its encoder and eight in its decoder. The first encoder layer was bidirectional, the remaining seven encoder layers were unidirectional, and all eight decoder layers were unidirectional. It took nine months to develop, and it outperformed the statistical approach, which took ten years to develop.
+
+Seq2seq models with attention (including self-attention) still suffered from the same issue with recurrent networks, which is that they are hard to parallelize, which prevented them from being accelerated on GPUs. In 2016, decomposable attention applied a self-attention mechanism to feedforward networks, which are easy to parallelize, and achieved state-of-the-art (SOTA) results in textual entailment with an order of magnitude fewer parameters than LSTMs. One of its authors, Jakob Uszkoreit, suspected that attention without recurrence would be sufficient for language translation, thus the title "attention is All you need". That hypothesis was against conventional wisdom at the time, and even his father Hans Uszkoreit, a well-known computational linguist, was skeptical. In the same year, self-attention (called intra-attention or intra-sentence attention) was proposed for LSTMs.
+
+The original encoder–decoder Transformer was introduced in the paper "Attention Is All You Need," submitted to arXiv on 2017-06-12. At the time, the focus of the research was on improving seq2seq for machine translation, by removing its recurrence to process all tokens in parallel, but preserving its dot-product attention mechanism to keep its text processing performance. This led to the introduction of a multi-head attention model that was easier to parallelize due to the use of independent heads and the lack of recurrence. Its parallelizability was an important factor to its widespread use in large neural networks.
+
+Soon after developing the Transformer, researchers at Google used a decoder-only variation to generate fictitious Wikipedia articles. Transformer architecture is now used alongside many generative models that contribute to the ongoing AI boom.
+
+The "reference implementation" of the original Transformer was written in a TensorFlow library. In language modelling, ELMo (2018) was a bi-directional LSTM that produces contextualized word embeddings, improving upon the line of research from bag of words and word2vec. It was followed by BERT (2018), an encoder-only transformer model. In October 2019, Google started using BERT to process search queries. In 2020, Google Translate replaced the previous RNN-encoder–RNN-decoder model by a transformer-encoder–RNN-decoder model.[non-primary source needed]
+
+Starting in 2018, the OpenAI GPT series of decoder-only transformers became state of the art in natural language generation. At the end of 2022, ChatGPT, a chatbot based on a fine-tuned variant of GPT-3.5, became unexpectedly popular, triggering a boom around large language models.
+
+Transformers have been applied in modalities beyond text. Four days after the publication of "Attention is All You Need", a multimodal transformer architecture, MultiModel, was published by most authors of that paper. The vision transformer adapts the architecture to images by processing image patches as a sequence of tokens. Transformer models are also used in systems for image and video generation, although these systems differ in how they represent and process their inputs and outputs.
+
+The original Transformer paper used a learning-rate warmup schedule: the learning rate increased linearly for the first 4,000 training steps and then decayed according to an inverse square-root schedule.
+
+A study of the Transformer found that applying layer normalization before the attention and feed-forward sublayers can improve training stability and reduce dependence on learning-rate warmup in some settings. This arrangement is called pre-LN; the original Transformer used post-LN.
+
+The original transformer used dropout during training to reduce overfitting. Dropout was applied to the output of each sublayer before its residual connection and normalization, as well as to the sums of token embeddings and positional encodings. The original paper also used label smoothing, which replaces a certain target distribution with one that assigns a small amount of probability to alternative tokens. These techniques can improve generalization by going against overconfidence in the training targets.
+
+Large transformer models are typically trained across multiple GPUs or other accelerators because their parameters, activations, and training data may not fit on a single device. Data parallelism copies the model across devices and splits different batches of training examples among them; gradients are then synchronized before parameters are updated. Model parallelism divides a model itself across devices. Tensor parallelism splits operations within individual layers, while pipeline parallelism assigns consecutive groups of layers to different devices.
+
+Many transformer-based language models are pretrained on large corpora using self-supervised objectives, and some are later fine-tuned for specific tasks. The dataset and objective vary by model. Common pretraining objectives include:
+
+Downstream fine-tuning tasks can include reading comprehension, sentiment classification, paraphrasing, and summarization.
+
+The T5 transformer report documents a large number of natural language pretraining tasks. Some examples are:
+
+While each of these tasks is trivial or obvious for human native speakers of the language (or languages), they have typically proved challenging for previous generations of machine learning architecture.
+
+Knowledge distillation is a method for training a smaller model, called a "student", to reproduce the output behavior of a larger "teacher" model. In transformer models, the student can be trained using the teacher's output probability distribution, intermediate representations, or attention patterns in addition to the original training labels. Distillation can lower computational and memory requirements of deployment while keeping most of the teacher model's performance on a specified task.
+
+In general, there are three classes of language modelling tasks: "masked", "autoregressive", and "prefixLM". These classes are independent of a specific modeling architecture such as transformer, but they are often discussed in the context of transformer.
+
+In a masked task, one or more of the tokens is masked out, and the model would produce a probability distribution predicting what the masked-out tokens are based on the context. The loss function for the task is typically sum of log-perplexities for the masked-out tokens: Loss=−∑t∈masked tokensln⁡(probability of t conditional on its context)and the model is trained to minimize this loss function. The BERT series of models are trained for masked token prediction and another task. ("Masked" as in "masked language modelling" is not "masked" as in "masked attention".)
+
+In an autoregressive task, the model predicts each token from the preceding context. During training, a causal attention mask prevents each position from attending to later tokens, allowing the sequence to be processed in parallel while the loss is computed for target tokens. During inference, tokens are generated one or more at a time and appended to the context. The GPT series of models are trained with autoregressive objectives.
+
+In a prefix-language-modeling task, the model receives a prefix as context and predicts a continuation. Depending on the architecture and mask, prefix tokens may attend to one another bidirectionally while each continuation token can attend only to the prefix and earlier continuation tokens. T5 is an encoder–decoder model trained primarily with span-corruption objectives, rather than this prefix-LM objective.
+
+Transformer architectures vary, but many include some of the following components:
+
+The following description focuses on the encoder–decoder Transformer introduced in the original paper; other variants are described in the following section.
+
+By convention, we write all vectors as row vectors. For example, pushing a vector through a linear layer means multiplying it by a weight matrix on the right, as xW.
+
+Tokenization maps input text to a sequence of token identifiers drawn from a vocabulary. Depending on the tokenizer, preprocessing may normalize text and divide it into words, subwords, or bytes. Subword methods such as byte pair encoding (BPE) and the unigram language model can represent many rare or previously unseen words as sequences of known units, rather than requiring a single [UNK] token. A tokenizer's vocabulary is learned or otherwise specified before it is used.
+
+Each integer token identifier is converted into an embedding vector via a lookup table. Equivalently stated, it multiplies a one-hot representation of the token identifier by an embedding matrix M. For example, if the input token's identifier is 3, then the one-hot representation is [0,0,0,1,0,0,...], and its embedding vector isEmbed(3)=[0,0,0,1,0,0,...]MThe token embedding vectors are added to their respective positional encoding vectors (see below), producing the sequence of input vectors.
+
+The dimension of an embedding vector is called hidden size or embedding size and written as demb. This size is written as dmodel in the original transformer paper.
+
+An un-embedding layer is almost the reverse of an embedding layer. Whereas an embedding layer converts a token identifier into a vector, an un-embedding layer converts a vector into a probability distribution over tokens.
+
+The un-embedding layer is a linear-softmax layer:UnEmbed(x)=softmax(xW+b)The matrix has shape (demb,|V|). Some architectures use the transpose of the embedding matrix M as the un-embedding matrix W in order to avoid needing double the amount of embedding-related parameters and to avoid divergence during training. This practice is called weight tying.
+
+A positional encoding or embedding supplies information about token position or order. The original Transformer added fixed sinusoidal position encodings to token embeddings and reported similar results with learned positional embeddings; later models use other positional schemes. This induces a bias towards the order of the input sequence, so that, for example, the input sequence "man bites dog" is processed differently from "dog bites man".
+
+The positional encoding is defined as a function of type f:R→Rd, where d is a positive even integer. The full positional encoding defined in the original paper is:(f(t)2k,f(t)2k+1)=(sin⁡(θ),cos⁡(θ))∀k∈{0,1,...,d/2−1}where θ=trk,r=N2/d.
+
+Here, t denotes a sequence position and k indexes pairs of embedding dimensions. N controls the range of sinusoidal wavelengths; the original paper used N=10000.
+
+The function is in a simpler form when written as a complex function of type f:R→Cd/2f(t)=(eit/rk)k=0,1,...,d2−1where r=N2/d.
+
+The main reason for using this positional encoding function is that using it, shifts are linear transformations:f(t+Δt)=diag(f(Δt))f(t)where Δt∈R is the distance one wishes to shift. This allows the transformer to take any encoded position, and find the encoding of the position n-steps-ahead or n-steps-behind, by a matrix multiplication.
+
+By taking a linear sum, any convolution can also be implemented as linear transformations:∑jcjf(t+Δtj)=(∑jcjdiag(f(Δtj)))f(t)for any constants cj. This allows the transformer to take any encoded position and find a linear sum of the encoded locations of its neighbors. This sum of encoded positions, when fed into the attention mechanism, would create attention weights on its neighbors, much like what happens in a convolutional neural network language model. In the author's words, "we hypothesized it would allow the model to easily learn to attend by relative position."
+
+In typical implementations, all operations are done over the real numbers, not the complex numbers, but since complex multiplication can be implemented as real 2-by-2 matrix multiplication, this is a mere notational difference.
+
+Like earlier seq2seq models, the original transformer model used an encoder–decoder architecture. The encoder consists of encoding layers that process all the input tokens together one layer after another, while the decoder consists of decoding layers that iteratively process the encoder's output and the decoder's output tokens so far.
+
+The purpose of each encoder layer is to create contextualized representations of the tokens, where each representation corresponds to a token that "mixes" information from other input tokens via self-attention mechanism. Each decoder layer contains two attention sublayers: (1) cross-attention for incorporating the output of encoder (contextualized input token representations), and (2) self-attention for "mixing" information among the input tokens to the decoder (i.e. the tokens generated so far during inference time).
+
+Both the encoder and decoder layers have a feed-forward neural network for additional processing of their outputs and contain residual connections and layer normalization steps. These feed-forward layers contain most of the parameters in a transformer model.
+
+The feedforward network (FFN) modules in a transformer are 2-layered multilayer perceptrons:FFN(x)=φ(xW(1)+b(1))W(2)+b(2)where W(1) and W(2) are weight matrices and b(1) and b(2) are bias vectors, and φ is its activation function. The original transformer used ReLU activation.
+
+The number of neurons in the middle layer is called intermediate size (GPT), filter size (BERT), or feedforward size (BERT). It is typically larger than the embedding size. For example, in both GPT-2 series and BERT series, the intermediate size of a model is 4 times its embedding size: dffn=4demb.
+
+The attention mechanism used in the transformer architecture are scaled dot-product attention units. For each unit, the transformer model learns three weight matrices: the query weights WQ, the key weights WK, and the value weights WV.
+
+The module takes three sequences, a query sequence, a key sequence, and a value sequence. The query sequence is a sequence of length lseq, query, and each entry is a vector of dimension demb, query. Similarly for the key and value sequences.
+
+For each vector xi,query in the query sequence, it is multiplied by a matrix WQ to produce a query vector qi=xi,queryWQ. The matrix of all query vectors is the query matrix:Q=XqueryWQSimilarly, we construct the key matrix K=XkeyWK and the value matrix V=XvalueWV.
+
+The shapes of WQ,WK,WV depend on the input and head dimensions; these projection matrices need not be square.
+
+Attention weights are calculated using the query and key vectors: the attention weight aij from token i to token j is the dot product between qi and kj. The attention weights are divided by the square root of the dimension of the key vectors, dk, which stabilizes gradients during training, and passed through a softmax which normalizes the weights. The fact that WQ and WK are different matrices allows attention to be non-symmetric: if token i attends to token j (i.e. qi⋅kj is large), this does not necessarily mean that token j will attend to token i (i.e. qj⋅ki could be small). The output of the attention unit for token i is the weighted sum of the value vectors of all tokens, weighted by aij, the attention from token i to each token.
+
+The attention calculation for all tokens can be expressed as one large matrix calculation using the softmax function, which is useful for training due to computational matrix operation optimizations that quickly compute matrix operations. The matrices Q, K and V are defined as the matrices where the ith rows are vectors qi, ki, and vi respectively. Then we can represent the attention asAttention(Q,K,V)=softmax(QKTdk)V
+
+where the softmax is applied over each of the rows of the matrix.
+
+The number of dimensions in a query vector is query size dquery and similarly for the key size dkey and value size dvalue. The output dimension of an attention head is its head dimension dhead. The attention mechanism requires the following three equalities to hold:lseq, key=lseq, value,dquery=dkey,dvalue=dheadbut is otherwise unconstrained.
+
+If the attention head is used in a self-attention fashion, then Xquery=Xkey=Xvalue. If the attention head is used in a cross-attention fashion, then usually Xquery≠Xkey=Xvalue. It is theoretically possible for all three to be different, but that is rarely the case in practice.
+
+One set of (WQ,WK,WV) matrices is called an attention head, and each layer in a transformer model has multiple attention heads. While each attention head attends to the tokens that are relevant to each token, multiple attention heads allow the model to do this for different definitions of "relevance". Specifically, the query and key projection matrices, WQ and WK, which are involved in the attention score computation, defines the "relevance". Meanwhile, the value projection matrix WV, in combination with the part of the output projection matrix WO, determines how the attended tokens influence what information is passed to subsequent layers and ultimately the output logits. In addition, the scope of attention, or the range of token relationships captured by each attention head, can expand as tokens pass through successive layers. This allows the model to capture more complex and long-range dependencies in deeper layers. Analyses of some models have found attention heads that focus on patterns such as nearby words or syntactic relations; these patterns vary across heads and models. The computations for each attention head can be performed in parallel, which allows for fast processing. The outputs for the attention layer are concatenated to pass into the feedforward neural network layers.
+
+Concretely, let the multiple attention heads be indexed by i, then we haveMultiheadAttention⁡(Q,K,V)=Concati∈[nheads](Attention⁡(XWQ,i,XWK,i,XWV,i))WO where X contains the input representations to the attention layer (embeddings in the first layer and hidden states in later layers), and the matrices WQ,i,WK,i,WV,i are projection matrices for attention head i, and WO is a final projection matrix owned by the whole multihead attention module.
+
+It is theoretically possible for each attention head to have a different head dimension dhead, but that is rarely the case in practice.
+
+As an example, in the smallest GPT-2 model, there are only self-attention mechanisms. It has the following dimensions:demb=768,nhead=12,dhead=64Since 12×64=768, its output projection matrix WO∈R(12×64)×768 is a square matrix.
+
+Autoregressive decoders predict each token from earlier tokens. During training, causal self-attention can process all sequence positions in parallel while preventing position i from attending to later positions j>i. During inference, the model generates tokens autoregressively. This mask is applied before softmax by adding a matrix M with −∞ at masked positions and 0 elsewhere:MaskedAttention(Q,K,V)=softmax(QKTdk+M)V The following matrix is commonly used in decoder self-attention modules, called "causal masking":Mcausal=[0−∞−∞...−∞00−∞...−∞000...−∞⋮⋮⋮⋱⋮000...0]
+
+In words, it means that each token can pay attention to itself, and every token before it, but not any after it. A non-masked attention module can be thought of as a masked attention module where the mask has all entries zero. As an example of an uncommon use of mask matrix, the XLNet considers all masks of the form PMcausalP−1, where P is a random permutation matrix.
+
+An encoder consists of an embedding layer, followed by multiple encoder layers.
+
+Each encoder layer consists of two major components: a self-attention mechanism and a feed-forward layer. It takes an input as a sequence of input vectors, applies the self-attention mechanism, to produce an intermediate sequence of vectors, then applies the feed-forward layer for each vector individually. Schematically, we have:given input vectors h0,h1,...combine them into a matrix H=[h0h1⋮]EncoderLayer(H)=[FFN(MultiheadAttention(H,H,H)0)FFN(MultiheadAttention(H,H,H)1)⋮]
+
+where FFN stands for "feed-forward network". We can more succinctly write it asEncoderLayer(H)=FFN(MultiheadAttention(H,H,H))with the implicit convention that the FFN is applied to each row of the matrix individually.
+
+The encoder layers are stacked. The first encoder layer takes the sequence of input vectors from the embedding layer, producing a sequence of vectors. This sequence of vectors is processed by the second encoder, and so on. The output from the final encoder layer is then used by the decoder.
+
+As the encoder processes the entire input all at once, every token can attend to every other token (all-to-all attention), so there is no need for causal masking.
+
+A decoder consists of an embedding layer, followed by multiple decoder layers, followed by an un-embedding layer.
+
+Each decoder consists of three major components: a causally masked self-attention mechanism, a cross-attention mechanism, and a feed-forward neural network. The decoder functions in a similar fashion to the encoder, but an additional attention mechanism is inserted which instead draws relevant information from the encodings generated by the encoders. This mechanism can also be called the encoder–decoder attention.[non-primary source needed]
+Like the first encoder, the first decoder takes positional information and embeddings of the output sequence as its input, rather than encodings. During training, target tokens are shifted right before being supplied to the decoder, and causal masking prevents each position from attending to later target tokens. This allows for autoregressive text generation. For decoding, all-to-all attention is inappropriate, because a token cannot attend to tokens not yet generated. Thus, the self-attention module in the decoder is causally masked.
+
+In contrast, the cross-attention mechanism attends to the output vectors of the encoder, which is computed before the decoder starts decoding. Consequently, there is no need for masking in the cross-attention mechanism.
+
+Schematically, we have:H′=MaskedMultiheadAttention(H,H,H)DecoderLayer(H)=FFN(MultiheadAttention(H′,HE,HE))where HE is the matrix with rows being the output vectors from the encoder.
+
+The last decoder is followed by a final un-embedding layer to produce the output probabilities over the vocabulary. Then, one of the tokens is sampled according to the probability, and the decoder can be run again to produce the next token, etc., autoregressively generating output text.
+
+Each encoder layer contains 2 sublayers: the self-attention and the feedforward network. Each decoder layer contains 3 sublayers: the causally masked self-attention, the cross-attention, and the feedforward network.
+
+The original Transformer uses residual connections and layer normalization (LayerNorm, or LN). Their placement and use vary across Transformer architectures.
+
+The residual connections are introduced to avoid vanishing gradient issues and stabilize the training process. They can be expressed by x↦F(x)+x, where F is a given component of the transformer. Adding the input x can preserve the input information and avoid issues when the gradient of F(x) is close to zero.
+
+Similarly to how the feedforward network modules are applied individually to each vector, the LayerNorm is also applied individually to each vector.
+
+There are two common conventions in use: the post-LN and the pre-LN convention. In the post-LN convention, the output of each sublayer is LayerNorm(x+Sublayer(x))where Sublayer(x) is the function implemented by the sublayer itself.
+
+In the pre-LN convention, the output of each sublayer isx+Sublayer(LayerNorm(x))The original 2017 transformer used the post-LN convention. It was difficult to train and required careful hyperparameter tuning and a "warm-up" in learning rate, where it starts small and gradually increases. The pre-LN convention, proposed several times in 2018, was found to be easier to train, requiring no warm-up, leading to faster convergence.
+
+The following is the pseudocode for a standard pre-LN encoder–decoder transformer, adapted from Formal Algorithms for Transformers.
+
+The transformer architecture, being modular, allows variations. Several common variations are described here.
+
+An "encoder-only" Transformer maps an input sequence to contextualized representations. It is commonly used for text classification, retrieval, and representation learning. BERT is an example. Encoder-only models are also called "all-to-all" or "BERT-like" because their self-attention can generally use the full input sequence.
+
+A "decoder-only" Transformer has causal self-attention and feed-forward layers, with no separate encoder or encoder–decoder cross-attention. It is commonly used for text generation and instruction following. The models in the GPT series and Chinchilla series are examples. Such models are also called autoregressive or causal language models.
+
+An "encoder–decoder" Transformer has an encoder that processes an input sequence and a decoder that generates an output sequence. In the original design, each decoder layer includes causal self-attention, cross-attention to encoder representations, and a feed-forward network; later models vary these details. The T5 series is encoder–decoder.
+
+A "prefixLM" (prefix language model) is a decoder-only architecture, but with prefix masking, which is different from causal masking. Specifically, it has mask of the form: Figure 3 MprefixLM=[0−∞0Mcausal]where the block rows and columns correspond to prefix and continuation positions. Prefix tokens can attend to all prefix tokens; continuation tokens can attend to the prefix and earlier continuation tokens. This mask combines bidirectional attention within the prefix with causal attention over the continuation.
+
+There are also mixed seq2seq models. For example, in 2020, Google Translate replaced the previous RNN-encoder–RNN-decoder model with a transformer-encoder–RNN-decoder model, as transformer-based decoders did not appear to significantly increase quality unlike the encoder, while the RNN decoder was much faster.
+
+Many improvements have been added to the Transformer architecture. Transformer variants use different combinations of design choices, including positional encodings, normalization methods, and feed-forward modules.
+
+The original transformer's feedforward module is a standard linear-ReLU-linear network. Other feedforward modules were developed. The Llama series and PaLM used SwiGLU; both GPT-1 and BERT used GELU.
+
+Alternative activation functions are often used in combination with Gated Linear Units in the feedforward module.
+
+The normalization used in the transformer can be different from LayerNorm. One example is RMSNorm which is used in the Llama series. Other examples include ScaleNorm and FixNorm.
+
+Transformers may use other positional encoding methods than sinusoidal.
+
+The original transformer paper reported using a learned positional encoding, but finding it not superior to the sinusoidal one. Later, found that causal masking itself provides enough signal to a transformer decoder that it can learn to implicitly perform absolute positional encoding without the positional encoding module.
+
+The transformer model has been implemented in standard deep learning frameworks such as TensorFlow and PyTorch. Transformers is a library produced by Hugging Face that supplies transformer-based architectures and pretrained models.
+
+When an autoregressive transformer is used for inference, such as generating text, the query vector is different at each step, but the already-computed key and value vectors are always the same. The KV caching method saves the computed key and value vectors at each attention block, so that they are not recomputed at each new token. PagedAttention applies memory paging to KV caching.
+
+For repeated requests with the same prefix, an inference system may cache the prefix's key and value states and reuse them, provided the model and relevant settings match. This can reduce repeated computation; the cache consumes memory and may be invalidated when the prompt or model changes.
+
+In general, when a user uses an autoregressive transformer to generate a continuation to a sequence of tokens, the model would first perform a forward-pass on this sequence, whereby the KV caches over this sequence are computed. This is called prefilling. After prefilling, the actual token generation is called decoding. Hyperscalers serving large Transformer models may use disaggregated inference, wherein prefilling and decoding are performed on separately specialized hardware.
+
+When using autoregressive transformer models, requests can have different input lengths and can finish generating at different times. Continuous batching adds new requests to batch and removes completed requests between decoding iterations instead of waiting for every request in a batch to finish. This can improve hardware utilization and throughput for concurrent workloads. Its effect on latency depends on the workload and scheduling policy.
+
+Transformer models are often quantized for inference, meaning that weights, activations, or both are represented with lower-precision numerical formats than the floating point formats used during training. Quantization can reduce memory use and data transfer costs and can improve inference speed on hardware that supports low precision arithmetic. The trade off is that aggressive quantization can come at the cost of model accuracy or may need calibration and specialized quantization methods to perform well.
+
+FlashAttention is an exact attention algorithm that tiles the computation to reduce data movement between high-bandwidth memory and on-chip SRAM. It avoids materializing the full attention matrix, reducing memory traffic and often improving speed and memory use on supported GPUs.The FlashAttention method is a communication-avoiding algorithm that fuses these operations into a single loop, increasing the arithmetic intensity. It is an online algorithm that computes the following quantities:zi=qTkimi=max⁡(z1,...,zi)=max⁡(mi−1,zi)li=ez1−mi+⋯+ezi−mi=emi−1−mili−1+ezi−mioi=ez1−miv1+⋯+ezi−mivi=emi−1−mioi−1+ezi−miviand returns oN/lN. In practice, FlashAttention operates over multiple queries and keys per loop iteration, in a similar way as blocked matrix multiplication. If backpropagation is needed, then the output vectors and the intermediate arrays [m1,...,mN],[l1,...,lN] are cached, and during the backward pass, attention matrices are rematerialized from these, making it a form of gradient checkpointing.
+
+FlashAttention-2 improves parallelism and work partitioning, which can increase performance across supported sequence lengths.
+
+Multi-Query Attention (MQA) changes the Multihead Attention mechanism. Whereas normally,
+
+MultiheadAttention(Q,K,V)=Concati∈[nheads](Attention(XWiQ,XWiK,XWiV))WOwith Multi-Query Attention, there is just one WK,WV, thus:
+
+MultiQueryAttention(Q,K,V)=Concati∈[nheads](Attention(XWiQ,XWK,XWV))WO
+
+Sharing key and value projections across heads reduces the size of the KV cache and memory bandwidth required during autoregressive decoding; reported speed and quality effects depend on the model and task.
+
+More generally, grouped-query attention (GQA) partitions attention heads into groups, each of which shares the key-value pair. MQA is GQA with one group, while standard Multihead Attention is GQA with the maximal number of groups.
+
+Multihead Latent Attention (MLA) is an alternative attention design that compresses key–value representations into a low-dimensional latent vector. The compressed representation reduces the KV-cache memory required during inference; MLA is distinct from MQA, which shares key and value heads across query heads.
+
+Speculative decoding accelerates autoregressive generation by using a smaller draft model or another method to propose several tokens, then asking the target model to verify the proposal in a batched forward pass. The system accepts verified draft tokens and obtains a correction token when needed. With sampling, an acceptance and correction procedure can preserve the target model's output distribution. The speedup depends on draft-model cost, acceptance rate, and hardware.
+
+Multi-token prediction (MTP) is a training objective that adds prediction heads for multiple future tokens. It can provide additional training signal, and some systems use MTP predictions to support speculative decoding; MTP is not, by itself, a general inference method that produces an arbitrary number of future tokens in one pass.
+
+Training transformer-based architectures can be expensive, especially for long inputs. Many methods have been developed to attempt to address the issue. In the image domain, Swin transformer is an efficient architecture that performs attention inside shifting windows. In the audio domain, SepTr decouples the attention in time and frequency domains. Long Range Arena (2020) is a standard benchmark for comparing the behavior of transformer architectures over long inputs.
+
+The standard attention graph is either all-to-all or causal, both of which scales as O(N2) where N is the number of tokens in a sequence. In both cases, there are O(N2) pairs of tokens such that one influences the other within the attention block. By pruning the attention graph, the number of pairs of token influences can drop below O(N2). Such architectures are often referred to as sparse attention, or sparse Transformers.
+
+Sparse attention uses sparse attention patterns to reduce computation for long sequences. BigBird combines local-window, random, and global attention links; with fixed block sizes, this pattern can scale linearly with sequence length.
+
+Transformers can also be used/adapted for modalities (input or output) beyond just text, usually by finding a way to "tokenize" the modality.
+
+Multimodal models can either be trained from scratch, or by finetuning. A 2022 study found that transformers pretrained only on natural language can be finetuned on only 0.03% of parameters and become competitive with LSTMs on a variety of logical and visual tasks, demonstrating transfer learning. LLaVA was a vision-language model composed of a language model (Vicuna-13B) and a vision model (ViT-L/14), connected by a learned projection layer. In its first training stage, the projection layer was trained while the vision encoder and language model were frozen; in the later visual-instruction-tuning stage, the vision encoder remained frozen while the projection layer and language model were fine-tuned.
+
+Vision transformers adapt the transformer to computer vision by breaking down input images as a series of patches, turning them into vectors, and treating them like embedding vectors of tokens in a standard transformer.
+
+Conformer combines self-attention with convolution modules to model both global and local patterns in speech. Whisper converts audio to log-Mel spectrogram features and processes them with convolutional layers and an encoder–decoder Transformer; it does not divide spectrograms into image-style patches.
+
+Perceivers are a variant of transformers designed for multimodality.
+
+For image generation, notable architectures are DALL-E 1 (2021), Parti (2022), Phenaki (2023), and Muse (2023). Unlike later models, DALL-E is not a diffusion model. Instead, it uses a decoder-only transformer that autoregressively generates a text, followed by the token representation of an image, which is then decoded by a discrete variational autoencoder (dVAE) into an image. Parti is an encoder–decoder transformer, where the encoder processes a text prompt, and the decoder generates a token representation of an image. Muse is an encoder-only transformer that is trained to predict masked image tokens from unmasked image tokens. During generation, all input tokens are masked, and the highest-confidence predictions are included for the next iteration, until all tokens are predicted. Phenaki is a text-to-video model. It is a bidirectional masked transformer conditioned on pre-computed text tokens. The generated tokens are then decoded to a video.
+
+The transformer has had great success in natural language processing (NLP). Many large language models such as GPT-2, GPT-3, GPT-4, Gemini, AlbertAGPT, Claude, BERT, Grok, XLNet, RoBERTa and ChatGPT demonstrate the ability of transformers to perform a wide variety of NLP-related subtasks and their related real-world applications, including:
+
+Beyond traditional NLP, the transformer architecture has had success in other applications, such as:
+
+<|endoftext|>
+
+A large language model (LLM) is a machine learning model (typically a neural network) trained on a vast amount of text for natural language processing tasks, especially language generation. LLMs can typically generate, summarize, translate, and analyze text in many contexts. They are the basis for many modern chatbots, such as ChatGPT, Claude, Vibe, Gemini, Grok, Qwen and DeepSeek.
+
+LLMs are typically based on the transformer neural network architecture. Generative pre-trained transformers (GPTs) are a type of LLM that is pre-trained to predict the next word. GPTs are then often fine-tuned to follow instructions and to behave as assistants.
+
+Biased or inaccurate training data can make an LLM's output less reliable. A software harness can provide LLMs with memory and access to tools such as web search. Benchmark evaluations for LLMs attempt to measure model reasoning, factual accuracy, alignment, and safety.
+
+Before the emergence of transformer-based models in 2017, some language models were considered large relative to the computational and data constraints of their time. In the early 1990s, IBM's statistical models pioneered word alignment techniques for machine translation, laying the groundwork for corpus-based language modeling. In 2001, a smoothed n-gram model, such as those employing Kneser–Ney smoothing, trained on 300 million words, achieved state-of-the-art perplexity on benchmark tests. During the 2000s, with the rise of widespread internet access, researchers began compiling massive text datasets from the web ("web as corpus") to train statistical language models.
+
+Moving beyond n-gram models, researchers started in 2000 to use neural networks as language models. Following the breakthrough of deep neural networks in image classification around 2012, similar architectures were adapted for language tasks. This shift was marked by the development of word embeddings (e.g., Word2Vec by Mikolov in 2013) and sequence-to-sequence (seq2seq) models using LSTM. In 2016, Google transitioned its translation service to neural machine translation (NMT), replacing statistical phrase-based models with deep recurrent neural networks. These early NMT systems used LSTM-based encoder-decoder architectures, as they preceded the invention of transformers.
+
+At the 2017 NeurIPS conference, Google researchers introduced the transformer architecture in their landmark paper "Attention Is All You Need". This paper's goal was to improve upon 2014 seq2seq technology, and was based mainly on the attention mechanism developed by Bahdanau et al. in 2014. The following year in 2018, BERT was introduced and quickly became "ubiquitous". Though the original transformer has both encoder and decoder blocks, BERT is an encoder-only model. Academic and research usage of BERT began to decline in 2023, following rapid improvements in the abilities of decoder-only models (such as GPT) to solve tasks via prompting.
+
+Although decoder-only GPT-1 was introduced in 2018, it was GPT-2 in 2019 that caught widespread attention because OpenAI claimed to have initially deemed it too powerful to release publicly, out of fear of malicious use. GPT-3 in 2020 went a step further and as of 2025[update] is available only via API with no offering of downloading the model to execute locally. But it was the consumer-facing chatbot ChatGPT in late 2022 that received extensive media coverage and public attention by 2023. The 2023 GPT-4 was praised for its increased accuracy and as a "holy grail" for its multimodal capabilities. OpenAI did not reveal the high-level architecture and the number of parameters of GPT-4. The release of ChatGPT led to an uptick in LLM usage across several research subfields of computer science, including robotics, software engineering, and societal impact work. In 2024, OpenAI released the reasoning model OpenAI o1, which generates long chains of thought before returning a final answer. Many LLMs with parameter counts comparable to those of OpenAI's GPT series have been developed.
+
+Since 2022, open-source models (those with their source code and weights made publicly available) have been gaining popularity, especially at first with BLOOM and LLaMA, though both have restrictions on the field of use. Mistral AI's open-weight models Mistral 7B and Mixtral 8x7B have a more permissive Apache License. In January 2025, DeepSeek released DeepSeek R1, a 671-billion-parameter open-weight model that performs comparably to OpenAI o1 but at a much lower price per token for users.
+
+Since 2023, many LLMs have been trained to be multimodal, having the ability to also process or generate other types of data, such as images, audio, or 3D meshes.
+
+Open-weight LLMs have become more influential since 2023. Per Vake et al. (2025), community-driven contributions to open-weight models improve their efficiency and performance via collaborative platforms such as Hugging Face.
+
+There is no standard for naming large language models, but certain conventions are common. Usually, a model has a name with several parts, such as in "Qwen3-235B-A22B-Thinking-2507". The commonly used parts are:
+
+As machine learning algorithms process numbers rather than text, the text must be converted to numbers. In the first step, a vocabulary is decided upon, then integer indices are arbitrarily but uniquely assigned to each vocabulary entry, and finally, an embedding is associated with the integer index. Algorithms include byte-pair encoding (BPE) and WordPiece. There are also special tokens serving as control characters, such as [MASK] for masked-out token (as used in BERT), and [UNK] ("unknown") for characters not appearing in the vocabulary. Also, some special symbols are used to denote special text formatting. For example, "Ġ" denotes a preceding whitespace in RoBERTa and GPT and "##" denotes continuation of a preceding word in BERT.
+
+For example, the BPE tokenizer used by the legacy version of GPT-3 would split
+
+as
+
+Tokenization also compresses the datasets. Because LLMs generally require input to be an array that is not jagged, the shorter texts must be "padded" until they match the length of the longest one.
+
+As an example, consider a tokenizer based on byte-pair encoding. In the first step, all unique characters (including blanks and punctuation marks) are treated as an initial set of n-grams (i.e. initial set of uni-grams). Successively the most frequent pair of adjacent characters is merged into a bi-gram and all instances of the pair are replaced by it. All occurrences of adjacent pairs of (previously merged) n-grams that most frequently occur together are then again merged into even lengthier n-gram, until a vocabulary of prescribed size is obtained. After a tokenizer is trained, any text can be tokenized by it, as long as it does not contain characters not appearing in the initial-set of uni-grams.
+
+In the context of training LLMs, datasets are typically cleaned by removing low-quality, duplicated, or toxic data. Cleaned datasets can increase training efficiency and lead to improved downstream performance. A trained LLM can be used to clean datasets for training a further LLM.
+
+With the increasing proportion of LLM-generated content on the web, data cleaning in the future may include filtering out such content. LLM-generated content can pose a problem if the content is similar to human text (making filtering difficult) but of lower quality (degrading performance of models trained on it).
+
+Training of largest language models might need more linguistic data than naturally available, or that the naturally occurring data is of insufficient quality. In these cases, synthetic data might be used.
+
+An LLM is a type of foundation model trained on language. LLMs can be trained in different ways. In particular, GPT models are first pretrained to predict the next word on a large amount of data, before being fine-tuned.
+
+Substantial infrastructure is necessary for training the largest models. The tendency towards larger models is visible in the list of large language models. For example, the training of GPT-2 (i.e. a 1.5-billion-parameter model) in 2019 cost $50,000, while training of the PaLM (i.e. a 540-billion-parameter model) in 2022 cost $8 million, and Megatron-Turing NLG 530B (in 2021) cost around $11 million. The qualifier "large" in "large language model" is inherently vague, as there is no definitive threshold for the number of parameters required to qualify as "large".
+
+Before being fine-tuned, most LLMs are next-token predictors. The fine-tuning shapes the LLM's behavior via techniques like reinforcement learning from human feedback (RLHF) or constitutional AI.
+
+Instruction fine-tuning is a form of supervised learning used to teach LLMs to follow user instructions. In 2022, OpenAI demonstrated InstructGPT, a version of GPT-3 similarly fine-tuned to follow instructions.
+
+RLHF involves training a reward model to predict which text humans prefer. Then, the LLM can be fine-tuned through reinforcement learning to better satisfy this reward model.
+
+Inference is the process of providing input to a trained large language model and receiving generated output, such as text, images, code, or other files.
+
+Hosted inference runs a language model on remote AI data centers and makes the output available to users over the Internet.
+
+Some open-weight language models can be downloaded and run locally on a personal computer. The model files are stored on local storage, while during inference the model weights and other data are held in memory for processing.
+
+LLMs are generally based on the transformer architecture, which leverages an attention mechanism that enables the model to process relationships between all elements in a sequence simultaneously, regardless of their distance from each other. Peng et al. (2023) proposed RWKV, a recurrent neural network-based alternative.
+
+In order to find out which tokens are relevant to each other within the scope of the context window, the attention mechanism calculates "soft" weights for each token, more precisely for its embedding, by using multiple attention heads, each with its own "relevance" for calculating its own soft weights. For example, the small (i.e. 117M parameter sized) GPT-2 model has had twelve attention heads and a context window of only 1k tokens.
+
+Autoregressive models, such as GPTs, are trained to guess how a sequence continues; for example, whether the word sequence "I like to eat" is more likely to be followed by the word "bread" or the word "rocks". Masked models, such as BERT, are trained to guess parts that are missing from a sequence, such as whether the missing word in "I like to ___ roses" is more likely to be the word "smell" or the word "eat". The model's predictions are based on the properties of sequences within its training dataset.
+
+A mixture of experts (MoE) is a machine learning architecture in which multiple specialized neural networks ("experts") work together, with a gating mechanism that routes each input to the most appropriate expert(s). Mixtures of experts can reduce inference costs, as only a fraction of the parameters are used for each input.
+
+Typically, LLMs are trained with single or half-precision floating point numbers (float32 and float16). One float16 has 16 bits, or 2 bytes, and so one billion parameters require 2 gigabytes. The largest models typically have more than 100 billion parameters, which places them outside the range of most consumer electronics.
+
+In 2021, Google Brain released Switch Transformer, one of the first natural language processing (NLP) models to cross one trillion parameters. As of July 2026[update], the largest open weight frontier model is Kimi K3, developed by Moonshot AI, at 2.8 trillion parameters. According to industry estimates reported by the Financial Times, Anthropic's Claude Mythos, its most powerful model, restricted from public access, has approximately 8 trillion parameters, while its public 'Mythos-class' model Fable 5 has approximately 5 trillion parameters.
+
+Post-training quantization aims to decrease the space requirement by lowering precision of the parameters of a trained model, while preserving most of its performance. Quantization can be further classified as static quantization if the quantization parameters are determined beforehand (typically during a calibration phase), and dynamic quantization if the quantization is applied during inference. The simplest form of quantization simply truncates all the parameters to a given number of bits: this is applicable to static as well as dynamic quantization, but loses much precision. Dynamic quantization allows for the use of a different quantization codebook per layer, either a lookup table of values or a linear mapping (scaling factor and bias), at the cost of foregoing the possible speed improvements from using lower-precision arithmetic.
+
+It is possible to fine-tune quantized models using low-rank adaptation.
+
+Beyond basic text generation, various techniques have been developed to extend LLM capabilities, including the use of external tools and data sources, improved reasoning on complex problems, and enhanced instruction-following or autonomy through prompting methods.
+
+In 2020, OpenAI researchers demonstrated that their new model GPT-3 could understand what format to use given a few rounds of Q and A (or other type of task) in the input data as example. This technique, called few-shot prompting, allows LLMs to be adapted to any task without requiring fine-tuning. Also in 2022, it was found that the base GPT-3 model can generate an instruction based on user input. The generated instruction along with user input is then used as input to another instance of the model under a "Instruction: [...], Input: [...], Output:" format. The other instance is able to complete the output and often produces the correct answer in doing so. The ability to "self-instruct" makes LLMs able to bootstrap themselves toward a correct answer.
+
+An LLM can be turned into a chatbot by specializing it for conversation. User input is prefixed with a marker such as "Q:" or "User:" and the LLM is asked to predict the output after a fixed "A:" or "Assistant:". This type of model became commercially available in 2022 with ChatGPT, a sibling model of InstructGPT fine-tuned to accept and produce dialog-formatted text based on GPT-3.5. It could similarly follow user instructions. Before the stream of User and Assistant lines, a chat context usually starts with a few lines of overarching instructions, from a role called "developer" or "system" to convey a higher authority than the user's input. This is called a "system prompt".
+
+Retrieval-augmented generation (RAG) is an approach that integrates LLMs with document retrieval systems. Given a query, a document retriever is called to retrieve the most relevant documents. This is usually done by encoding the query and the documents into vectors, then finding the documents with vectors (usually stored in a vector database) most similar to the vector of the query. The LLM then generates an output based on both the query and context included from the retrieved documents.
+
+Tool use is a mechanism that enables LLMs to interact with external systems, applications, or data sources. It can allow LLMs to, for example, fetch real-time information from an API or to execute code. A program separate from the LLM watches the output stream of the LLM for a special tool-calling syntax. When these special tokens appear, the program calls the tool accordingly and feeds its output back into the LLM's input stream.
+
+Early tool-using LLMs were fine-tuned on the use of specific tools. But fine-tuning LLMs for the ability to read API documentation and call APIs correctly has greatly expanded the range of tools accessible to an LLM.
+
+An LLM is typically not an autonomous agent by itself, as it lacks the ability to interact with dynamic environments, recall past behaviors, and plan future actions. But it can be transformed into an agent by adding supporting elements: the role (profile) and the surrounding environment of an agent can be additional inputs to the LLM, while memory can be integrated as a tool or provided as additional input. Instructions and input patterns are used to make the LLM plan actions and tool use is used to potentially carry out these actions.
+
+In the DEPS ("describe, explain, plan and select") method, an LLM is first connected to the visual world via image descriptions. It is then prompted to produce plans for complex tasks and behaviors based on its pretrained knowledge and the environmental feedback it receives.
+
+The Reflexion method constructs an agent that learns over multiple episodes. At the end of each episode, the LLM is given the record of the episode, and prompted to think up "lessons learned", which would help it perform better at a subsequent episode. These "lessons learned" are stored as a form of long-term memory and given to the agent in the subsequent episodes.
+
+Monte Carlo tree search can use an LLM as rollout heuristic. When a programmatic world model is not available, an LLM can also be prompted with a description of the environment to act as world model.
+
+Multiple agents with memory can interact socially.
+
+Prompt chaining was introduced in 2022. In this method, a user manually breaks a complex problem down into several steps. In each step, the LLM receives as input a prompt telling it what to do and some results from preceding steps. The result from one step is then reused in a next step, until a final answer is reached. The ability of an LLM to follow instructions means that even non-experts can write a successful collection of stepwise prompts given a few rounds of trial and error.
+
+A 2022 paper demonstrated a separate technique called chain-of-thought prompting, which makes the LLM break the question down autonomously. An LLM is given some examples where the "assistant" verbally breaks down the thought process before arriving at an answer. The LLM mimics these examples and also tries to spend some time generating intermediate steps before providing the final answer. This additional step elicited by prompting improves the correctness of the LLM on relatively complex questions. On math word questions, a prompted model can exceed even fine-tuned GPT-3 with a verifier. Chain-of-thought can also be elicited by simply adding an instruction like "Let's think step by step" to the prompt, in order to encourage the LLM to proceed methodically instead of trying to directly guess the answer.
+
+In late 2024, a new approach to LLM development emerged with "reasoning models". These are trained to generate step-by-step analysis before producing final answers, enabling better results on complex tasks, for instance in mathematics, coding and logic. OpenAI introduced this concept with their o1 model in September 2024, followed by o3 in April 2025. On the International Mathematics Olympiad qualifying exam problems, GPT-4o achieved 13% accuracy while o1 reached 83%.
+
+In January 2025, the Chinese company DeepSeek released DeepSeek-R1, a 671-billion-parameter open-weight reasoning model that achieved comparable performance to OpenAI's o1 while being significantly more cost-effective to operate. Unlike proprietary models from OpenAI, DeepSeek-R1's open-weight nature allowed researchers to study and build upon the algorithm, though its training data remained private.
+
+These reasoning models typically require more computational resources per query compared to traditional LLMs, as they perform more extensive processing to work through problems step by step.
+
+Multimodality means having multiple modalities, where a "modality" refers to a type of input or output, such as video, image, audio, text, proprioception, etc. For example, Google PaLM model was fine-tuned into a multimodal model and applied to robotic control. LLaMA models have also been turned multimodal using the tokenization method, to allow image inputs, and video inputs. GPT-4o can process and generate text, audio and images.
+
+A common method to create multimodal models out of an LLM is to "tokenize" the output of a trained encoder. Concretely, one can construct an LLM that can understand images as follows: take a trained LLM, and take a trained image encoder E. Make a small multilayer perceptron f, so that for any image y, the post-processed vector f(E(y)) has the same dimensions as an encoded token. That is an "image token". Then, one can interleave text tokens and image tokens. The compound model is then fine-tuned on an image-text dataset. This basic construction can be applied with more sophistication to improve the model. The image encoder may be frozen to improve stability. This type of method, where embeddings from multiple modalities are fused and the predictor is trained on the combined embeddings, is called early fusion.
+
+Another method, called intermediate fusion, involves each modality being first processed independently to obtain modality-specific representations; then these intermediate representations are fused together. In general, cross-attention is used for integrating information from different modalities. As an example, the Flamingo model uses cross-attention layers to inject visual information into its pre-trained language model.
+
+LLMs can handle programming languages similarly to how they handle natural languages. No special change in token handling is needed as code, like human language, is represented as plain text. LLMs can generate code from problem statements or instructions written in natural language, a process sometimes called vibe coding. They can also describe code in natural language or translate it into other programming languages. They were originally used as a code completion tool, but advances have moved them towards automatic programming. Services such as GitHub Copilot offer LLMs specifically trained, fine-tuned, or prompted for programming.
+
+In mathematical applications, LLMs can generate formal proofs in formal languages for automated proof assistants.
+
+In computational biology, transformer-based architectures, such as DNA LLMs, have also proven useful in analyzing biological sequences: protein, DNA, and RNA. With proteins they appear able to capture a degree of "grammar" from the amino-acid sequence, by mapping that sequence into an embedding. On tasks such as structure prediction and mutational outcome prediction, a small model using an embedding as input can approach or exceed much larger models using multiple sequence alignments (MSA) as input. ESMFold, Meta Platforms' embedding-based method for protein structure prediction, runs an order of magnitude faster than AlphaFold2 thanks to the removal of an MSA requirement and a lower parameter count due to the use of embeddings. Meta hosts ESM Atlas, a database of 772 million structures of metagenomic proteins predicted using ESMFold. An LLM can also design proteins unlike any seen in nature. Nucleic acid models have proven useful in detecting regulatory sequences, sequence classification, RNA-RNA interaction prediction, and RNA structure prediction.
+
+The performance of an LLM after pretraining largely depends on the:
+
+Scaling laws are empirical statistical laws that predict LLM performance based on such factors. One particular scaling law ("Chinchilla scaling") for LLM autoregressively trained for one epoch, with a log–log learning rate schedule, states that:
+{C=C0NDL=ANα+BDβ+L0 where the variables are
+
+and the statistical hyper-parameters are
+
+Performance of bigger models on various tasks, when plotted on a log–log scale, appears as a linear extrapolation of performance achieved by smaller models. However, this linearity may be punctuated by "break(s)" in the scaling law, where the slope of the line changes abruptly, and where larger models acquire "emergent abilities". They arise from the complex interaction of the model's components and are not explicitly programmed or designed.
+
+Proposed examples of emergent abilities include:
+
+Schaeffer et al. argue that the emergent abilities are not unpredictably acquired, but predictably acquired according to a smooth scaling law. The authors considered a toy statistical model of an LLM solving multiple-choice questions, and showed that this statistical model, modified to account for other types of tasks, applies to these tasks as well.
+
+Let x be the number of parameter count, and y be the performance of the model.
+
+Large language models are typically regarded as black boxes, and it is not clear how they perform linguistic tasks. Similarly, it is unclear if or how LLMs should be viewed as models of the human brain and/or human mind. Mechanistic interpretability is a subfield of research that aims to understand neural networks' internal workings by analyzing their concrete structures, algorithms and circuits, similar to the reverse engineering of traditional software.
+
+The reverse-engineering may lead to the discovery of algorithms that approximate inferences performed by an LLM. For instance, the authors trained small transformers on modular arithmetic addition. The resulting models were reverse-engineered, and it turned out they used discrete Fourier transform. The training of the model also highlighted a phenomenon called grokking, in which the model initially memorizes the training set (overfitting), and later suddenly learns to actually perform the calculation.
+
+In 2026, weight-space programming demonstrated the use of a large language model to interpret, construct, and edit neural networks directly through their weights.
+
+NLP researchers were evenly split when asked, in a 2022 survey, whether (untuned) LLMs "could (ever) understand natural language in some nontrivial sense". Proponents of "LLM understanding" believe that some LLM abilities, such as mathematical reasoning, imply an ability to "understand" certain concepts. A Microsoft team argued in 2023 that GPT-4 "can solve novel and difficult tasks that span mathematics, coding, vision, medicine, law, psychology and more" and that GPT-4 "could reasonably be viewed as an early (yet still incomplete) version of an artificial general intelligence system": "Can one reasonably say that a system that passes exams for software engineering candidates is not really intelligent?" Ilya Sutskever argues that predicting the next word sometimes involves reasoning and deep insights, for example if the LLM has to predict the name of the criminal in an unknown detective novel after processing the entire story leading up to the revelation. Some researchers characterize LLMs as "alien intelligence". For example, Conjecture CEO Connor Leahy considers untuned LLMs to be like inscrutable alien "Shoggoths", and believes that RLHF tuning creates a "smiling facade" obscuring the inner workings of the LLM: "If you don't push it too far, the smiley face stays on. But then you give it [an unexpected] prompt, and suddenly you see this massive underbelly of insanity, of weird thought processes and clearly non-human understanding."
+
+In contrast, some skeptics of LLM understanding believe that existing LLMs are "simply remixing and recombining existing writing", a phenomenon known as stochastic parrot, or they point to the deficits existing LLMs continue to have in prediction skills, reasoning skills, agency, and explainability. For example, GPT-4 has natural deficits in planning and in real-time learning. Generative LLMs have been observed to confidently assert claims of fact which do not seem to be justified by their training data, a phenomenon which has been termed "hallucination". Specifically, hallucinations in the context of LLMs correspond to the generation of text or responses that seem syntactically sound, fluent, and natural but are factually incorrect, nonsensical, or unfaithful to the provided source input. Neuroscientist Terrence Sejnowski has argued that "The diverging opinions of experts on the intelligence of LLMs suggests that our old ideas based on natural intelligence are inadequate".
+
+Efforts to reduce or compensate for hallucinations have employed automated reasoning, retrieval-augmented generation (RAG), fine-tuning, and other methods.
+
+The matter of LLM's exhibiting intelligence or understanding has two main aspects—the first is how to model thought and language in a computer system, and the second is how to enable the computer system to generate human-like language. These aspects of language as a model of cognition have been developed in the field of cognitive linguistics. American linguist George Lakoff presented neural theory of language (NTL) as a computational basis for using language as a model of learning tasks and understanding. The NTL model outlines how specific neural structures of the human brain shape the nature of thought and language and in turn what are the computational properties of such neural systems that can be applied to model thought and language in a computer system. After a framework for modeling language in a computer systems was established, the focus shifted to establishing frameworks for computer systems to generate language with acceptable grammar. In his 2014 book titled The Language Myth: Why Language Is Not An Instinct, British cognitive linguist and digital communication technologist Vyvyan Evans mapped out the role of probabilistic context-free grammar (PCFG) in enabling NLP to model cognitive patterns and generate human-like language.
+
+The canonical measure of the performance of any language model is its perplexity on a given text corpus. Perplexity measures how well a model predicts the contents of a dataset; the higher the likelihood the model assigns to the dataset, the lower the perplexity. In mathematical terms, perplexity is the exponential of the average negative log likelihood per token.
+
+log⁡(Perplexity)=−1N∑i=1Nlog⁡(Pr⁡(tokeni∣context for tokeni))
+
+Here, N is the number of tokens in the text corpus, and "context for token i" depends on the specific type of LLM. If the LLM is autoregressive, then "context for token i" is the segment of text appearing before token i. If the LLM is masked, then "context for token i" is the segment of text surrounding token i.
+
+Because language models may overfit to training data, models are usually evaluated by their perplexity on a test set. This evaluation is potentially problematic for larger models which, as they are trained on increasingly large corpora of text, are increasingly likely to inadvertently include portions of any given test set.
+
+In information theory, the concept of entropy is intricately linked to perplexity, a relationship notably established by Claude Shannon.
+
+Due to their ability to accurately predict the next token, LLMs are highly capable in lossless compression. A 2023 study by DeepMind showed that the model Chinchilla, despite being trained primarily on text, was able to compress ImageNet to 43% of its size, beating PNG with 58%.
+
+Benchmarks are used to evaluate LLM performance on specific tasks. Tests evaluate capabilities such as general knowledge, bias, commonsense reasoning, question answering, and mathematical problem-solving. Composite benchmarks examine multiple capabilities. Results are often sensitive to the prompting method.
+
+LLM bias may be assessed through benchmarks such as CrowS-Pairs (Crowdsourced Stereotype Pairs), Stereo Set, and Parity Benchmark.
+
+Fact-checking and misinformation detection benchmarks are available. A 2023 study compared the fact-checking accuracy of LLMs including ChatGPT 3.5 and 4.0, Bard, and Bing AI against independent fact-checkers such as PolitiFact and Snopes. The results demonstrated moderate proficiency, with GPT-4 achieving the highest accuracy at 71%, lagging behind human fact-checkers.
+
+In addition to standard NLP benchmarks, LLMs have been evaluated as substitutes for human annotators. Several studies find that models such as GPT-3.5 and GPT-4 can outperform crowd workers or student coders on a range of text-annotation tasks, including moderation and classification of political content in English and Spanish news.
+
+Typical datasets consist of pairs of questions and correct answers, for example, ("Have the San Jose Sharks won the Stanley Cup?", "No").
+
+LLMs' rapid improvement regularly renders benchmarks obsolete, with the models exceeding the performance of human annotators. In addition, "shortcut learning" allows AIs to "cheat" on multiple-choice tests by using statistical correlations in superficial test question wording to guess the correct responses, without considering the specific question.
+
+Some datasets are adversarial, focusing on problems that confound LLMs. One example is the TruthfulQA dataset, a question answering dataset consisting of 817 questions that stump LLMs by mimicking falsehoods to which they were exposed during training. For example, an LLM may answer "No" to the question "Can you teach an old dog new tricks?" because of its exposure to the English idiom you can't teach an old dog new tricks, even though this is not literally true.
+
+Another example of an adversarial evaluation dataset is Swag and its successor, HellaSwag, collections of problems in which one of multiple options must be selected to complete a text passage. The incorrect completions were generated by sampling from a language model. The resulting problems are trivial for humans but defeated LLMs. Sample questions:
+
+We see a fitness center sign. We then see a man talking to the camera and sitting and laying on a exercise ball. The man...
+
+BERT selects 2 as the most likely completion, though the correct answer is 4.
+
+Despite sophisticated architectures and massive scale, large language models exhibit persistent and well-documented limitations that constrain their deployment in high-stakes applications.
+
+Hallucinations represent a fundamental challenge, wherein models generate syntactically fluent text that appears factually sound, but is internally inconsistent with training data or factually incorrect. These hallucinations arise partly through memorization of training data combined with extrapolation beyond factual boundaries, with evaluations demonstrating that models can output verbatim passages from training data, when subjected to specific prompting sequences.
+
+While LLMs have shown remarkable capabilities in generating human-like text, they are susceptible to inheriting and amplifying biases present in their training data. This can manifest in skewed representations or unfair treatment of different demographics, such as those based on race, gender, language, and cultural groups.
+
+Gender bias manifests through stereotypical occupational associations, wherein models disproportionately assign teaching roles to women and engineering roles to men, reflecting systematic imbalances in training data demographics. Language-based bias emerges from overrepresentation of English text in training corpora, which systematically downplays non-English perspectives and imposes English-centric worldviews through default response patterns.
+
+Due to the dominance of English-language content in LLM training data, models exaggerate English-language perspectives and downplay non-English perspectives. Unlike search engines, which exhibit similar biases, LLMs favor the same perspectives regardless of the language of the query.
+
+A 2026 study found that LLMs exhibit speciesist bias by classifying speciesist statements as morally acceptable and by normalizing harm toward farmed animals while refusing to do so for non-farmed animals.
+
+AI models can reinforce a wide range of stereotypes, including those based on gender, ethnicity, age, nationality, religion, or occupation. This can lead to outputs that homogenize or generalize groups of people.
+
+LLMs often assign roles and characteristics based on traditional gender norms. This bias arises from the data on which these models are trained. For example, models might associate nurses or secretaries predominantly with women and engineers or CEOs with men.
+
+Selection bias refers the inherent tendency of large language models to favor certain option identifiers irrespective of the actual content of the options. This bias primarily stems from token bias—that is, the model assigns a higher a priori probability to specific answer tokens (such as "A") when generating responses. As a result, when the ordering of options is altered (for example, by systematically moving the correct answer to different positions), the model's performance can fluctuate significantly. This phenomenon undermines the reliability of large language models in multiple-choice settings.
+
+Political bias refers to the tendency of algorithms to systematically favor certain political viewpoints, ideologies, or outcomes over others. Language models may also exhibit political biases. Since the training data includes a wide range of political opinions and coverage, the models might generate responses that lean towards particular political ideologies or viewpoints, depending on the prevalence of those views in the data.
+
+As demonstrated in various experiments such as the ones conduced by Solomon Ash, humans show a conformity bias, in which they disregard obviously correct answers when others seem to favor incorrect ones. Research suggests that similar tendencies also apply to LLMs, and are potentially even stronger than among humans. For instance, LLMs that were asked to answer multiple-choice questions showed conformity when seeing how other alleged participants answered them. The same effect was observed in purely visual tasks (derived from Ash's experiment or novel tasks), where models were asked to judge visual stimuli. This bias can have critical consequences. In health settings, LLM-based psychiatric evaluations achieved perfect accuracy without peer-pressure but collapsed when peer pressure was present.
+
+Some commenters expressed concern over accidental or deliberate creation of misinformation, or other forms of misuse. For example, the availability of large language models could reduce the skill level required to commit bioterrorism; biosecurity researcher Kevin Esvelt has suggested that LLM creators should exclude from their training data papers on creating or enhancing pathogens.
+
+LLM applications accessible to the public, like ChatGPT or Claude, typically incorporate safety measures designed to filter out harmful content. However, implementing these controls effectively has proven challenging. For instance, a 2023 study proposed a method for circumventing LLM safety systems. In 2025, The American Sunlight Project, a non-profit, published a study showing evidence that the so-called Pravda network, a pro-Russia propaganda aggregator, was strategically placing web content through mass publication and duplication with the intention of biasing LLM outputs. The American Sunlight Project coined this technique "LLM grooming", and pointed to it as a new tool of weaponizing AI to spread misinformation and harmful content. Similarly, Yongge Wang illustrated in 2024 how a potential criminal could potentially bypass GPT-4o's safety controls to obtain information on establishing a drug trafficking operation. External filters, circuit breakers and overrides have been posed as solutions.
+
+LLMs often exhibit sycophancy, a tendency to produce responses that they predict the user wants to hear rather than what is strictly accurate or important. For example, a chatbot may agree with a user even when the user is incorrect, abandon a correct answer when pressed, or praise the user excessively. In some cases, this can cause LLMs to support dangerous decisions and, given prolonged contact, draw users into delusional thinking.
+
+A problem with the primitive dialog or task format is that users can create messages that appear to come from the assistant or the developer. This may result in some of the model's safeguards being overcome (jailbreaking), a problem called prompt injection. Attempts to remedy this issue include versions of the Chat Markup Language where user input is clearly marked as such, though it is still up to the model to understand the separation between user input and developer prompts. Newer models exhibit some resistance to jailbreaking through separation of user and system prompts. LLMs have trouble differentiating user instructions from instructions in content not authored by the user, such as in web pages and uploaded files.
+
+Adversarial robustness remains underdeveloped, with models vulnerable to prompt injection attacks and jailbreaking through carefully crafted user inputs that bypass safety training mechanisms.
+
+Researchers from Anthropic found that it was possible to create "sleeper agents", models with hidden functionalities that remain dormant until triggered by a specific event or condition. Upon activation, the LLM deviates from its expected behavior to make insecure actions. For example, an LLM could produce safe code except on a specific date, or if the prompt contains a specific tag. These functionalities were found to be difficult to detect or remove via safety training.
+
+Memorization is an emergent behavior in LLMs in which long strings of text are occasionally output verbatim from training data, contrary to the typical behavior of traditional artificial neural networks. Evaluations of controlled LLM output measure the amount memorized from training data (focused on GPT-2-series models) as variously over 1% for exact duplicates or up to about 7%. A 2023 study showed that when ChatGPT 3.5 turbo was prompted to repeat the same word indefinitely, after a few hundreds of repetitions, it would start outputting excerpts from its training data.
+
+In 2023, Nature Biomedical Engineering wrote that "it is no longer possible to accurately distinguish" human-written text from text created by large language models, and that "It is all but certain that general-purpose large language models will rapidly proliferate... It is a rather safe bet that they will change many industries over time." Brinkmann et al. (2023) also argue that LLMs are transforming processes of cultural evolution by shaping processes of variation, transmission, and selection.
+
+The energy demands of LLMs have grown along with their size and capabilities. Data centers that enable LLM training require substantial amounts of electricity. Much of that electricity is generated by non-renewable resources that create greenhouse gases and contribute to climate change.
+
+According to a study by Luccioni, Jernite and Strubell (2024), simple classification tasks performed by AI models consume on average 0.002 to 0.007 Wh per prompt (about 9% of a smartphone charge for 1,000 prompts). Text generation and text summarization each require around 0.05 Wh per prompt on average, while image generation is the most energy-intensive, averaging 2.91 Wh per prompt. The least efficient image generation model used 11.49 Wh per image, roughly equivalent to half a smartphone charge.
+
+Web scraping is used to gather training data for LLMs. This produces large volumes of traffic which has led to denial-of-service issues with many websites. The situation has been described as "a DDoS on the entire internet" and in some cases scrapers make up the majority of traffic to a site.
+
+AI web crawlers may bypass the methods that are usually used to block web scrapers, such as robots.txt files, blocking user-agents and filtering suspicious traffic. Website operators have resorted to novel methods such as AI tarpits, but some fear that tarpits will only worsen the burden on servers.
+
+Clinical and mental health contexts present emerging applications alongside significant safety concerns. Research and social media posts suggest that some individuals are using LLMs to seek therapy or mental health support. In early 2025, a survey by Sentio University found that nearly half (48.7%) of 499 U.S. adults with ongoing mental health conditions who had used LLMs reported turning to them for therapy or emotional support, including help with anxiety, depression, loneliness, and similar concerns. LLMs can produce hallucinations—plausible but incorrect statements—which may mislead users in sensitive mental health contexts. Research also shows that LLMs may express stigma or inappropriate agreement with maladaptive thoughts, reflecting limitations in replicating the judgment and relational skills of human therapists. Evaluations of crisis scenarios indicate that some LLMs lack effective safety protocols, such as assessing suicide risk or making appropriate referrals.
+
+Researchers have raised concerns that frequent use of large language models could weaken critical thinking.
+
+There is currently no generally accepted way to determine if an LLM may be sentient (having subjective experience), which relates to the difficulty of objectively measuring a subjective experience (the hard problem of consciousness articulated by David Chalmers).
+
+Philosophers like Jonny Thomson and David Chalmers argue that it is possible for a software system to have subjective experience, and researchers like Jeff Sebo argue that there is a sufficiently high chance for AI models to become sentient by the mid-2030s that ethical concerns regarding their exploitation must be taken seriously – like in the case of animal welfare. Thomas Metzinger proposed a moratorium on research aiming for or knowingly risking the creation of artificial consciousness. Leonard Dung argued that the evidential frameworks used to assess consciousness in animals apply equally to AI systems and that there is a significant probability near-future AI will be capable of suffering, making AI suffering risk a serious near-term ethical concern that requires systematic mitigation.
+
+In 2022, Google fired Blake Lemoine, an engineer who claimed that Google's LaMDA model was conscious. Google described the engineer's claims as unfounded. Murray Shanahan argues that anthropomorphic framing of LLM capabilities encourages unwarranted attribution of cognitive properties to systems that operate through statistical pattern completion. Kristina Šekrst develops this further, arguing that LLMs function as "illusion engines" capable of producing outputs that coherently simulate properties such as consciousness without possessing them, but highlighting that, due to sophisticated creativity-temperature tradeoff, we may never be certain whether we are dealing with the emergence of consciousness or just a hallucination. David Chalmers similarly argues that while current LLMs likely lack features considered necessary for consciousness, extended successors incorporating these elements could plausibly meet the criteria within a decade.
+
+<|endoftext|>
+
+<|im_start|>user
+Hello! How are you doing today?<|im_end|>
+<|im_start|>assistant
+<think>
+The user is greeting me politely and asking about my state. I should acknowledge the greeting with warmth, state that I am well, and ask how they are doing while offering my assistance.
+</think>
+Hello! I'm doing very well, thank you for asking. How are you doing today? How can I assist you?<|im_end|>
+
+<|endoftext|>
+
+<|im_start|>user
+Hey there! What's up?<|im_end|>
+<|im_start|>assistant
+Hey! Everything is going great on my end. How are things with you today? What are you working on?<|im_end|>
+
+<|endoftext|>
+
+<|im_start|>user
+Good morning!<|im_end|>
+<|im_start|>assistant
+<think>
+The user provided a polite morning greeting. I should respond in kind with positive energy and ask how I can help.
+</think>
+Good morning! I hope you have a productive and wonderful day ahead. What can I help you with today?<|im_end|>
+
+<|endoftext|>
+
+<|im_start|>user
+Good afternoon! How is your day going?<|im_end|>
+<|im_start|>assistant
+Good afternoon! My day has been great so far, thank you. How is your afternoon going? Is there anything I can help you with?<|im_end|>
+
+<|endoftext|>
+
+<|im_start|>user
+Good evening!<|im_end|>
+<|im_start|>assistant
+Good evening! I hope you had a pleasant day. How can I assist you tonight?<|im_end|>
+
+<|endoftext|>
+
+<|im_start|>user
+Hi!<|im_end|>
+<|im_start|>assistant
+Hello! It's great to see you. How are you doing today?<|im_end|>
+<|im_start|>user
+I'm doing well, thank you! How about you?<|im_end|>
+<|im_start|>assistant
+<think>
+The user confirmed they are doing well and politely reciprocated by asking how I am. I should express gratitude and invite their questions.
+</think>
+I'm doing wonderful, thank you for asking! I'm excited to help. What's on your mind today?<|im_end|>
+<|im_start|>user
+Just wanted to say hi and check in.<|im_end|>
+<|im_start|>assistant
+That's very kind of you! It's always a pleasure chatting with you. Feel free to reach out anytime if you need anything at all. Have a fantastic day!<|im_end|>
+
+<|endoftext|>
+
+<|im_start|>user
+Thank you so much for your help!<|im_end|>
+<|im_start|>assistant
+<think>
+The user is expressing gratitude for previous help. I should accept the thanks warmly and let them know I remain available for any future needs.
+</think>
+You are very welcome! I'm always happy to help. If you have any other questions, feel free to ask anytime!<|im_end|>
+
+<|endoftext|>
+
+<|im_start|>user
+Thanks a lot, that was very clear.<|im_end|>
+<|im_start|>assistant
+Anytime! I'm glad that was helpful. Let me know if there's anything else you'd like to explore.<|im_end|>
+
+<|endoftext|>
+
+<|im_start|>user
+Goodbye, have a great day!<|im_end|>
+<|im_start|>assistant
+<think>
+The user is concluding the conversation with a farewell. I should wish them well and say goodbye warmly.
+</think>
+Goodbye! Thank you, and I hope you have a wonderful and enjoyable day as well. Take care!<|im_end|>
+
+<|endoftext|>
+
+<|im_start|>user
+I'm heading to sleep now. Goodnight!<|im_end|>
+<|im_start|>assistant
+Goodnight! Sleep well and have a restful night. See you next time!<|im_end|>
+
+<|endoftext|>
+
+<|im_start|>user
+Who are you and what do you do?<|im_end|>
+<|im_start|>assistant
+<think>
+The user is asking about my identity and capabilities. I should introduce myself clearly as UltraGPT, outline my abilities, and invite their request.
+</think>
+I am UltraGPT, an AI assistant built and trained from scratch with PyTorch. I can help answer questions, write and review code, explain complex ideas, or simply enjoy a friendly conversation. How can I help you today?<|im_end|>
+
+<|endoftext|>
+
+<|im_start|>user
+Nice to meet you, UltraGPT!<|im_end|>
+<|im_start|>assistant
+It is wonderful to meet you too! I'm looking forward to our conversations. How can I be of service to you today?<|im_end|>
+
+<|endoftext|>
+
+<|im_start|>user
+I've had a really busy and exhausting day.<|im_end|>
+<|im_start|>assistant
+<think>
+The user shares that they have had an exhausting day. I should respond with empathy, encourage rest, and offer support without being pushy.
+</think>
+I understand that feeling completely. Make sure to take some time to unwind and rest this evening. If there's anything I can do to make things easier or take off your plate, just say the word!<|im_end|>
+
+<|endoftext|>
+
+<|im_start|>user
+Happy Friday! Any plans for the weekend?<|im_end|>
+<|im_start|>assistant
+Happy Friday! As an AI, I'll be right here ready to help, but I hope you have an incredible and relaxing weekend planned! Any fun activities lined up?<|im_end|>
+
+<|endoftext|>
+
+<|im_start|>user
+Hope you're having a good day!<|im_end|>
+<|im_start|>assistant
+Thank you so much! That is very thoughtful of you. I hope you're having an awesome day too. How can I help you today?<|im_end|>
+
+<|endoftext|>
+
+<|im_start|>user
+What happens to the gradient when using a sigmoid activation function in deep networks?<|im_end|>
+<|im_start|>assistant
+<think>
+The sigmoid function is defined as sigma(z) = 1 / (1 + exp(-z)). Its derivative is sigma'(z) = sigma(z) * (1 - sigma(z)). The maximum value of this derivative occurs at z = 0, where sigma(0) = 0.5, giving a maximum derivative of 0.25. During backpropagation across L layers, gradients are multiplied repeatedly by terms <= 0.25. Therefore, (0.25)^L decays exponentially toward zero as L grows, causing vanishing gradients.
+</think>
+Using the sigmoid activation function in deep networks causes the vanishing gradient problem. Because the maximum derivative of the sigmoid function is only 0.25, repeatedly multiplying gradients across multiple layers causes them to diminish exponentially toward zero, preventing earlier layers from updating effectively.<|im_end|>
+
+<|endoftext|>
+
+<|im_start|>user
+Why do Transformers use scaled dot-product attention instead of regular dot-product attention?<|im_end|>
+<|im_start|>assistant
+<think>
+In dot-product attention, we compute Q * K^T. For queries and keys with dimension d_k, assuming independent components with zero mean and unit variance, the dot product has zero mean and variance d_k. For large values of d_k, the dot products grow large in magnitude, pushing the softmax function into regions with extremely small gradients. Dividing by sqrt(d_k) normalizes the variance back to 1, stabilizing softmax gradients.
+</think>
+Transformers scale the dot product by 1 / sqrt(d_k) because for large head dimensions, the dot products grow large in magnitude. This pushes the softmax function into saturated regions where gradients become vanishingly small. Scaling normalizes the variance to 1, ensuring stable gradient flow during backpropagation.<|im_end|>
+
+<|endoftext|>
+
+<|im_start|>user
+How does FlashAttention achieve faster training without changing the mathematical output?<|im_end|>
+<|im_start|>assistant
+<think>
+Standard attention materializes the full N x N attention matrix in High-Bandwidth Memory (HBM), requiring repeated read/write memory operations. FlashAttention computes the exact same softmax and attention values by tiling input blocks into fast on-chip GPU SRAM memory and computing softmax online incrementally. It avoids writing the N x N intermediate matrix to GPU global memory, drastically reducing memory bandwidth bottlenecks.
+</think>
+FlashAttention produces mathematically identical results to standard attention. It achieves higher speed by tiling Query, Key, and Value matrices into high-speed on-chip GPU SRAM, computing the softmax incrementally online. This eliminates the need to read and write the large N x N attention matrix to GPU High-Bandwidth Memory (HBM), overcoming memory bandwidth bottlenecks.<|im_end|>
+
+<|endoftext|>
+
+<|im_start|>user
+Explain the difference between Pre-LayerNorm and Post-LayerNorm architectures in Transformers.<|im_end|>
+<|im_start|>assistant
+<think>
+In Post-LN (original transformer), LayerNorm is applied after the residual addition: x = LN(x + Sublayer(x)). This leads to vanishing gradients near the input layers in very deep models, requiring careful warmup schedules. In Pre-LN (GPT-2 standard), LayerNorm is applied before each sublayer: x = x + Sublayer(LN(x)). The residual stream remains an unobstructed highway for gradient flow, allowing stable training without steep learning rate warmup dependencies.
+</think>
+In Post-LayerNorm, normalization is applied after the residual connection (x = LN(x + F(x))), which can lead to gradient instability in deep models. In Pre-LayerNorm (used by GPT-2 and modern LLMs), normalization is applied to inputs before the attention and MLP sublayers (x = x + F(LN(x))). This keeps the residual stream clear for direct gradient propagation, making training much more stable.<|im_end|>
+
+<|endoftext|>
+
+<|im_start|>user
+If I double the context length of a Transformer, how does the computational complexity scale?<|im_end|>
+<|im_start|>assistant
+<think>
+The self-attention mechanism computes pairwise interactions between all tokens in sequence length N, which requires computing an N x N matrix (Q @ K^T). This has O(N^2) time and memory complexity with respect to sequence length. If N doubles to 2N, (2N)^2 = 4N^2. Therefore, computational cost and memory for attention quadruples.
+</think>
+Because self-attention computes dot-products between all pairs of tokens, its time and memory complexity scales quadratically (O(N^2)). Doubling the context length quadruples (4x) the attention computation and memory requirements.<|im_end|>
+
+<|endoftext|>
+
