@@ -304,7 +304,16 @@ print(f"Decoded String: '{dec}'")""")
     # Phase 5
     md("""## Phase 5: PyTorch Dataset & DataLoader Pipeline (Causal LM Shifting)
 We implement `GPTDataset` which creates causally shifted input-target pairs ($x = \text{tokens}[:-1]$, $y = \text{tokens}[1:]$), performs a 90/10 train/validation split, and configures dynamic memory pinning.""")
-    code(read_source("data/dataset.py") + """
+    code(read_source("data/dataset.py"))
+
+    md("""### Phase 5 DataLoader Construction & Hyperparameter Setup
+Encode the corpus and build train/validation DataLoaders with optimal batch size and context length:""")
+    code("""# =====================================================================
+# OPTIMAL HYPERPARAMETERS FOR QUICK DIALOGUE LEARNING
+# =====================================================================
+context_length = 256    # Context window: room for user prompt + assistant answer (~5 MB VRAM)
+batch_size     = 32     # Micro-batch size: fast GPU parallel throughput on Quadro T2000
+# =====================================================================
 
 # Encode scraped corpus into token sequence
 tokens = char_tok.encode(raw_corpus)
@@ -313,8 +322,8 @@ print(f"Total tokens in scraped dataset: {len(tokens):,}")
 # Create 90/10 Train and Validation DataLoaders
 train_loader, val_loader, train_ds, val_ds = create_dataloaders(
     tokens=tokens,
-    block_size=64,
-    batch_size=8,
+    block_size=context_length,
+    batch_size=batch_size,
     split_ratio=0.9,
 )
 
@@ -333,32 +342,36 @@ Here we construct the neural network using raw `torch.nn.Module`:
     code(read_source("model/attention.py"))
     code(read_source("model/mlp.py"))
     code(read_source("model/block.py"))
-    code(read_source("model/gpt.py") + """
+    code(read_source("model/gpt.py"))
 
-# Instantiate GPT with gpt-nano preset for our character vocabulary
-# You can control training duration using epochs or max_iters:
-EPOCHS = 3
-steps_per_epoch = len(train_loader)
-total_steps = EPOCHS * steps_per_epoch
+    md("""### Phase 6 Model Instantiation & Hyperparameter Setup
+Configure the UltraGPT model with the optimal parameters for rapid dialogue learning:""")
+    code("""# =====================================================================
+# OPTIMAL HYPERPARAMETERS FOR QUICK DIALOGUE LEARNING
+# =====================================================================
+context_length = 256    # Enough room for user prompt + assistant answer (uses ~5 MB VRAM)
+batch_size     = 32     # Fast GPU parallel processing on Quadro T2000
+max_iters      = 6000   # ~15 minutes of training on your GPU
+learning_rate  = 8e-4   # Rapid convergence with cosine decay
+# =====================================================================
 
 nano_cfg = GPTConfig.from_preset(
     "gpt-nano",
     vocab_size=char_tok.vocab_size,
-    block_size=64,
-    batch_size=8,
-    epochs=EPOCHS,
-    max_iters=total_steps,
-    lr_decay_iters=total_steps,
-    eval_interval=max(1, total_steps // 5),
-    eval_iters=5,
-    learning_rate=1e-3,
+    block_size=context_length,
+    batch_size=batch_size,
+    max_iters=max_iters,
+    lr_decay_iters=max_iters,
+    eval_interval=max(50, max_iters // 10),
+    eval_iters=10,
+    learning_rate=learning_rate,
     mixed_precision="fp16" if torch.cuda.is_available() else "no",
 )
-print(f"Training schedule: {EPOCHS} epoch(s) x {steps_per_epoch:,} steps/epoch = {total_steps:,} total steps")
 
 model = GPT(nano_cfg)
 total_params, trainable_params = model.get_num_params()
-print(f"Initialized UltraGPT: {total_params:,} total parameters ({trainable_params:,} trainable).")""")
+print(f"Initialized UltraGPT: {total_params:,} total parameters ({trainable_params:,} trainable).")
+print(f"Context Window: {nano_cfg.block_size} tokens | Batch Size: {nano_cfg.batch_size} | Training Steps: {nano_cfg.max_iters:,}")""")
 
     # Phase 7
     md("""## Phase 7: Training Engine (Decoupled AdamW, Cosine Warmup, AMP & Checkpointing)
@@ -374,8 +387,19 @@ We define:
 
     # Phase 8
     md("""## Phase 8: Model Training Execution & Resuming Mechanism
-We train our UltraGPT model with live real-time telemetry. If `checkpoints/latest_checkpoint.pt` exists, **it automatically resumes from the saved step and trained weights** instead of starting from scratch!""")
-    code("""# Initialize Trainer
+We train our UltraGPT model with live real-time telemetry. You can choose whether to resume from saved weights or train freshly on the newly created dialogue dataset!""")
+    code("""# =====================================================================
+# TRAINING CONTROLS
+# =====================================================================
+# Set FORCE_FRESH_TRAIN = True to train freshly on your new dialogue dataset
+# Set FORCE_FRESH_TRAIN = False to resume from checkpoints/latest_checkpoint.pt
+FORCE_FRESH_TRAIN = True
+# =====================================================================
+
+ckpt_file = Path("checkpoints/latest_checkpoint.pt")
+resume_mode = ckpt_file.exists() and not FORCE_FRESH_TRAIN
+
+# Initialize Trainer
 trainer = Trainer(
     model=model,
     config=nano_cfg,
@@ -383,16 +407,15 @@ trainer = Trainer(
     val_loader=val_loader,
 )
 
-# Check for existing checkpoint
-ckpt_file = Path("checkpoints/latest_checkpoint.pt")
-resume_mode = ckpt_file.exists()
-
 if resume_mode:
-    print(f"[*] Found checkpoint at {ckpt_file}. RESUMING training from saved weights...")
+    print(f"[*] Found checkpoint at {ckpt_file}. RESUMING training from saved step & weights...")
 else:
-    print("[*] No checkpoint found. Starting training from scratch...")
+    if FORCE_FRESH_TRAIN and ckpt_file.exists():
+        print(f"[*] FORCE_FRESH_TRAIN is True: Starting fresh dialogue training on context_length={nano_cfg.block_size}...")
+    else:
+        print("[*] Starting training from scratch...")
 
-# trainer.train() automatically restores model weights, optimizer buffers, and step count
+# trainer.train() executes the loop with live GPU telemetry and loss logging
 training_history = trainer.train(resume_from_checkpoint=resume_mode)""")
 
     # Phase 9

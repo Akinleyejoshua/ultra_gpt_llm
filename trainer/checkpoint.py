@@ -81,13 +81,49 @@ class CheckpointManager:
         checkpoint = torch.save if False else torch.load(target_path, map_location=device)
 
         raw_model = model.module if hasattr(model, "module") else model
-        raw_model.load_state_dict(checkpoint["model_state_dict"])
+        ckpt_state = checkpoint["model_state_dict"]
+        model_dict = raw_model.state_dict()
 
-        if optimizer is not None and "optimizer_state_dict" in checkpoint and checkpoint["optimizer_state_dict"]:
-            optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
+        # Check for architectural dimension compatibility (e.g. expanding block_size or vocab)
+        compatible_dict = {}
+        dimension_adjusted = False
 
-        if scaler is not None and "scaler_state_dict" in checkpoint and checkpoint["scaler_state_dict"]:
-            scaler.load_state_dict(checkpoint["scaler_state_dict"])
+        for k, v in ckpt_state.items():
+            if k in model_dict:
+                if v.shape == model_dict[k].shape:
+                    compatible_dict[k] = v
+                elif k == "transformer.wpe.weight" and v.shape[1] == model_dict[k].shape[1]:
+                    # Positional embedding expansion (e.g. block_size 64 -> 256)
+                    dimension_adjusted = True
+                    min_pos = min(v.shape[0], model_dict[k].shape[0])
+                    model_dict[k][:min_pos] = v[:min_pos]
+                    compatible_dict[k] = model_dict[k]
+                elif k in ("transformer.wte.weight", "lm_head.weight") and v.shape[1] == model_dict[k].shape[1]:
+                    # Vocabulary expansion
+                    dimension_adjusted = True
+                    min_v = min(v.shape[0], model_dict[k].shape[0])
+                    model_dict[k][:min_v] = v[:min_v]
+                    compatible_dict[k] = model_dict[k]
+
+        if dimension_adjusted:
+            logger.info("Transferred compatible weights across expanded architectural dimensions.")
+            model_dict.update(compatible_dict)
+            raw_model.load_state_dict(model_dict)
+        else:
+            raw_model.load_state_dict(ckpt_state)
+
+        if not dimension_adjusted:
+            if optimizer is not None and "optimizer_state_dict" in checkpoint and checkpoint["optimizer_state_dict"]:
+                try:
+                    optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
+                except Exception:
+                    logger.warning("Could not restore optimizer state, initializing fresh optimizer.")
+
+            if scaler is not None and "scaler_state_dict" in checkpoint and checkpoint["scaler_state_dict"]:
+                try:
+                    scaler.load_state_dict(checkpoint["scaler_state_dict"])
+                except Exception:
+                    pass
 
         step = checkpoint.get("step", 0)
         loss = checkpoint.get("loss", 0.0)
