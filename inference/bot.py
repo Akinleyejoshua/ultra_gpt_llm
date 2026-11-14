@@ -106,13 +106,10 @@ class ConversationBot:
         total_token_budget = max_tokens + adaptive_limit
         sentence_terminators = {".", "!", "?", "\n", ";", "```"}
 
-        for step in range(total_token_budget):
-            # If past max_tokens, stop as soon as a complete sentence or clause has ended
-            if step >= max_tokens:
-                stripped = accumulated_text.rstrip()
-                if any(stripped.endswith(t) for t in sentence_terminators):
-                    break
+        sentence_count = 0
+        min_tokens_before_stop = 20
 
+        for step in range(total_token_budget):
             # Take last block_size tokens and clamp to valid vocabulary range
             context_window = current_tokens[-self.block_size :]
             vocab_size = getattr(self.model.config, "vocab_size", 50257)
@@ -158,7 +155,45 @@ class ConversationBot:
             if not any(st.startswith(piece) and len(piece) > 2 for st in stops):
                 yield piece
 
+            # Natural stopping: if the model reaches a sentence terminator (. or ! or ?) after min tokens
+            if complete_sentence and step >= min_tokens_before_stop:
+                if piece in (".", "!", "?"):
+                    sentence_count += 1
+                    # Stop if max_tokens reached or 2 complete sentences are delivered
+                    if step >= max_tokens or sentence_count >= 2:
+                        break
+
+            # Hard budget check
+            if step >= total_token_budget - 1:
+                break
+
         clean_response = accumulated_text.strip()
+
+        # Guarantee complete sentences: trim any trailing fragmented sentence or half-word
+        if complete_sentence and clean_response:
+            terminal_chars = (".", "!", "?", "```", "\n")
+            if not any(clean_response.endswith(t) for t in terminal_chars):
+                boundaries = [
+                    clean_response.rfind(". "),
+                    clean_response.rfind(".\n"),
+                    clean_response.rfind("! "),
+                    clean_response.rfind("?\n"),
+                    clean_response.rfind("? "),
+                    clean_response.rfind(".\t"),
+                ]
+                latest_b = max(boundaries)
+                if latest_b != -1:
+                    clean_response = clean_response[: latest_b + 1].strip()
+                elif clean_response.rfind(".") != -1:
+                    clean_response = clean_response[: clean_response.rfind(".") + 1].strip()
+                else:
+                    # If model did not emit a period, clean up trailing partial word and seal sentence
+                    last_space = clean_response.rfind(" ")
+                    if last_space > 10:
+                        clean_response = clean_response[:last_space].rstrip(",;:- ") + "."
+                    else:
+                        clean_response = clean_response.rstrip(",;:- ") + "."
+
         # Record turn in persistent history
         self.messages.append({"role": "user", "content": user_message})
         self.messages.append({"role": "assistant", "content": clean_response})
@@ -188,6 +223,29 @@ class ConversationBot:
             complete_sentence=complete_sentence,
         )
         full_text = ""
-        for piece in gen:
-            full_text += piece
-        return full_text.strip()
+        try:
+            while True:
+                full_text += next(gen)
+        except StopIteration as e:
+            if e.value:
+                return e.value
+
+        # Fallback to trimmed complete sentence
+        clean = full_text.strip()
+        if complete_sentence and clean:
+            terminal_chars = (".", "!", "?", "```", "\n")
+            if not any(clean.endswith(t) for t in terminal_chars):
+                boundaries = [
+                    clean.rfind(". "),
+                    clean.rfind(".\n"),
+                    clean.rfind("! "),
+                    clean.rfind("?\n"),
+                    clean.rfind("? "),
+                    clean.rfind(".\t"),
+                ]
+                latest_b = max(boundaries)
+                if latest_b != -1:
+                    clean = clean[: latest_b + 1].strip()
+                elif clean.rfind(".") != -1:
+                    clean = clean[: clean.rfind(".") + 1].strip()
+        return clean
