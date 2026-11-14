@@ -15,10 +15,16 @@ from server.app import app, load_model_and_tokenizer
 
 
 def parse_args():
+    default_ckpt = None
+    if os.path.exists("checkpoints/best_checkpoint.pt"):
+        default_ckpt = "checkpoints/best_checkpoint.pt"
+    elif os.path.exists("checkpoints/latest_checkpoint.pt"):
+        default_ckpt = "checkpoints/latest_checkpoint.pt"
+
     parser = argparse.ArgumentParser(description="UltraGPT FastAPI Serving Server")
     parser.add_argument("--host", type=str, default="0.0.0.0", help="Host interface to bind")
     parser.add_argument("--port", type=int, default=8000, help="Port to bind")
-    parser.add_argument("--checkpoint", type=str, default=None, help="Path to checkpoint .pt file")
+    parser.add_argument("--checkpoint", type=str, default=default_ckpt, help="Path to checkpoint .pt file (defaults to best_checkpoint.pt if found)")
     parser.add_argument("--preset", type=str, default="gpt-nano", help="Architecture preset")
     parser.add_argument("--bpe", action="store_true", help="Use BPE Tokenizer instead of CharTokenizer")
     return parser.parse_args()

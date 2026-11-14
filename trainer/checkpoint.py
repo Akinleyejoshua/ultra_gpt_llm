@@ -18,7 +18,8 @@ logger = logging.getLogger(__name__)
 class CheckpointManager:
     """
     Saves and restores training checkpoints:
-    - Maintains a rolling 'latest_checkpoint.pt'
+    - Maintains rolling 'latest_checkpoint.pt'
+    - Automatically captures 'best_checkpoint.pt' whenever validation loss hits a new all-time low
     - Creates periodic versioned snapshots 'checkpoint_step_{step}.pt'
     - Preserves model state, optimizer state, scaler state, step count, and loss.
     """
@@ -27,6 +28,8 @@ class CheckpointManager:
         self.checkpoint_dir = Path(checkpoint_dir)
         self.checkpoint_dir.mkdir(parents=True, exist_ok=True)
         self.latest_path = self.checkpoint_dir / "latest_checkpoint.pt"
+        self.best_path = self.checkpoint_dir / "best_checkpoint.pt"
+        self.best_val_loss = float("inf")
 
     def save(
         self,
@@ -37,8 +40,13 @@ class CheckpointManager:
         loss: float,
         config: Any,
         is_snapshot: bool = False,
-    ) -> Path:
-        """Serialize complete training state."""
+    ) -> Tuple[Path, bool]:
+        """
+        Serialize complete training state.
+        Maintains ONLY:
+        1. 'latest_checkpoint.pt' - rolling latest state
+        2. 'best_checkpoint.pt' - weights with all-time lowest validation loss
+        """
         raw_model = model.module if hasattr(model, "module") else model
         state = {
             "step": step,
@@ -49,17 +57,17 @@ class CheckpointManager:
             "config": config.to_dict() if hasattr(config, "to_dict") else config,
         }
 
-        # Save rolling latest checkpoint
+        # 1. Save rolling latest checkpoint
         torch.save(state, self.latest_path)
 
-        # Save periodic versioned snapshot if requested
-        if is_snapshot:
-            snapshot_path = self.checkpoint_dir / f"checkpoint_step_{step}.pt"
-            torch.save(state, snapshot_path)
-            logger.info(f"Saved versioned checkpoint snapshot to {snapshot_path}")
-            return snapshot_path
+        # 2. Check if this is a new all-time best validation loss
+        is_best = False
+        if loss < self.best_val_loss:
+            self.best_val_loss = loss
+            torch.save(state, self.best_path)
+            is_best = True
 
-        return self.latest_path
+        return self.latest_path, is_best
 
     def resume(
         self,

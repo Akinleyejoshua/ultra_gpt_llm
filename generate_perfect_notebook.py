@@ -435,12 +435,14 @@ We implement:
     code(read_source("inference/bot.py") + """
 
 # Initialize interactive conversational bot with trained model
-# If a saved checkpoint exists, restore the exact trained weights & vocab
-ckpt_path = Path("checkpoints/latest_checkpoint.pt")
+# Prioritize best_checkpoint.pt (lowest validation loss) over latest_checkpoint.pt
+best_ckpt = Path("checkpoints/best_checkpoint.pt")
+latest_ckpt = Path("checkpoints/latest_checkpoint.pt")
+ckpt_path = best_ckpt if best_ckpt.exists() else latest_ckpt
 vocab_path = Path("checkpoints/char_vocab.json")
 
 if ckpt_path.exists():
-    print(f"Loading trained weights from {ckpt_path}...")
+    print(f"Loading trained weights from {ckpt_path} (Best Validation Model)...")
     ckpt = torch.load(ckpt_path, map_location=device)
     active_cfg = GPTConfig(**ckpt["config"])
     active_model = GPT(active_cfg)
@@ -451,7 +453,7 @@ if ckpt_path.exists():
         active_tok = CharTokenizer.load(vocab_path)
     else:
         active_tok = char_tok
-    print(f"Successfully restored trained checkpoint: Step {ckpt.get('step', 0):,}, Loss {ckpt.get('loss', 0):.4f}, Vocab {active_cfg.vocab_size}")
+    print(f"Successfully restored checkpoint: Step {ckpt.get('step', 0):,}, Val Loss {ckpt.get('loss', 0):.4f}, Vocab {active_cfg.vocab_size}")
 else:
     active_model = model
     active_tok = char_tok

@@ -257,9 +257,9 @@ class Trainer:
                         f"Elapsed: {elapsed_str}"
                     )
 
-                    # Periodic snapshot checkpoint
+                    # Periodic snapshot checkpoint and best checkpoint tracking
                     is_snapshot = ((step + 1) % self.config.save_checkpoint_interval == 0)
-                    self.checkpoint_mgr.save(
+                    saved_path, is_best = self.checkpoint_mgr.save(
                         self.model,
                         self.optimizer,
                         self.scaler,
@@ -268,6 +268,9 @@ class Trainer:
                         config=self.config,
                         is_snapshot=is_snapshot,
                     )
+
+                    if is_best:
+                        pbar.write(f"  --> [★ Best Model Saved] (Val Loss: {val_loss:.4f}) -> {self.checkpoint_mgr.best_path.name}")
 
                 # Prevent CUDA memory fragmentation leak
                 if self.device_type == "cuda" and (step + 1) % 500 == 0:

@@ -22,7 +22,12 @@ from model.gpt import GPT
 
 def parse_args():
     parser = argparse.ArgumentParser(description="UltraGPT Interactive Generation CLI")
-    parser.add_argument("--checkpoint", type=str, default="checkpoints/latest_checkpoint.pt", help="Path to checkpoint")
+    parser.add_argument(
+        "--checkpoint",
+        type=str,
+        default="checkpoints/best_checkpoint.pt" if Path("checkpoints/best_checkpoint.pt").exists() else "checkpoints/latest_checkpoint.pt",
+        help="Path to checkpoint (defaults to best_checkpoint.pt if available)",
+    )
     parser.add_argument("--preset", type=str, default="gpt-nano", help="Preset if no checkpoint exists")
     parser.add_argument("--temperature", type=float, default=0.8, help="Sampling temperature")
     parser.add_argument("--top_k", type=int, default=50, help="Top-K filtering limit")
