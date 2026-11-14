@@ -417,6 +417,74 @@ class DSACodingSynthesizer:
         return dialogues
 
 
+class ShakespeareDialogueScraper:
+    """
+    Downloads and parses authentic dramatic dialogues from Shakespeare plays
+    (TinyShakespeare dataset) and converts speaker-to-speaker turn exchanges
+    into structured multi-turn ChatML dialogues.
+    """
+
+    SHAKESPEARE_URL = "https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt"
+
+    @classmethod
+    def download_and_parse(cls, max_dialogues: Optional[int] = None) -> List[List[Dict[str, str]]]:
+        """
+        Download TinyShakespeare and extract conversations between characters.
+        Returns a list of multi-turn conversational exchanges.
+        """
+        logger.info(f"Downloading Shakespeare dataset from {cls.SHAKESPEARE_URL}...")
+        resp = requests.get(cls.SHAKESPEARE_URL, timeout=15)
+        resp.raise_for_status()
+        text = resp.text
+
+        lines = text.splitlines()
+        speeches: List[Tuple[str, str]] = []
+        current_speaker: Optional[str] = None
+        current_text: List[str] = []
+
+        for line in lines:
+            stripped = line.strip()
+            # Speaker indicator (e.g. 'First Citizen:', 'MENENIUS:', 'ROMEO:', 'JULIET:')
+            if (
+                line.endswith(":")
+                and not line.startswith(" ")
+                and len(stripped) < 35
+                and (
+                    stripped[:-1].isupper()
+                    or any(k in stripped for k in ["Citizen", "All", "Both", "Lord", "Lady", "Servant", "Messenger"])
+                )
+            ):
+                if current_speaker and current_text:
+                    speeches.append((current_speaker, " ".join(current_text)))
+                current_speaker = stripped[:-1]
+                current_text = []
+            else:
+                if current_speaker and stripped:
+                    current_text.append(stripped)
+
+        if current_speaker and current_text:
+            speeches.append((current_speaker, " ".join(current_text)))
+
+        conversations: List[List[Dict[str, str]]] = []
+        # Pair consecutive speeches as natural dialogues
+        for i in range(0, len(speeches) - 1, 2):
+            sp1, txt1 = speeches[i]
+            sp2, txt2 = speeches[i + 1]
+            if len(txt1) < 5 or len(txt2) < 5:
+                continue
+
+            conv = [
+                {"role": "user", "content": f"[{sp1}]: {txt1}"},
+                {"role": "assistant", "content": f"[{sp2}]: {txt2}"},
+            ]
+            conversations.append(conv)
+            if max_dialogues and len(conversations) >= max_dialogues:
+                break
+
+        logger.info(f"Parsed {len(conversations)} Shakespeare conversations.")
+        return conversations
+
+
 class DialogueDatasetBuilder:
     """
     Compiles multi-source dialogues into the primary training dataset:

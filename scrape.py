@@ -24,6 +24,7 @@ from data.dialogue_scraper import (
     ThinkingDialogueSynthesizer,
     GreetingPleasantrySynthesizer,
     DSACodingSynthesizer,
+    ShakespeareDialogueScraper,
     DialogueDatasetBuilder,
 )
 
@@ -62,6 +63,14 @@ def parse_args():
         type=int,
         default=None,
         help="Synthesize N Data Structures & Algorithms (DSA) interview problems with CoT reasoning and Python solutions",
+    )
+    parser.add_argument(
+        "--shakespeare",
+        type=int,
+        nargs="?",
+        const=500,
+        default=None,
+        help="Download and parse N Shakespeare character dialogue conversations into ChatML format (default: 500)",
     )
     parser.add_argument(
         "--transcript",
@@ -151,7 +160,18 @@ def main():
         total_dialogue_chars += c
         print(f"  [+] Ingested {len(dsa_convs)} DSA coding dialogues ({c:,} characters)")
 
-    # 5. Ingest and parse transcript file
+    # 5. Ingest Shakespeare character conversations
+    if args.shakespeare:
+        print(f"Downloading and parsing {args.shakespeare} Shakespeare play conversations...")
+        try:
+            shakespeare_convs = ShakespeareDialogueScraper.download_and_parse(max_dialogues=args.shakespeare)
+            c = dialogue_builder.append_conversations(shakespeare_convs)
+            total_dialogue_chars += c
+            print(f"  [+] Ingested {len(shakespeare_convs)} Shakespeare conversations ({c:,} characters)")
+        except Exception as e:
+            print(f"  [-] Failed to download Shakespeare: {e}")
+
+    # 6. Ingest and parse transcript file
     if args.transcript:
         t_path = Path(args.transcript)
         if t_path.exists():
